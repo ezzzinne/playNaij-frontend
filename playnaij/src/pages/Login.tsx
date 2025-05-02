@@ -5,22 +5,10 @@ interface LoginPageProps {
     onLogin: () => void;
 }
 
-function LoginPage({ onLogin }: LoginPageProps) {
+// eslint-disable-next-line no-empty-pattern
+function LoginPage({ }: LoginPageProps) {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleLogin = () => {
-        // Logic to verify Login - API call
-        setIsLoggedIn(true);
-    };
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleSubmit = () => {
-        // Handle form validation/login API here
-        onLogin();
-        navigate('/home');
-    };
+    const [isLoggedIn, ] = useState(false);
 
     useEffect(() => {
         if (isLoggedIn) {
