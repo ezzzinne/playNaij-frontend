@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+  
+  
+
+.sidebar-container {
+    width: 280px;
+    height: 100%;
+    background-color: #10131C;
+}
+
+.more-games {
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .btn-toggle-sidebar {
+      display: none !important;
+    }
+}
+  
+  

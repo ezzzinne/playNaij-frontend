@@ -1,13 +1,44 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import "./App.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/Login';
+import Layout from './layouts/GameLayout';
+import Streetz from './games/web2/Streetz.tsx';
+import HomePage from './pages/HomePage.tsx';
+import { useState } from 'react';
+import LandingLayout from './layouts/LandingLayout.tsx';
+
 
 function App() {
+  const [, setIsLoggedIn] = useState(false);
+  
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
-    <Router>
-      <Routes>
-        <Route/>
-        <Route />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingLayout><LandingPage /></LandingLayout>} />
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="/home" element={<HomePage />} />
+
+          <Route 
+            path='/game'
+            element={
+              <Layout>
+                <Streetz />
+              </Layout>
+            }
+          />
+
+          <Route />
+        </Routes>
+      </Router>
+    </>
+    
   )
 }
 
