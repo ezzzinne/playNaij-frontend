@@ -3,45 +3,47 @@ import { FaSearch } from 'react-icons/fa';
 import Icon from '../assets/img.svg';
 import Bell from '../assets/notification.svg'
 
-function Navbar1 () {
+interface Navbar1Props {
+    onToggleSidebar: () => void;
+}
 
-    function onToggleSidebar( ): void {
-        throw new Error('Function not implemented.');
-    }
+function Navbar1 ({ onToggleSidebar }: Navbar1Props) {
 
     return (
         <>
-            <nav className="navbar bg-dark px-4 d-flex align-items-center justify-content-between" style={{ height: '60px', width: '100%', top: 0, zIndex: 1060 }}>
-                <button className="btn btn-outline-dark d-md-none" onClick={onToggleSidebar}>
+            <nav className="navbar px-4 d-flex align-items-center justify-content-between" style={{ height: '60px', width: '100%', top: 0, zIndex: 1060 }}>
+                <button className="btn btn-outline-light d-md-none" onClick={onToggleSidebar}>
                     ☰
                 </button>
 
-                <form className="d-flex align-items-center flex-grow-1 me-4" style={{ maxWidth: '500px' }}>
+                <form className="d-none d-md-flex align-items-center flex-grow-1 me-4" style={{ maxWidth: '500px' }}>
                     <div className="input-group w-100">
-                        <span className="input-group-text bg-white border-end-0 border-light-subtle">
+                        <span className="input-group-text border-end-0" style={{ color: '#9C9C9C', borderColor: '#9C9C9C', background: '#0D1017' }}>
                             <FaSearch />
                         </span>
-                        <input type="search" className="form-control border-start-0 border-end-0" aria-label='Search' />
-                        <span className="input-group-text bg-white border-start-0">Search</span>
+                        <input type="search" className="form-control border-start-0 border-end-0 text-white" style={{ borderColor: '#9C9C9C', background: '#0D1017' }} aria-label='Search' />
+                        <span className="input-group-text border-start-0" style={{ color: '#9C9C9C', borderColor: '#9C9C9C', background: '#0D1017' }}>Search</span>
                     </div>
                 </form>
 
                 <ul className="nav gap-4 d-none d-md-flex">
                     <li className="nav-item"><a className="nav-link text-white" href="#">Leaderboard</a></li>
-                    <select className="text-white bg-dark" id="">
+                    <select className="text-white border-0" style={{ background: '#0D1017' }} id="">
                         <option value="">Categories</option>
                         <option value="">Word Games</option>
-                        <option value="">Trivia</option>
-                        <option value="">Web3</option>
+                        <option value="">Trivia Games</option>
+                        <option value="">Web3 Games</option>
                     </select>
                 </ul>
 
-                <div>
+                <div className="d-flex align-items-center">
                     <img src={Icon} alt="" className='m-2' />
                     <img src={Bell} alt="" className='m-2' />
                 </div>
 
-                <button className="btn btn-warning">Connect Wallet</button>
+                <button className="btn btn-warning d-none d-md-flex">Connect Wallet</button>
+
+                
             </nav>
         </>
     )

@@ -8,6 +8,7 @@ import Streetz from './games/web2/Streetz.tsx';
 import HomePage from './pages/HomePage.tsx';
 import { useState } from 'react';
 import LandingLayout from './layouts/LandingLayout.tsx';
+import HomeLayout from './layouts/HomeLayout.tsx';
 
 
 function App() {
@@ -23,10 +24,10 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingLayout><LandingPage /></LandingLayout>} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/home" element={<HomeLayout><HomePage /></HomeLayout>} />
 
           <Route 
-            path='/game'
+            path='/game1'
             element={
               <Layout>
                 <Streetz />

@@ -4,11 +4,9 @@ import Streetz from "../assets/Streetz.svg"
 import WhoSabi from '../assets/Who sabi.svg'
 import Hustlerz from '../assets/Hustlerz.svg'
 import People from '../assets/People.svg'
-import Icon1 from '../assets/Icon1.svg'
-import Icon2 from '../assets/Icon2.svg'
-import Icon3 from '../assets/Icon3.svg'
-import Icon4 from '../assets/Icon4.svg'
+
 import './LandingPage.css'
+import { Link } from "react-router-dom"
 
 
 function LandingPage () {
@@ -27,7 +25,7 @@ function LandingPage () {
                             <p style={{ color: '#9CA3AF' }}>Build words in Pidgin English, use power-ups, and become the ultimate word master!</p>
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50K Players</small>
-                                <button className="btn mx-3 text-white" style={{ backgroundColor: '#10B981' }}>Play Now</button>
+                                <button className="btn mx-3 text-white" style={{ backgroundColor: '#10B981' }}><Link to="/game1" style={{  color: 'white', textDecoration: 'none'}}>Play Now</Link></button>
                             </div>
                         </div>
                     </div>
@@ -60,40 +58,7 @@ function LandingPage () {
                 </div>
             </div>
 
-            <h3 className="text-center fs-1" style={{ color: '#E7F8F2'}}>Why Choose PlayNaij?</h3>
-            <p className="text-center fs-4" style={{ color: '#9CA3AF'}}>Experience gaming with authentic Nigerian flavor!</p>
-        
-            <div className="row g-4 p-3 row-cols-2 row-cols-md-4">
-                <div className="feature col d-flex flex-column align-items-center justify-content-center">
-                    <div className="feature-icon mb-1">
-                        <img src={Icon1} alt="" />
-                    </div>
-                    <p className="fs-4 text-white mb-1">Cultural Gaming</p>
-                    <p className="text-center" style={{ color: '#9CA3AF' }}>Games that celebrate Nigerian identity and culture</p>
-                </div>
-                <div className="feature col d-flex flex-column align-items-center justify-content-center">
-                    <div className="feature-icon mb-1">
-                        <img src={Icon2} alt="" />
-                    </div>
-                    <p className="fs-4 text-white mb-1">Web3 Ready</p>
-                    <p className="text-center" style={{ color: '#9CA3AF' }}>Earn and trade NFTs while you play</p>
-                </div>
-                <div className="feature col d-flex flex-column align-items-center justify-content-center">
-                    <div className="feature-icon mb-1">
-                        <img src={Icon3} alt="" />
-                    </div>
-                    <p className="fs-4 text-white mb-1">Daily Rewards</p>
-                    <p className="text-center" style={{ color: '#9CA3AF' }}>Win prizes and climb the leaderboard</p>
-                </div>
-                <div className="feature col d-flex flex-column align-items-center justify-content-center">
-                    <div className="feature-icon mb-1">
-                        <img src={Icon4} alt="" />
-                    </div>
-                    <p className="fs-4 text-white mb-1">Community</p>
-                    <p className="text-center" style={{ color: '#9CA3AF' }}>Connect with friends and players across Nigeria</p>
-                </div>
-            </div>
-            <hr className="w-100" style={{ color: '#4F4F4F' }} />
+            <h3 className="text-center fs-1 mt-3 mb-0" style={{ color: '#E7F8F2'}}>Why Choose PlayNaij?</h3>
 
             <Footer />
         </>

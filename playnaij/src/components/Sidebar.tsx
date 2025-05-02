@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Logo from "../assets/Logo.svg"
 import Home from '../assets/home 02.svg'
 import Rewards from '../assets/Frame.svg'
@@ -10,8 +10,7 @@ import Help from '../assets/help 01.svg'
 import Logout from '../assets/logout.svg'
 import MoreGames from '../assets/Frame 2147227324.svg'
 
-function Sidebar () {
-    const [showSidebar, setShowSidebar] = useState(false);
+function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setShowSidebar: (val: boolean) => void }) {
     const sidebarRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -25,59 +24,38 @@ function Sidebar () {
           }
         };
         document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-        };
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
-        if (showSidebar && window.innerWidth < 768) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-
+        document.body.style.overflow = showSidebar && window.innerWidth < 768 ? 'hidden' : 'auto';
         return () => {
-            document.body.style.overflow = 'auto';
+          document.body.style.overflow = 'auto';
         };
     }, [showSidebar]);
-
-    // Remove if you don't figure out how to remove one of the toggle buttons on mobile
-    useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
-          if (
-            sidebarRef.current &&
-            !sidebarRef.current.contains(e.target as Node) &&
-            window.innerWidth < 768
-          ) {
-            setShowSidebar(false);
-          }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-      }, []);
 
     return (
         <>
             <main>
-                <button
+                {/* <button
                     className="btn bg-dark text-white btn-outline-dark m-3 d-md-none"
                     onClick={() => setShowSidebar(true)}
                     >
                     ☰
-                </button>
+                </button> */}
 
                 <div
                     ref={sidebarRef}
-                    className={`sidebar-container bg-dark text-white d-flex flex-column p-3 shadow-lg
-                        ${showSidebar ? 'd-flex' : 'd-none'} 
-                        d-md-flex top-0 start-0 w-100`}
+                    className={`text-white d-flex flex-column p-3 shadow-lg top-0 start-0 h-100
+                        ${showSidebar ? 'd-flex' : 'd-none'} d-md-flex`} 
                     style={{
                         height: '100%',
                         zIndex: 1050,
+                        width: '250px',
+                        background: '#10131C',
                     }}
                 >
-
 
                     <a href="/" className="mb-2 d-flex justify-content-center align-items-center">
                         <img src={Logo} alt="" />
@@ -141,6 +119,7 @@ function Sidebar () {
 
                     <img src={MoreGames} alt="" className="mt-4 more-games" />
                 </div>
+
             </main>
         </>
     )

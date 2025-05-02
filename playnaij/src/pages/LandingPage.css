@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #0D1017D9;
+    background: #0D1017;
     font-family: "Rubik", sans-serif;
 }
 
@@ -16,5 +16,16 @@ h3 {
 .feature {
     min-height: 250px;
     text-align: center;
+}
+
+.bg1 {
+    background-image: url("../assets/Gamepad.svg");
+    height: 100%;
+    max-width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 10;
 }
   
