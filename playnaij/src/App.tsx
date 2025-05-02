@@ -1,14 +1,18 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/login';
+import CreateAccount from './components/CreateAccount';
+import Header from './components/Header';
 
-function App() {
+const App = () => {
   return (
     <Router>
+      <Header />
       <Routes>
-        <Route/>
-        <Route />
+        <Route path="/" element={<Login />} />
+        <Route path="/create-account" element={<CreateAccount />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,0 +1,67 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #000;
+    color: white;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .search-container {
+    flex: 1;
+    max-width: 600px;
+    margin: 0 2rem;
+    display: flex;
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .search-container input {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    background: #000;
+    border: none;
+    color: white;
+  }
+  
+  .search-container button {
+    padding: 0.5rem 1rem;
+    background: #000;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .categories {
+    cursor: pointer;
+  }
+  
+  .connect-wallet {
+    background-color: #f59e0b;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .login-btn {
+    background-color: #10b981;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: bold;
+  }
+  
