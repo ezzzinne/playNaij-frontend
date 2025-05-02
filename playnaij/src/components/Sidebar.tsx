@@ -9,6 +9,7 @@ import Settings from '../assets/settings.svg'
 import Help from '../assets/help 01.svg'
 import Logout from '../assets/logout.svg'
 import MoreGames from '../assets/Frame 2147227324.svg'
+import { Link } from 'react-router-dom';
 
 function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setShowSidebar: (val: boolean) => void }) {
     const sidebarRef = useRef<HTMLDivElement>(null);
@@ -66,7 +67,7 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                         <li className="nav-item mb-0">
                             <a href="#" className="nav-link d-flex align-items-start text-white" aria-current="page">
                             <img src={Home} alt="" className="me-4" />
-                            Home
+                            <Link to="/home" style={{  color: 'white', textDecoration: 'none'}}>Home</Link>
                             </a>
                         </li>
                         <li className="nav-item mb-0">
