@@ -63,7 +63,7 @@ function LandingPage () {
             <h3 className="text-center fs-1" style={{ color: '#E7F8F2'}}>Why Choose PlayNaij?</h3>
             <p className="text-center fs-4" style={{ color: '#9CA3AF'}}>Experience gaming with authentic Nigerian flavor!</p>
         
-            <div className="row g-4 p-5 row-cols-2 row-cols-md-4">
+            <div className="row g-4 p-3 row-cols-2 row-cols-md-4">
                 <div className="feature col d-flex flex-column align-items-center justify-content-center">
                     <div className="feature-icon mb-1">
                         <img src={Icon1} alt="" />

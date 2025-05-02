@@ -4,7 +4,7 @@ import '../pages/LandingPage.css'
 function Footer () {
     return (
         <>
-            <div className="container">
+            <div className="container px-3">
             <footer className="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-3 my-5 gap-5">
                 <div className="col mb-3 col-12 col-md-3">
                     <img src={Logo} alt="" />
