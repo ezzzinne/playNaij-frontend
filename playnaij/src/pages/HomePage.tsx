@@ -23,7 +23,7 @@ function HomePage () {
                             <p style={{ color: '#9CA3AF' }}>Build words in Pidgin English, use power-ups, and become the ultimate word master!</p>
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50K Players</small>
-                                <button className="btn mx-3 text-white" style={{ backgroundColor: '#10B981' }}><Link to='/game1' style={{  color: 'white', textDecoration: 'none'}}></Link>Play Now</button>
+                                <button className="btn mx-3 text-white" style={{ backgroundColor: '#10B981' }}><Link to='/game1' style={{  color: 'white', textDecoration: 'none'}}>Play Now</Link></button>
                             </div>
                         </div>
                     </div>

@@ -113,7 +113,7 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                         <li className="nav-item mb-0">
                             <a href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Logout} alt="" className="me-4" />
-                            Log out
+                            <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>Log out</Link>
                             </a>
                         </li>
                     </ul>

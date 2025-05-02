@@ -28,7 +28,7 @@ function HomeNavbar ({ }: NavbarProps) {
                             <FaBars size={20} />
                         </button>
                     </div>
-
+                    
                     <img src={Logo} alt="Logo" className='me-2' style={{ height: '40px' }} />
 
                     <form className="d-none d-md-flex align-items-center flex-grow-1 me-md-4 mb-2" style={{ maxWidth: '500px' }}>

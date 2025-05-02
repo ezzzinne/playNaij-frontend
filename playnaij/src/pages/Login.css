@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0f1623;
+  }
+  
+  .auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #0f1623; /* blueblack-600 */
+    background: url("/playnaij/src/assets/background\ login\ page.jpg");
+  }
+  
+  .auth-box {
+    width: 100%;
+    max-width: 400px;
+    background-color: #111827; /* blueblack-500 */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    color: white;
+  }
+  
+  .auth-box h1 {
+    color: #f59e0b; /* yellow-500 */
+    font-size: 2rem;
+    font-family: 'Luckiest Guy', cursive;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-box input {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    border: none;
+    background-color: #414652; /* blueblack-400 */
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .auth-box input::placeholder {
+    color: #cbd5e1;
+  }
+  
+  .auth-box .password-wrapper {
+    position: relative;
+  }
+  
+  .auth-box .password-toggle {
+    position: absolute;
+    top: 0.9rem;
+    right: 1rem;
+    cursor: pointer;
+    color: #d1d5db;
+  }
+  
+  .auth-box .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-box button.login-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #f59e0b;
+    color: #111827;
+    font-weight: bold;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .auth-box .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: #94a3b8;
+  }
+  
+  .auth-box .divider hr {
+    flex: 1;
+    border-color: #64748b;
+  }
+  
+  .auth-box .socials {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .auth-box .socials button {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .auth-box .socials button:hover {
+    transform: scale(1.05);
+  }
+  
+  .auth-box .signup {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #e2e8f0;
+  }
+  
+  .auth-box .signup a {
+    color: #f59e0b;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .auth-box .signup a:hover {
+    text-decoration: underline;
+  }
+  
+  
+  

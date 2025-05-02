@@ -4,10 +4,11 @@ import { useState } from 'react';
 import Logo from '../assets/Logo.svg'
 import User from '../assets/user-circle.svg'
 import User2 from '../assets/users 02.svg'
+import { Link } from 'react-router-dom';
 
-interface NavbarProps {
-    isLoggedIn: boolean;
-}
+type NavbarProps = {
+    className?: string;
+};
 
 // eslint-disable-next-line no-empty-pattern
 function Navbar ({ }: NavbarProps) {    
@@ -16,7 +17,7 @@ function Navbar ({ }: NavbarProps) {
     
     return (
         <>
-           <nav className="navbar px-3 px-md-4 d-flex align-items-center justify-content-between flex-wrap" style={{ height: 'fit-content', width: '100%', top: 0, zIndex: 1060 }}>
+           <nav className="navbar px-3 px-md-4 d-flex align-items-center justify-content-between flex-wrap {`navbar ${className}`}" style={{ height: 'fit-content', width: '100%', top: 0, zIndex: 1060 }}>
 
                 <div className="d-flex align-items-center gap-3">
                     <div className="d-md-none">
@@ -59,7 +60,7 @@ function Navbar ({ }: NavbarProps) {
 
                     <div className='d-flex gap-2'>
                         <button className="btn btn-outline-success me-3 text-white d-none d-md-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
-                        <button className="btn btn-success px-3">Log In</button>
+                        <button className="btn btn-success px-3"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
                     </div>
                 </div>
 
