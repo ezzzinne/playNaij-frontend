@@ -5,7 +5,7 @@ import Bell from '../assets/notification.svg'
 
 function Navbar1 () {
 
-    function onToggleSidebar(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    function onToggleSidebar( ): void {
         throw new Error('Function not implemented.');
     }
 
