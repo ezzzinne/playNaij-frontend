@@ -63,33 +63,33 @@ function LandingPage () {
             <h3 className="text-center fs-1" style={{ color: '#E7F8F2'}}>Why Choose PlayNaij?</h3>
             <p className="text-center fs-4" style={{ color: '#9CA3AF'}}>Experience gaming with authentic Nigerian flavor!</p>
         
-            <div className="row g-4 p-5 row-cols-2 row-cols-lg-4 d-flex justify-content-center align-items-center">
-                <div className="feature col d-inline-flex flex-column align-items-center justify-content-center">
+            <div className="row g-4 p-5 row-cols-2 row-cols-md-4">
+                <div className="feature col d-flex flex-column align-items-center justify-content-center">
                     <div className="feature-icon mb-1">
                         <img src={Icon1} alt="" />
                     </div>
-                    <p className="fs-4 text-white text-center mb-1">Cultural Gaming</p>
+                    <p className="fs-4 text-white mb-1">Cultural Gaming</p>
                     <p className="text-center" style={{ color: '#9CA3AF' }}>Games that celebrate Nigerian identity and culture</p>
                 </div>
-                <div className="feature col d-inline-flex flex-column align-items-center justify-content-center">
+                <div className="feature col d-flex flex-column align-items-center justify-content-center">
                     <div className="feature-icon mb-1">
                         <img src={Icon2} alt="" />
                     </div>
-                    <p className="fs-4 text-white text-center mb-1">Web3 Ready</p>
+                    <p className="fs-4 text-white mb-1">Web3 Ready</p>
                     <p className="text-center" style={{ color: '#9CA3AF' }}>Earn and trade NFTs while you play</p>
                 </div>
-                <div className="feature col d-inline-flex flex-column align-items-center justify-content-center">
+                <div className="feature col d-flex flex-column align-items-center justify-content-center">
                     <div className="feature-icon mb-1">
                         <img src={Icon3} alt="" />
                     </div>
-                    <p className="fs-4 text-white text-center mb-1">Daily Rewards</p>
+                    <p className="fs-4 text-white mb-1">Daily Rewards</p>
                     <p className="text-center" style={{ color: '#9CA3AF' }}>Win prizes and climb the leaderboard</p>
                 </div>
-                <div className="feature col d-inline-flex flex-column align-items-center justify-content-center">
+                <div className="feature col d-flex flex-column align-items-center justify-content-center">
                     <div className="feature-icon mb-1">
                         <img src={Icon4} alt="" />
                     </div>
-                    <p className="fs-4 text-white text-center mb-1">Community</p>
+                    <p className="fs-4 text-white mb-1">Community</p>
                     <p className="text-center" style={{ color: '#9CA3AF' }}>Connect with friends and players across Nigeria</p>
                 </div>
             </div>

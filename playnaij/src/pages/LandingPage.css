@@ -12,3 +12,9 @@ body {
 h3 {
     font-family: "Rubik Spray Paint", system-ui;
 }
+
+.feature {
+    min-height: 250px;
+    text-align: center;
+}
+  
