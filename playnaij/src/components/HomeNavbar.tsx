@@ -57,16 +57,16 @@ function HomeNavbar ({ }: NavbarProps) {
                         <img src={Bell} alt="Notification" style={{ height: '32px' }} />
 
                         
-                        <button className="btn btn-warning px-2">Connect Wallet</button>
+                        <button className="btn btn-warning">Connect Wallet</button>
                     </div>
 
                 </div>
 
                 {showMobileMenu && (
-                    <div className="w-100 d-md-none mt-2">
+                    <div className="d-md-none mt-2 d-flex flex-column align-items-start">
                         <ul className="nav flex-column text-white gap-2 mb-3">
                             <li className="nav-item">
-                                <select className="form-select text-white border-secondary" style={{ background: '#0D1017' }}>
+                                <select className="text-white" style={{ background: '#0D1017' }}>
                                     <option value="">Categories</option>
                                     <option value="">Word Games</option>
                                     <option value="">Trivia Games</option>
@@ -74,8 +74,14 @@ function HomeNavbar ({ }: NavbarProps) {
                                 </select>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link text-white" href="#"><span className='me-3'><img src={Award} alt="" /></span>Leaderboard</a>
-                                <a className="nav-link text-white" href="#"><span className='me-3'><img src={User} alt="" /></span>Invite Friends</a>
+                                <div className='d-flex'>
+                                    <img src={Award} alt="" />
+                                    <a className="nav-link text-white" href="#">Leaderboard</a>
+                                </div>
+                                <div className='d-flex'>
+                                    <img src={User} alt="" />
+                                    <a className="nav-link text-white" href="#">Invite Friends</a>
+                                </div>
                             </li>
                         </ul>
                     </div>

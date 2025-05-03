@@ -36,7 +36,7 @@ export default function Login() {
         >
         <div className="auth-box">
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <button style={{ fontSize: '1.25rem', color: 'white' }}>&times;</button>
+            <button style={{ fontSize: '1.25rem', color: 'white' }}><Link to='/' style={{ textDecoration: 'none', color: '#0D1017'}}>&times;</Link></button>
             </div>
 
             <h1>LOGIN</h1>

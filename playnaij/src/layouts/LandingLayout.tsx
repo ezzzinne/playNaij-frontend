@@ -8,7 +8,7 @@ interface LayoutProps {
 function LandingLayout ({ children }: LayoutProps) {
     return (
         <>
-            <LandingNavbar isLoggedIn={false} />
+            <LandingNavbar />
             <main>{children}</main>
         </>
     )

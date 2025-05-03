@@ -65,18 +65,19 @@ function Navbar ({ }: NavbarProps) {
                 </div>
 
                 {showMobileMenu && (
-                    <div className="w-100 d-md-none mt-2">
+                    <div className="d-md-none mt-2 d-flex flex-column align-items-start">
                         <ul className="nav flex-column text-white gap-2 mb-3">
                             <li className="nav-item">
-                                <select className="form-select text-white border-secondary" style={{ background: '#0D1017' }}>
+                                <select className="text-white" style={{ background: '#0D1017' }}>
                                     <option value="">Categories</option>
                                     <option value="">Word Games</option>
                                     <option value="">Trivia</option>
                                     <option value="">Web3</option>
                                 </select>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link text-white" href="#"><span className='me-3'><img src={User2} alt="" /></span>Invite Friends</a>
+                            <li className="nav-item d-flex">
+                                <img src={User2} alt="" />
+                                <a className="nav-link text-white" href="#">Invite Friends</a>
                             </li>
                         </ul>
 
