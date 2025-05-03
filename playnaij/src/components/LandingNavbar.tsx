@@ -60,7 +60,7 @@ function Navbar ({ }: NavbarProps) {
 
                     <div className='d-flex gap-2'>
                         <button className="btn btn-outline-success me-3 text-white d-none d-md-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
-                        <button className="btn btn-success px-3"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
+                        <button className="btn btn-success"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
                     </div>
                 </div>
 
