@@ -55,11 +55,11 @@ function HomeNavbar ({ }: NavbarProps) {
 
                         <img src={Icon} alt="User Icon" style={{ height: '32px' }} />
                         <img src={Bell} alt="Notification" style={{ height: '32px' }} />
-
+                    </div>
                         
+                    <div className="d-flex align-items-center ms-3 mb-2 mb-md-0">
                         <button className="btn btn-warning">Connect Wallet</button>
                     </div>
-
                 </div>
 
                 {showMobileMenu && (

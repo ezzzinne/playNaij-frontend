@@ -57,12 +57,13 @@ function Navbar ({ }: NavbarProps) {
                     </ul>
 
                     <img src={User} alt="User Icon" style={{ height: '32px' }} />
-
-                    <div className='d-flex gap-2'>
-                        <button className="btn btn-outline-success me-3 text-white d-none d-md-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
-                        <button className="btn btn-success"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
-                    </div>
                 </div>
+
+                <div className='d-flex gap-2 align-items-center mb-2 mb-md-0'>
+                    <button className="btn btn-outline-success me-3 text-white d-none d-md-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
+                    <button className="btn btn-success"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
+                </div>
+                
 
                 {showMobileMenu && (
                     <div className="d-md-none mt-2 d-flex flex-column align-items-start">
