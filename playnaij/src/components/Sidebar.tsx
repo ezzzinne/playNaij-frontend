@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setShowSidebar: (val: boolean) => void }) {
     const sidebarRef = useRef<HTMLDivElement>(null);
 
+    // Close on outside click (only on mobile)
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
           if (
@@ -29,6 +30,7 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // Lock background scroll when sidebar is open (mobile)
     useEffect(() => {
         document.body.style.overflow = showSidebar && window.innerWidth < 768 ? 'hidden' : 'auto';
         return () => {
@@ -39,13 +41,6 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
     return (
         <>
             <main>
-                {/* <button
-                    className="btn bg-dark text-white btn-outline-dark m-3 d-md-none"
-                    onClick={() => setShowSidebar(true)}
-                    >
-                    ☰
-                </button> */}
-
                 <div
                     ref={sidebarRef}
                     className={`text-white d-flex flex-column p-3 shadow-lg top-0 start-0 h-100
@@ -59,7 +54,9 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                 >
 
                     <a href="/" className="mb-2 d-flex justify-content-center align-items-center">
-                        <img src={Logo} alt="" />
+                    <Link to="/">
+                        <img src={Logo} alt="Logo" className="img-fluid" />
+                    </Link>
                     </a>
                     <hr />
 
@@ -116,9 +113,11 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                             <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>Log out</Link>
                             </a>
                         </li>
-                    </ul>
 
-                    <img src={MoreGames} alt="" className="mt-4 more-games" />
+                        <div className="mt-auto">
+                            <img src={MoreGames} alt="More games" className="img-fluid mt-4" />
+                        </div>
+                    </ul>
                 </div>
 
             </main>

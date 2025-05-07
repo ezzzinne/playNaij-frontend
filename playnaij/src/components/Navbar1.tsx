@@ -1,22 +1,24 @@
 import './Navbar.css'
 import { FaSearch } from 'react-icons/fa';
-import Icon from '../assets/img.svg';
-import Bell from '../assets/notification.svg'
+import User from '../assets/user-circle.svg';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../redux/AuthContext';
 
 interface Navbar1Props {
     onToggleSidebar: () => void;
 }
 
 function Navbar1 ({ onToggleSidebar }: Navbar1Props) {
-
+    const { login } = useAuth();
+    
     return (
         <>
-            <nav className="navbar px-4 d-flex align-items-center justify-content-between" style={{ height: '60px', width: '100%', top: 0, zIndex: 1060 }}>
-                <button className="btn btn-outline-light d-md-none" onClick={onToggleSidebar}>
+            <nav className="navbar px-4 d-flex align-items-center justify-content-between flex-wrap" style={{ height: 'fit-content', top: 0, zIndex: 1060 }}>
+                <button className="btn btn-outline-light d-lg-none" onClick={onToggleSidebar}>
                     ☰
                 </button>
 
-                <form className="d-none d-md-flex align-items-center flex-grow-1 me-4" style={{ maxWidth: '500px' }}>
+                <form className="d-none d-lg-flex align-items-center flex-grow-1 me-4" style={{ maxWidth: '500px' }}>
                     <div className="input-group w-100">
                         <span className="input-group-text border-end-0" style={{ color: '#9C9C9C', borderColor: '#9C9C9C', background: '#0D1017' }}>
                             <FaSearch />
@@ -26,8 +28,7 @@ function Navbar1 ({ onToggleSidebar }: Navbar1Props) {
                     </div>
                 </form>
 
-                <ul className="nav gap-4 d-none d-md-flex">
-                    <li className="nav-item"><a className="nav-link text-white" href="#">Leaderboard</a></li>
+                <ul className="nav gap-4 d-none d-lg-flex">
                     <select className="text-white border-0" style={{ background: '#0D1017' }} id="">
                         <option value="">Categories</option>
                         <option value="">Word Games</option>
@@ -36,12 +37,12 @@ function Navbar1 ({ onToggleSidebar }: Navbar1Props) {
                     </select>
                 </ul>
 
-                <div className="d-flex align-items-center">
-                    <img src={Icon} alt="" className='m-2' />
-                    <img src={Bell} alt="" className='m-2 d-none d-md-flex' />
-                </div>
+                <img src={User} alt="" className='m-2' />
 
-                <button className="btn btn-warning d-none d-md-flex">Connect Wallet</button>
+                <div className='d-flex gap-2 align-items-center mb-2 mb-lg-0'>
+                    <button className="btn btn-outline-success me-3 text-white d-none d-lg-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
+                    <button onClick={login} className="btn btn-success"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
+                </div>
 
                 
             </nav>

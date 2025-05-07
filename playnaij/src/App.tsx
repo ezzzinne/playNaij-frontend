@@ -9,7 +9,7 @@ import LandingLayout from './layouts/LandingLayout.tsx';
 import HomeLayout from './layouts/HomeLayout.tsx';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount.tsx';
-
+import GameScreen from './games/web2/Streetz.tsx/components/GameScreen.tsx';
 
 function App() {
 
@@ -21,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/home" element={<HomeLayout><HomePage /></HomeLayout>} />
+          <Route path="/game" element={<Layout><GameScreen /></Layout>} />
 
           <Route 
             path='/game1'

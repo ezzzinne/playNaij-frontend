@@ -5,6 +5,7 @@ import Logo from '../assets/Logo.svg'
 import User from '../assets/user-circle.svg'
 import User2 from '../assets/users 02.svg'
 import { Link } from 'react-router-dom';
+import { useAuth } from '../redux/AuthContext'
 
 type NavbarProps = {
     className?: string;
@@ -14,13 +15,13 @@ type NavbarProps = {
 function Navbar ({ }: NavbarProps) {    
 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const { login } = useAuth();
     
     return (
         <>
            <nav className="navbar px-3 px-md-4 d-flex align-items-center justify-content-between flex-wrap {`navbar ${className}`}" style={{ height: 'fit-content', width: '100%', top: 0, zIndex: 1060 }}>
-
                 <div className="d-flex align-items-center gap-3">
-                    <div className="d-md-none">
+                    <div className="d-lg-none">
                         <button
                         className="btn text-white p-0 me-2"
                         type="button"
@@ -29,13 +30,11 @@ function Navbar ({ }: NavbarProps) {
                             <FaBars size={20} />
                         </button>
                     </div>
-                </div>
 
-                <div className="d-flex align-items-center mb-2 mb-md-0">
                     <img src={Logo} alt="Logo" style={{ height: '40px' }} />
                 </div>
 
-                <form className="d-none d-md-flex align-items-center flex-grow-1 me-md-4 mb-2" style={{ maxWidth: '500px' }}>
+                <form className="d-none d-lg-flex align-items-center flex-grow-1 mx-4" style={{ maxWidth: '500px' }}>
                     <div className="input-group w-100">
                         <span className="input-group-text border-end-0" style={{ color: '#9C9C9C', borderColor: '#9C9C9C', background: '#0D1017' }}>
                             <FaSearch />
@@ -45,29 +44,31 @@ function Navbar ({ }: NavbarProps) {
                     </div>
                 </form>
 
-                <div className="d-flex align-items-center gap-3 mb-2 mb-md-0">
-                    <ul className="d-none d-md-flex nav gap-3 align-items-center mb-2 mb-md-0">
+                <div className="d-flex align-items-center gap-3 mb-2 mb-lg-0">
+                    <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
                         <li className="nav-item"><a className="nav-link text-white" href="#">Invite Friends</a></li>
-                        <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} id="">
-                            <option value="">Categories</option>
-                            <option value="">Word Games</option>
-                            <option value="">Trivia Games</option>
-                            <option value="">Web3 Games</option>
-                        </select>
+                        <li className="nav-item">
+                            <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} id="">
+                                <option value="">Categories</option>
+                                <option value="">Word Games</option>
+                                <option value="">Trivia Games</option>
+                                <option value="">Web3 Games</option>
+                            </select>
+                        </li>
                     </ul>
 
                     <img src={User} alt="User Icon" style={{ height: '32px' }} />
                 </div>
 
-                <div className='d-flex gap-2 align-items-center mb-2 mb-md-0'>
-                    <button className="btn btn-outline-success me-3 text-white d-none d-md-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
-                    <button className="btn btn-success"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
+                <div className='d-flex gap-2 align-items-center mb-2 mb-lg-0'>
+                    <button className="btn btn-outline-success text-white d-none d-lg-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
+                    <button onClick={login} className="btn btn-success"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
                 </div>
                 
 
                 {showMobileMenu && (
-                    <div className="d-md-none mt-2 d-flex flex-column align-items-start">
-                        <ul className="nav flex-column text-white gap-2 mb-3">
+                    <div className="d-lg-none mt-2 d-flex flex-column align-items-start w-100">
+                        <ul className="nav flex-column text-white gap-3 mb-3">
                             <li className="nav-item">
                                 <select className="text-white" style={{ background: '#0D1017' }}>
                                     <option value="">Categories</option>
@@ -76,7 +77,7 @@ function Navbar ({ }: NavbarProps) {
                                     <option value="">Web3</option>
                                 </select>
                             </li>
-                            <li className="nav-item d-flex">
+                            <li className="nav-item d-flex align-items-center gap-2">
                                 <img src={User2} alt="" />
                                 <a className="nav-link text-white" href="#">Invite Friends</a>
                             </li>
