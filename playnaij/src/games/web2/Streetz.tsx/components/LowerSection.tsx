@@ -5,7 +5,7 @@ import People from '../assets/People.svg';
 function LowerSection () {
     return (
         <>
-                <div className="row row-cols-1 row-cols-md-2 g-4 p-3 container-fluid">
+                <div className="row row-cols-1 row-cols-md-2 g-4 p-4 container-fluid">
                     <div className="col">
                         <div className="card h-100" style={{ borderColor: '#F59E0B', backgroundColor: '#0D1017D9' }}>
                             <img src={WhoSabi} className="card-img-top p-4" alt="..." />
