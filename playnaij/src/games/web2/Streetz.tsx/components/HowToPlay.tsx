@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from '../assets/STREETZ img.svg'
+import LowerSection from './LowerSection';
 
 const HowToPlay: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   return (
@@ -15,6 +16,8 @@ const HowToPlay: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 Go Back to Game
             </button>
         </div>
+
+        <LowerSection />
     </>
   );
 };

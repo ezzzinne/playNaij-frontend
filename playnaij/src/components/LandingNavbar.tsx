@@ -2,7 +2,6 @@ import './Navbar.css'
 import { FaSearch, FaBars } from 'react-icons/fa';
 import { useState } from 'react';
 import Logo from '../assets/Logo.svg'
-import User from '../assets/user-circle.svg'
 import User2 from '../assets/users 02.svg'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../redux/AuthContext'
@@ -44,9 +43,9 @@ function Navbar ({ }: NavbarProps) {
                     </div>
                 </form>
 
-                <div className="d-flex align-items-center gap-3 mb-2 mb-lg-0">
+                <div className="d-flex align-items-center gap-2 mb-2 mb-lg-0">
                     <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
-                        <li className="nav-item"><a className="nav-link text-white" href="#">Invite Friends</a></li>
+                        <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/friends' style={{  color: 'white', textDecoration: 'none'}}>Invite Friends</Link></a></li>
                         <li className="nav-item">
                             <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} id="">
                                 <option value="">Categories</option>
@@ -56,11 +55,9 @@ function Navbar ({ }: NavbarProps) {
                             </select>
                         </li>
                     </ul>
-
-                    <img src={User} alt="User Icon" style={{ height: '32px' }} />
                 </div>
 
-                <div className='d-flex gap-2 align-items-center mb-2 mb-lg-0'>
+                <div className='d-flex gap-3 align-items-center mb-2 mb-lg-0'>
                     <button className="btn btn-outline-success text-white d-none d-lg-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
                     <button onClick={login} className="btn btn-success"><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
                 </div>

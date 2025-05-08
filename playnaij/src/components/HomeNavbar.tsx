@@ -6,6 +6,7 @@ import Icon from '../assets/img.svg';
 import Bell from '../assets/notification.svg';
 import Award from '../assets/Award.svg';
 import User from '../assets/users 02.svg'
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
     isLoggedIn: boolean;
@@ -44,7 +45,7 @@ function HomeNavbar ({ }: NavbarProps) {
                     <div className="d-flex align-items-center gap-3">
                         <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
                             <li className="nav-item"><a className="nav-link text-white" href="#">Invite Friends</a></li>
-                            <li className="nav-item"><a className="nav-link text-white" href="#">Leaderboard</a></li>
+                            <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/leaderboard'>Leaderboard</Link></a></li>
                             <li className="nav-item">
                                 <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} id="">
                                     <option value="">Categories</option>

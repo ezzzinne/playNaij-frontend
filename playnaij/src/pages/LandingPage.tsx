@@ -38,7 +38,7 @@ function LandingPage () {
                             <p style={{ color: '#9CA3AF' }}>Test your knowledge of Naija culture, entertainment, and current events!</p>
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50K Players</small>
-                                <button className="btn mx-2 text-white" style={{ backgroundColor: '#10B981' }}>Play Now</button>
+                                <button className="btn mx-2 text-white" style={{ backgroundColor: '#10B981' }}><Link to="/game2" style={{  color: 'white', textDecoration: 'none'}}>Play Now</Link></button>
                             </div>
                         </div>
                     </div>
