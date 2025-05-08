@@ -1,49 +1,110 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaGoogle, FaFacebookF, IoEye, IoEyeOff } from '../components/icons';
-import { Link } from 'react-router-dom';
-import '../styles/login.css'; 
+import { useNavigate, Link } from 'react-router-dom';
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider
+} from 'firebase/auth';
+import { app } from '../firebase';
+import { IoEye, IoEyeOff } from '../components/icons';
+import '../styles/login.css';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [form, setForm] = useState({
+    username: '',
+    password: '',
+    remember: false
+  });
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const auth = getAuth(app);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, type, value, checked } = e.target;
+    setForm(f => ({
+      ...f,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
 
   const handleLogin = () => {
-    // Fake check — replace with real validation later
-    const userExists = false; // simulate: user does NOT exist
+    // Form validation
+    if (!form.username || !form.password) {
+      setError('Please enter both username and password.');
+      return;
+    }
+
+    if (!form.remember) {
+      setError('You must agree to remember me before logging in.');
+      return;
+    }
+
+    setError(''); // Clear error if everything is valid
+
+    // Replace this with real auth logic
+    const userExists = true;
 
     if (!userExists) {
       navigate('/create-account');
     } else {
-      navigate('/home'); // or wherever your dashboard/homepage is
+      navigate('/home');
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log('Google user:', user);
+    } catch (error) {
+      console.error('Google login error:', error);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    const provider = new FacebookAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log('Facebook user:', user);
+    } catch (error) {
+      console.error('Facebook login error:', error);
     }
   };
 
   return (
-    <div className="auth-container"
-      style={{
-        backgroundImage: 'url("/background login page.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        minHeight: '100vh',
-      }}
-    >
+    <div className="auth-container auth-background">
       <div className="auth-box">
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button style={{ fontSize: '1.25rem', color: 'white' }}>&times;</button>
+        <div className="auth-close">
+          <button>&times;</button>
         </div>
 
-        <h1>LOGIN</h1>
+        <h1 className="auth-title">Login</h1>
+
+        {error && <p className="error-message">{error}</p>}
 
         <div>
-          <input type="text" placeholder="Enter Username" />
+          <input
+            type="text"
+            name="username"
+            value={form.username}
+            onChange={onChange}
+            placeholder="Enter Username"
+            className="auth-input"
+          />
         </div>
 
         <div className="password-wrapper">
           <input
             type={showPassword ? 'text' : 'password'}
+            name="password"
+            value={form.password}
+            onChange={onChange}
             placeholder="Enter password"
+            className="auth-input"
           />
           <span
             className="password-toggle"
@@ -53,14 +114,21 @@ export default function Login() {
           </span>
         </div>
 
-        <div className="remember-forgot">
-          <label>
-            <input type="checkbox" style={{ marginRight: '0.5rem' }} />
+        <div className="login-remember">
+          <label htmlFor="remember" className="remember-label">
+            <input
+              type="checkbox"
+              id="remember"
+              name="remember"
+              checked={form.remember}
+              onChange={onChange}
+            />
             Remember me
           </label>
-          <button style={{ color: '#60a5fa', background: 'none', border: 'none' }}>
+
+          <Link to="/forgot-password" className="forgot-password-link">
             Forgot Password?
-          </button>
+          </Link>
         </div>
 
         <button className="login-btn" onClick={handleLogin}>
@@ -69,24 +137,35 @@ export default function Login() {
 
         <div className="divider">
           <hr />
-          <span style={{ fontSize: '0.875rem' }}>Or sign in with</span>
+          <span>Or sign in with</span>
           <hr />
         </div>
 
-        <div className="socials">
-          <button><FaGoogle /></button>
-          <button><FaFacebookF /></button>
+        <div className="ca-social-buttons">
+          <button
+            aria-label="Google sign up"
+            onClick={handleGoogleLogin}
+            type="button"
+            className="ca-social"
+          >
+            <img src="/google logo.png" alt="Google sign in" />
+          </button>
+
+          <button
+            aria-label="Facebook sign up"
+            onClick={handleFacebookLogin}
+            type="button"
+            className="ca-social"
+          >
+            <img src="/Facebook_Logo_(2019).png" alt="Facebook sign in" />
+          </button>
         </div>
 
         <p className="signup">
           Don’t have an account?{' '}
-          <Link to="/create-account">Sign Up</Link>
-          <button
-            onClick={() => navigate('/create-account')}
-            style={{ color: '#60a5fa', background: 'none', border: 'none', cursor: 'pointer' }}
-          >
+          <Link to="/create-account" className="signup-link">
             Sign Up
-          </button>
+          </Link>
         </p>
       </div>
     </div>
