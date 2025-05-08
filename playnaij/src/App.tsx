@@ -1,14 +1,19 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ShareProfilePage from "./pages/ShareProfile";
+import FriendsPage from "./pages/Friends";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
+      {/* <Leaderboard /> */}
       <Routes>
-        <Route/>
-        <Route />
+        <Route path="/friends" element={<FriendsPage />} />
+        <Route path="/share-profile" element={<ShareProfilePage />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
-    </Router>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

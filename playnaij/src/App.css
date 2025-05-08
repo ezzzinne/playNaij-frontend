@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+* {
+  font-family: "Rubik", sans-serif;
+}
+
+.leaderboard {
+  font-family: "Rubik Bubbles", system-ui;
+}
