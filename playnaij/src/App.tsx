@@ -14,7 +14,7 @@ import WhoSabiGame from './games/web2/WhoSabi.tsx/index.tsx';
 import LoadingScreen from './games/web2/WhoSabi.tsx/components/LoadingScreen.tsx';
 import CategorySelection from './games/web2/WhoSabi.tsx/components/CategorySelection.tsx';
 import VerifyAccount from './pages/verifyAccount.tsx';
-import FriendsPage from './tailwind-components/Friends.tsx';
+import FriendsPage from './pages/Friends.tsx';
 import Leaderboard from './pages/Leaderboard.tsx';
 import ShareProfilePage from './pages/ShareProfile.tsx';
 
