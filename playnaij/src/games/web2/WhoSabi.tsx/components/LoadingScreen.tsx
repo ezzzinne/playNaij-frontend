@@ -13,7 +13,7 @@ export default function LoadingScreen() {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          navigate('/categories');
+          navigate('/play');
           return 100;
         }
         return prev + 10;

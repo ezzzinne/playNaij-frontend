@@ -17,6 +17,7 @@ import VerifyAccount from './pages/verifyAccount.tsx';
 import FriendsPage from './pages/Friends.tsx';
 import Leaderboard from './pages/Leaderboard.tsx';
 import ShareProfilePage from './pages/ShareProfile.tsx';
+import WhoSabiStartScreen from './games/web2/WhoSabi.tsx/components/HomeScreen.tsx';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/game" element={<Layout><GameScreen /></Layout>} />
           <Route path="/loading" element={<Layout><LoadingScreen /></Layout>} />
           <Route path='/categories' element={<Layout><CategorySelection /></Layout>} />
+          <Route path='/play' element={<Layout><WhoSabiStartScreen /></Layout>} />
           <Route path="/friends" element={<FriendsPage />} />
         <Route path="/share-profile" element={<ShareProfilePage />} />
         <Route path="/leaderboard" element={<Leaderboard />} />

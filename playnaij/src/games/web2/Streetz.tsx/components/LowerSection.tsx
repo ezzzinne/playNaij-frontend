@@ -28,7 +28,7 @@ function LowerSection () {
                                 <p style={{ color: '#9CA3AF' }}>Run your virtual Lagos market stall with NFT-powered items and strategy!</p>
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                     <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50K Players</small>
-                                    <button className="btn btn-outline-success mx-2 text-white disabled" style={{ backgroundColor: '#0D1017' }}>Coming soon</button>
+                                    <button className="btn btn-outline-success mx-1 text-white disabled" style={{ backgroundColor: '#0D1017' }}>Coming soon</button>
                                 </div>
                             </div>
                         </div>

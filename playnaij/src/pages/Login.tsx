@@ -4,10 +4,11 @@ import { IoEye, IoEyeOff } from '../components/icons';
 import { Link } from 'react-router-dom';
 import './Login.css'; 
 import LandingNavbar from '../components/LandingNavbar';
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../firebase';
 import Google from "../assets/google logo.png";
 import Facebook from "../assets/Facebook_Logo_(2019).png";
+import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +19,8 @@ export default function Login() {
   });
   const [error, setError] = useState('');
   const auth = getAuth(app);
+  const db = getFirestore(app);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +31,15 @@ export default function Login() {
     }));
   };
 
-  const handleLogin = () => {
+  // Firestore example
+  setDoc(doc(db, 'usernames', 'jon_doe'), {
+    email: 'jon@example.com'
+  }).catch(err => console.error('Error setting Firestore document:', err));
+
+
+  const handleLogin = async () => {
+    const { username, password } = form;
+
     // Form validation
     if (!form.username || !form.password) {
       setError('Please enter both username and password.');
@@ -38,6 +49,25 @@ export default function Login() {
     if (!form.remember) {
       setError('You must agree to remember me before logging in.');
       return;
+    }
+
+    try {
+      const docRef = doc(db, 'usernames', username);
+      const docSnap = await getDoc(docRef);
+  
+      if (!docSnap.exists()) {
+        setError('Username not found.');
+        return;
+      }
+  
+      const email = docSnap.data().email;
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('Logged in user:', userCredential.user);
+      navigate('/home');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.error(err);
+      setError('Login failed. Check your password or try again.');
     }
 
     setError(''); // Clear error if everything is valid
