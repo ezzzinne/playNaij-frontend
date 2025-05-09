@@ -32,7 +32,7 @@ function App() {
           <Route path="/home" element={<HomeLayout><HomePage /></HomeLayout>} />
           <Route path="/game" element={<Layout><GameScreen /></Layout>} />
           <Route path="/loading" element={<Layout><LoadingScreen /></Layout>} />
-          <Route path='/categories' element={<Layout><CategorySelection /></Layout>} />
+          <Route path='/categories' element={<Layout><CategorySelection onSelect={(category) => console.log(category)} /></Layout>} />
           <Route path='/play' element={<Layout><WhoSabiStartScreen /></Layout>} />
           <Route path="/friends" element={<FriendsPage />} />
         <Route path="/share-profile" element={<ShareProfilePage />} />
