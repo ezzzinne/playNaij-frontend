@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider
-} from 'firebase/auth';
-import { app } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 import { IoEye, IoEyeOff } from '../components/icons';
-import '../styles/login.css';
+import { Link } from 'react-router-dom';
+import './Login.css'; 
+import LandingNavbar from '../components/LandingNavbar';
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
+import { app } from '../firebase';
+import Google from "../assets/google logo.png";
+import Facebook from "../assets/Facebook_Logo_(2019).png";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,8 +17,8 @@ export default function Login() {
     remember: false
   });
   const [error, setError] = useState('');
-  const navigate = useNavigate();
   const auth = getAuth(app);
+  const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, value, checked } = e.target;
@@ -30,6 +29,7 @@ export default function Login() {
   };
 
   const handleLogin = () => {
+
     // Form validation
     if (!form.username || !form.password) {
       setError('Please enter both username and password.');
@@ -76,98 +76,102 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container auth-background">
-      <div className="auth-box">
-        <div className="auth-close">
-          <button>&times;</button>
+    <>
+        <LandingNavbar className="bg-transparent shadow-none" />
+
+        <div className="auth-container auth-background">
+        <div className="auth-box">
+            <div className='auth-close'>
+              <button><Link to='/' style={{ textDecoration: 'none'}}>&times;</Link></button>
+            </div>
+
+            <h1 className="auth-title">LOGIN</h1>
+
+            {error && <p className="error-message">{error}</p>}
+
+            <div>
+              <input
+                type="text"
+                name="username"
+                value={form.username}
+                onChange={onChange}
+                placeholder="Enter Username"
+                className="auth-input"
+              />
+            </div>
+
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={form.password}
+                onChange={onChange}
+                placeholder="Enter password"
+                className="auth-input"
+              />
+              <span
+                className="password-toggle"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <IoEyeOff size={20} /> : <IoEye size={20} />}
+              </span>
+            </div>
+
+            <div className="login-remember">
+              <label htmlFor="remember" className="remember-label">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  name="remember"
+                  checked={form.remember}
+                  onChange={onChange}
+                />
+                Remember me
+              </label>
+
+              <Link to="/forgot-password" className="forgot-password-link">
+                Forgot Password?
+              </Link>
+            </div>
+
+            <button className="login-btn" onClick={handleLogin}>
+            Login
+            </button>
+
+            <div className="divider">
+              <hr />
+              <span>Or sign in with</span>
+              <hr />
+            </div>
+
+            <div className="ca-social-buttons">
+              <button
+                aria-label="Google sign up"
+                onClick={handleGoogleLogin}
+                type="button"
+                className="ca-social"
+              >
+                <img src={Google} alt="Google sign in" />
+              </button>
+
+              <button
+                aria-label="Facebook sign up"
+                onClick={handleFacebookLogin}
+                type="button"
+                className="ca-social"
+              >
+                <img src={Facebook} alt="Facebook sign in" />
+              </button>
+            </div>
+
+            <p className="signup">
+              Don't have an account?{' '}
+              <Link to="/create-account" className="signup-link">
+                Sign Up
+              </Link>
+            </p>
         </div>
-
-        <h1 className="auth-title">Login</h1>
-
-        {error && <p className="error-message">{error}</p>}
-
-        <div>
-          <input
-            type="text"
-            name="username"
-            value={form.username}
-            onChange={onChange}
-            placeholder="Enter Username"
-            className="auth-input"
-          />
         </div>
-
-        <div className="password-wrapper">
-          <input
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            value={form.password}
-            onChange={onChange}
-            placeholder="Enter password"
-            className="auth-input"
-          />
-          <span
-            className="password-toggle"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <IoEyeOff size={20} /> : <IoEye size={20} />}
-          </span>
-        </div>
-
-        <div className="login-remember">
-          <label htmlFor="remember" className="remember-label">
-            <input
-              type="checkbox"
-              id="remember"
-              name="remember"
-              checked={form.remember}
-              onChange={onChange}
-            />
-            Remember me
-          </label>
-
-          <Link to="/forgot-password" className="forgot-password-link">
-            Forgot Password?
-          </Link>
-        </div>
-
-        <button className="login-btn" onClick={handleLogin}>
-          Login
-        </button>
-
-        <div className="divider">
-          <hr />
-          <span>Or sign in with</span>
-          <hr />
-        </div>
-
-        <div className="ca-social-buttons">
-          <button
-            aria-label="Google sign up"
-            onClick={handleGoogleLogin}
-            type="button"
-            className="ca-social"
-          >
-            <img src="/google logo.png" alt="Google sign in" />
-          </button>
-
-          <button
-            aria-label="Facebook sign up"
-            onClick={handleFacebookLogin}
-            type="button"
-            className="ca-social"
-          >
-            <img src="/Facebook_Logo_(2019).png" alt="Facebook sign in" />
-          </button>
-        </div>
-
-        <p className="signup">
-          Don’t have an account?{' '}
-          <Link to="/create-account" className="signup-link">
-            Sign Up
-          </Link>
-        </p>
-      </div>
-    </div>
+    </>
   );
 }
