@@ -15,6 +15,16 @@ function Navbar ({ }: NavbarProps) {
 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const { login } = useAuth();
+
+    const handleScrollToSection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const sectionId = e.target.value;
+        if (sectionId) {
+          const targetElement = document.querySelector(sectionId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      };      
     
     return (
         <>
@@ -47,11 +57,11 @@ function Navbar ({ }: NavbarProps) {
                     <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
                         <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/friends' style={{  color: 'white', textDecoration: 'none'}}>Invite Friends</Link></a></li>
                         <li className="nav-item">
-                            <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} id="">
+                            <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} onChange={handleScrollToSection}>
                                 <option value="">Categories</option>
-                                <option value="">Word Games</option>
-                                <option value="">Trivia Games</option>
-                                <option value="">Web3 Games</option>
+                                <option value="#game-cards">Word Games</option>
+                                <option value="#game-cards">Trivia Games</option>
+                                <option value="#game-cards">Web3 Games</option>
                             </select>
                         </li>
                     </ul>
@@ -67,11 +77,11 @@ function Navbar ({ }: NavbarProps) {
                     <div className="d-lg-none mt-2 d-flex flex-column align-items-start w-100">
                         <ul className="nav flex-column text-white gap-3 mb-3">
                             <li className="nav-item">
-                                <select className="text-white" style={{ background: '#0D1017' }}>
+                                <select className="text-white" style={{ background: '#0D1017' }} onChange={handleScrollToSection}>
                                     <option value="">Categories</option>
-                                    <option value="">Word Games</option>
-                                    <option value="">Trivia</option>
-                                    <option value="">Web3</option>
+                                    <option value="#game-cards">Word Games</option>
+                                    <option value="#game-cards">Trivia</option>
+                                    <option value="#game-cards">Web3</option>
                                 </select>
                             </li>
                             <li className="nav-item d-flex align-items-center gap-2">

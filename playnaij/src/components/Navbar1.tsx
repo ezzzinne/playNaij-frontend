@@ -1,6 +1,6 @@
 import './Navbar.css'
 import { FaSearch } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../redux/AuthContext';
 
 interface Navbar1Props {
@@ -9,6 +9,13 @@ interface Navbar1Props {
 
 function Navbar1 ({ onToggleSidebar }: Navbar1Props) {
     const { login } = useAuth();
+
+    const navigate = useNavigate();
+
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedRoute = e.target.value;
+    navigate(selectedRoute);
+    };
     
     return (
         <>
@@ -28,11 +35,11 @@ function Navbar1 ({ onToggleSidebar }: Navbar1Props) {
                 </form>
 
                 <ul className="nav gap-4 d-none d-lg-flex">
-                    <select className="text-white border-0" style={{ background: '#0D1017' }} id="">
+                    <select className="text-white border-0" style={{ background: '#0D1017' }} onChange={handleSelectChange}>
                         <option value="">Categories</option>
-                        <option value="">Word Games</option>
-                        <option value="">Trivia Games</option>
-                        <option value="">Web3 Games</option>
+                        <option value="/game1">Word Games</option>
+                        <option value="/game2">Trivia Games</option>
+                        <option disabled value="">Web3 Games</option>
                     </select>
 
                     <div className='d-flex gap-3 align-items-center mb-2 mb-lg-0'>

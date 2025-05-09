@@ -16,7 +16,7 @@ function LandingPage () {
 
             <h3 className="text-center mt-4 fs-2" style={{ color: '#B5E9D8' }}>Available Games</h3>
 
-            <div className="row row-cols-1 row-cols-md-3 g-4 p-4 container-fluid">
+            <div className="row row-cols-1 row-cols-md-3 g-4 p-4 container-fluid" id="game-cards">
                 <div className="col">
                     <div className="card h-100" style={{ borderColor: '#F59E0B', backgroundColor: '#0D1017D9' }}>
                         <img src={Streetz} className="card-img-top p-4" alt="..." />
@@ -51,7 +51,7 @@ function LandingPage () {
                             <p style={{ color: '#9CA3AF' }}>Run your virtual Lagos market stall with NFT-powered items and strategy!</p>
                             <div className="d-flex justify-content-between align-items-center mb-3">
                                 <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50K Players</small>
-                                <button className="btn mx-2 text-white" style={{ backgroundColor: '#10B981' }}>Play Now</button>
+                                <button className="btn btn-outline-success mx-2 text-white disabled" style={{ backgroundColor: '#0D1017' }}>Coming soon</button>
                             </div>
                         </div>
                     </div>

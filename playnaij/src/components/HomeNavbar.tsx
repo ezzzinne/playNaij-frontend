@@ -16,6 +16,16 @@ interface NavbarProps {
 function HomeNavbar ({ }: NavbarProps) {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+    const handleScrollToSection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const sectionId = e.target.value;
+        if (sectionId) {
+          const targetElement = document.querySelector(sectionId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      };      
+
     return (
         <>
             <nav className="navbar px-3 px-md-4 py-2" style={{ height: 'fit-content', width: '100%', top: 0, zIndex: 1060 }}>
@@ -45,13 +55,13 @@ function HomeNavbar ({ }: NavbarProps) {
                     <div className="d-flex align-items-center gap-3">
                         <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
                             <li className="nav-item"><a className="nav-link text-white" href="#">Invite Friends</a></li>
-                            <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/leaderboard'>Leaderboard</Link></a></li>
+                            <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/leaderboard' style={{ color: 'white', textDecoration: 'none'}}>Leaderboard</Link></a></li>
                             <li className="nav-item">
-                                <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} id="">
+                                <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} onChange={handleScrollToSection}>
                                     <option value="">Categories</option>
-                                    <option value="">Word Games</option>
-                                    <option value="">Trivia</option>
-                                    <option value="">Web3</option>
+                                    <option value="#game-cards">Word Games</option>
+                                    <option value="#game-cards">Trivia Games</option>
+                                    <option value="#game-cards">Web3 Games</option>
                                 </select>
                             </li>
                         </ul>
@@ -67,20 +77,20 @@ function HomeNavbar ({ }: NavbarProps) {
                     <div className="d-lg-none mt-3">
                         <ul className="nav flex-column text-white gap-3 px-1">
                             <li className="nav-item">
-                                <select className="text-white" style={{ background: '#0D1017' }}>
+                                <select className="text-white" style={{ background: '#0D1017' }} onChange={handleScrollToSection}>
                                     <option value="">Categories</option>
-                                    <option value="">Word Games</option>
-                                    <option value="">Trivia Games</option>
-                                    <option value="">Web3 Games</option>
+                                    <option value="#game-cards">Word Games</option>
+                                    <option value="#game-cards">Trivia Games</option>
+                                    <option value="#game-cards">Web3 Games</option>
                                 </select>
                             </li>
                             <li className="nav-item d-flex align-items-center gap-2">
                                 <img src={Award} alt="Leaderboard" style={{ height: '24px' }} />
-                                <a className="nav-link text-white p-0" href="#">Leaderboard</a>
+                                <a className="nav-link text-white p-0" href="#"><Link to='/leaderboard' style={{ color: 'white', textDecoration: 'none'}}>Leaderboard</Link></a>
                             </li>
                             <li className="nav-item d-flex align-items-center gap-2">
                                 <img src={User} alt="Invite" style={{ height: '24px' }} />
-                                <a className="nav-link text-white p-0" href="#">Invite Friends</a>
+                                <a className="nav-link text-white p-0" href="#"><Link to='/friends' style={{ color: 'white', textDecoration: 'none'}}>Invite Friends</Link></a>
                             </li>
                             <li className="nav-item">
                                 <button className="btn btn-warning w-100">Connect Wallet</button>

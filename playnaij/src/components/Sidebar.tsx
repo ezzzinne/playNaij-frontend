@@ -9,10 +9,11 @@ import Settings from '../assets/settings.svg'
 import Help from '../assets/help 01.svg'
 import Logout from '../assets/logout.svg'
 import MoreGames from '../assets/Frame 2147227324.svg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setShowSidebar: (val: boolean) => void }) {
     const sidebarRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
 
     // Close on outside click (only on mobile)
     useEffect(() => {
@@ -37,6 +38,12 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
           document.body.style.overflow = 'auto';
         };
     }, [showSidebar]);
+
+    const handleLogout = () => {
+        if (confirm('Are you sure you want to log out?')) {
+          navigate('/home'); 
+        }
+      };
 
     return (
         <>
@@ -76,7 +83,7 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                         <li className="nav-item mb-0">
                             <a href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Invite} alt="" className="me-4" />
-                            Invite Friends
+                            <Link to="/friends" style={{  color: 'white', textDecoration: 'none'}}>Invite Friends</Link>
                             </a>
                         </li>
                         <li className="nav-item mb-0">
@@ -96,7 +103,7 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
 
                     <ul className="nav flex-column mb-auto">
                         <li className="nav-item mb-0">
-                            <a href="#" className="nav-link active text-white" aria-current="page">
+                            <a href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Settings} alt="" className="me-4" />
                             Settings
                             </a>
@@ -108,9 +115,9 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                             </a>
                         </li>
                         <li className="nav-item mb-0">
-                            <a href="#" className="nav-link link-body-emphasis text-white">
+                            <a onClick={handleLogout} href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Logout} alt="" className="me-4" />
-                            <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>Log out</Link>
+                            Log out
                             </a>
                         </li>
 

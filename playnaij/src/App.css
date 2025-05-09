@@ -12,6 +12,7 @@ html, body, #root {
     padding: 0;
     overflow-x: hidden;
     background: #0D1017;
+    scroll-behavior: smooth;
 }
   
 .sidebar-container {
@@ -28,6 +29,10 @@ html, body, #root {
     .btn-toggle-sidebar {
       display: none !important;
     }
+}
+
+.leaderboard {
+    font-family: "Rubik Bubbles", system-ui;
 }
   
 
