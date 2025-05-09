@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha';
 import './CreateAccount.css';
-import LandingNavbar from '../components/LandingNavbar';
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, createUserWithEmailAndPassword, } from 'firebase/auth';
 import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebase/firestore';
 import { app } from '../firebase';
@@ -118,8 +117,6 @@ export default function CreateAccount() {
 
   return (
     <>
-        <LandingNavbar />
-
         <div className="ca-wrapper auth-background">
         <div className="ca-container">
             <header className="ca-header">

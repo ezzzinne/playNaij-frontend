@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { IoEye, IoEyeOff } from '../components/icons';
 import { Link } from 'react-router-dom';
 import './Login.css'; 
-import LandingNavbar from '../components/LandingNavbar';
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 import { app } from '../firebase';
 import Google from "../assets/google logo.png";
@@ -77,8 +76,6 @@ export default function Login() {
 
   return (
     <>
-        <LandingNavbar className="bg-transparent shadow-none" />
-
         <div className="auth-container auth-background">
         <div className="auth-box">
             <div className='auth-close'>
