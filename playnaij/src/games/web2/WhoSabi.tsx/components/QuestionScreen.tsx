@@ -16,8 +16,36 @@ import SettingsModal from './SettingsModal';
 interface Question {
   question: string;
   options: string[];
-  correctAnswer: string;
+  answer: string;
 }
+
+const exitFullscreenAndPortrait = async () => {
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    try {
+      // Unlock orientation
+      if (screen.orientation && screen.orientation.unlock) {
+        screen.orientation.unlock();
+      } else {
+        // Fallback: rotate back to portrait if supported
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (screen.orientation as any).lock('portrait').catch(() => {});
+      }
+    } catch (err) {
+      console.warn('Orientation unlock or revert failed:', err);
+    }
+
+    // Exit fullscreen
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } else if ((document as any).webkitExitFullscreen) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (document as any).webkitExitFullscreen();
+    }
+  }
+};
 
 const QuestionScreen: React.FC = () => {
   const { category } = useParams<{ category: string }>();
@@ -47,7 +75,7 @@ const QuestionScreen: React.FC = () => {
   
   const handleFiftyFifty = () => {
     if (coins < 100 || selected || hiddenOptions.length > 0) return;
-    const incorrectOptions = q.options.filter(o => o !== q.correctAnswer);
+    const incorrectOptions = q.options.filter(o => o !== q.answer);
     const twoToHide = incorrectOptions.sort(() => 0.5 - Math.random()).slice(0, 2);
     setCoins(prev => prev - 100);
     setHiddenOptions(twoToHide);
@@ -57,7 +85,7 @@ const QuestionScreen: React.FC = () => {
     if (coins < 500 || selected || revealUsed) return;
     setCoins(prev => prev - 500);
     setRevealUsed(true);
-    setSelected(q.correctAnswer);
+    setSelected(q.answer);
     setTimeout(() => {
       setSelected(null);
       setCurrent(prev => prev + 1);
@@ -68,7 +96,7 @@ const QuestionScreen: React.FC = () => {
   const handleSelect = (option: string) => {
     setSelected(option);
     setQuestionsAnswered(prev => prev + 1);
-    const correct = questions[current].correctAnswer;
+    const correct = questions[current].answer;
     if (option === correct) {
       setCoins(prev => prev + 50);
       setCorrectAnswers(prev => prev + 1);
@@ -121,42 +149,20 @@ const QuestionScreen: React.FC = () => {
 
   const handleExit = () => {
     if (confirm('Are you sure you want to exit the game?')) {
+      exitFullscreenAndPortrait();
       navigate('/game2'); 
     }
   };
   
   useEffect(() => {
-    fetch(`https://casual-web-game-platform.onrender.com/api/questions?category=${category}`)
+    fetch(`https://casual-web-game-platform.onrender.com/trivia/questions?category=${category}`)
       .then(res => res.json())
-      .then(data => setQuestions(data))
+      .then(data => {
+        const shuffled = data.sort(() => 0.5 - Math.random());
+        setQuestions(shuffled);
+      })
       .catch(() => {
-        // setQuestions([
-        //   {
-        //     question: 'Which of these Food is Enugu popularly known for?',
-        //     options: ['Okpa', 'Suya', 'Chin Chin', 'Kuli Kuli'],
-        //     correctAnswer: 'Okpa',
-        //   },
-        //   {
-        //     question: 'Which of these Food is Enugu popularly known for?',
-        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-        //     correctAnswer: 'ya',
-        //   },
-        //   {
-        //     question: 'Which of these Food is Enugu popularly known for?',
-        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-        //     correctAnswer: 'ya',
-        //   },
-        //   {
-        //     question: 'Which of these Food is Enugu popularly known for?',
-        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-        //     correctAnswer: 'ya',
-        //   },
-        //   {
-        //     question: 'Which of these Food is Enugu popularly known for?',
-        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-        //     correctAnswer: 'ya',
-        //   },
-        // ]);
+        console.error('Error fetching questions');
       });
   }, [category]);
 
@@ -244,14 +250,14 @@ const QuestionScreen: React.FC = () => {
                   className="w-100 py-3 fw-bold shadow border-0 rounded-3"
                   style={{ 
                     backgroundColor: selected
-                    ? opt === q.correctAnswer
+                    ? opt === q.answer
                       ? '#40C79A'
                       : opt === selected
                       ? '#EC0E11'
                       : '#FAFAFA'
                     : '#FAFAFA',
                    color:
-                    selected && opt === q.correctAnswer
+                    selected && opt === q.answer
                       ? 'white'
                       : selected && opt === selected
                       ? 'white'

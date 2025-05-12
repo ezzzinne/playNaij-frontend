@@ -17,7 +17,7 @@ const GameResult: React.FC<GameResultProps> = ({ correctAnswers, questionsAnswer
 
   const handleExit = () => {
     if (confirm('Are you sure you want to exit the game?')) {
-      navigate('/game2'); 
+      navigate('/categories'); // Navigate to the categories page
     }
   };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import coinIcon from '../assets/Coin gold.svg';
+import coinIcon from '../assets/Coin gold.svg'; 
 import energyIcon from '../assets/Flash gold.svg';
 import settingsIcon from '../assets/setting.svg';
 import logo from '../assets/Who Sabi TM 1.svg';
@@ -10,17 +10,23 @@ import LowerSection1 from '../../Streetz.tsx/components/LowerSection1';
 import CategorySelection from './CategorySelection';
 
 const enterFullscreenAndLandscape = async () => {
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const docElm = document.documentElement;
 
-  if (docElm.requestFullscreen) {
-    await docElm.requestFullscreen();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } else if ((docElm as any).webkitRequestFullscreen) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (docElm as any).webkitRequestFullscreen();
-  }
+  if (isMobile) {
+    // Check if the device is mobile and in portrait mode
+    if (window.innerHeight > window.innerWidth) {
+      // Request fullscreen
+      if (docElm.requestFullscreen) {
+        await docElm.requestFullscreen();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } else if ((docElm as any).webkitRequestFullscreen) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (docElm as any).webkitRequestFullscreen();
+      }
+    }
 
-  try {
+    try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (screen.orientation && (screen.orientation as any).lock) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,6 +34,7 @@ const enterFullscreenAndLandscape = async () => {
     }
   } catch (err) {
     console.warn('Orientation lock not supported:', err);
+  }
   }
 };
 
