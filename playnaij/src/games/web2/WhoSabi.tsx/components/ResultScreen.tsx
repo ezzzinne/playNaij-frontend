@@ -4,6 +4,7 @@ import SabiSmall from '../assets/sabi-small.svg';
 import NoSabi from '../assets/no-sabi.svg';
 import '../styles.css';
 import { useNavigate } from 'react-router-dom';
+import TimeUp from '../assets/time-up.svg';
 
 interface GameResultProps {
   correctAnswers: number;
@@ -79,9 +80,9 @@ const GameResult: React.FC<GameResultProps> = ({ correctAnswers, questionsAnswer
       return (
       <div className='d-flex flex-column justify-content-center align-items-center gap-3 text-white'>
         <h2 className='fw-bold mb-3'>Time's up!</h2>
-        <p className='text-white mb-0'>You didn't answer any questions.</p>
-        <p className='text-white'>Try again and see if you sabi!</p>
-        <img src={NoSabi} alt="" />
+        <p className='text-white mb-0'>You didn't answer any questions. Try again and see if you sabi</p>
+        <p className='text-white'>Your Points will not be saved. <span style={{ color: '#F59E0B' }}>Login to save progress</span></p>
+        <img src={TimeUp} alt="" />
         <div className='d-flex gap-3 mt-4'>
           <button onClick={onPlayAgain} className='btn rounded-3 d-flex align-items-center gap-2 fw-semibold text-white fs-3' style={{ backgroundColor: '#10B981' }}>
             <img src={Repeat} />

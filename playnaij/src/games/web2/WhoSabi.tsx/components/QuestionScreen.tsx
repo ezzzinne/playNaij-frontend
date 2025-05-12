@@ -126,49 +126,42 @@ const QuestionScreen: React.FC = () => {
   };
   
   useEffect(() => {
-    fetch(`https://api.example.com/questions?category=${category}`)
+    fetch(`https://casual-web-game-platform.onrender.com/api/questions?category=${category}`)
       .then(res => res.json())
       .then(data => setQuestions(data))
       .catch(() => {
-        setQuestions([
-          {
-            question: 'Which of these Food is Enugu popularly known for?',
-            options: ['Okpa', 'Suya', 'Chin Chin', 'Kuli Kuli'],
-            correctAnswer: 'Okpa',
-          },
-          {
-            question: 'Which of these Food is Enugu popularly known for?',
-            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-            correctAnswer: 'ya',
-          },
-          {
-            question: 'Which of these Food is Enugu popularly known for?',
-            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-            correctAnswer: 'ya',
-          },
-          {
-            question: 'Which of these Food is Enugu popularly known for?',
-            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-            correctAnswer: 'ya',
-          },
-          {
-            question: 'Which of these Food is Enugu popularly known for?',
-            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
-            correctAnswer: 'ya',
-          },
-        ]);
+        // setQuestions([
+        //   {
+        //     question: 'Which of these Food is Enugu popularly known for?',
+        //     options: ['Okpa', 'Suya', 'Chin Chin', 'Kuli Kuli'],
+        //     correctAnswer: 'Okpa',
+        //   },
+        //   {
+        //     question: 'Which of these Food is Enugu popularly known for?',
+        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+        //     correctAnswer: 'ya',
+        //   },
+        //   {
+        //     question: 'Which of these Food is Enugu popularly known for?',
+        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+        //     correctAnswer: 'ya',
+        //   },
+        //   {
+        //     question: 'Which of these Food is Enugu popularly known for?',
+        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+        //     correctAnswer: 'ya',
+        //   },
+        //   {
+        //     question: 'Which of these Food is Enugu popularly known for?',
+        //     options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+        //     correctAnswer: 'ya',
+        //   },
+        // ]);
       });
   }, [category]);
 
   useEffect(() => {
     if (selected || gameOver || current >= questions.length || showSettings) return;
-
-    // if (timer === 0) {
-    //   setGameOver(true);
-    //   return;
-    // }
-
-    // if (isSettingsOpen) return;
 
     const countdown = setInterval(() => {
       setTimer(prev => {
@@ -194,8 +187,6 @@ const QuestionScreen: React.FC = () => {
     return <p className="text-center mt-5">Loading questions...</p>;
   } 
 
-  // const isRoundOver = gameOver || current >= questions.length;
-
   if (gameOver) {
     return (
       <div className="position-relative w-100" style={{ minHeight: '100vh' }}>
@@ -210,10 +201,10 @@ const QuestionScreen: React.FC = () => {
   }
 
   return (
-        <div className="position-relative w-100" style={{ minHeight: '100vh' }}>
-          <div className="container-fluid questions-bg m-0 p-0 position-relative w-100 d-flex flex-column justify-content-between" style={{ flex: 1 }}>
+        <div className="container-fluid position-relative w-100" style={{ minHeight: '100vh' }}>
+          <div className="container-fluid questions-bg m-0 p-0 position-relative w-100 d-flex flex-column justify-content-between" style={{ minHeight: '100vh', flex: 1 }}>
           {/* Top Bar */}
-          <div className='d-flex justify-content-around align-items-center rounded-bottom-5 py-3 position-relative top-bar' style={{ backgroundColor: topBarColor }}>
+          <div className='d-flex flex-column flex-lg-row justify-content-around align-items-center gap-3 gap-md-0 rounded-bottom-5 py-3 position-relative top-bar w-100' style={{ backgroundColor: topBarColor }}>
             <div className='d-flex gap-3'>
               <div className="rounded-3 py-2 ps-1 pe-5 d-flex align-items-center gap-1" style={{ backgroundColor: '#00000033' }}>
                 <img src={Coin} alt="coin" width={30} />
@@ -231,7 +222,7 @@ const QuestionScreen: React.FC = () => {
             <div className='rounded-3 py-2 px-5' style={{ backgroundColor: '#00000033', color: '#F7B13C' }}>
               <div className="fw-bold fs-5">Q{current + 1}/{questions.length}</div>
             </div>
-            <div onClick={() => setShowSettings(true)} className="rounded-3 py-2 px-2" style={{ backgroundColor: '#5FD0AB' }}>
+            <div onClick={() => setShowSettings(true)} className="rounded-3 py-2 px-2 settings-btn" style={{ backgroundColor: '#5FD0AB' }}>
               <img src={Settings} alt="settings" width={30} />
             </div>
           </div>
@@ -277,15 +268,9 @@ const QuestionScreen: React.FC = () => {
 
           {/* Bottom Bar */}
           <div className="d-flex justify-content-around align-items-center mb-2">
-            
             <button onClick={handleFiftyFifty} className="btn px-3 py-2 d-flex align-items-center fw-bold shadow rounded-3" style={{ backgroundColor: coins >= 100 ? '#60646E' : '#aaa', color: 'white'}}><img src={Bomb} alt="" /><span className='ms-1'>50/50</span> <span className='ms-5'><img src={Coin} className='ms-1' />100</span></button>
-          
-            
             <h3 className="fw-bold" style={{ color: '#B4080B', fontFamily: 'Rubik'}}><img src={Timer} /> 00:{timer < 10 ? `0${timer}` : timer}</h3>
-            
-            
             <button onClick={handleReveal} className="btn px-3 py-2 d-flex align-items-center fw-semibold fs-6 rounded-3 shadow" style={{ backgroundColor: coins >= 500 ? '#60646E' : '#aaa', color: 'white'}}><img src={Check} alt="" /><span className='ms-1'>Reveal <br /> Answer</span> <span className='ms-5'><img src={Coin} className='ms-1' />500</span></button>
-            
           </div>
           {showSettings && (
             <SettingsModal onClose={() => setShowSettings(false)} onQuit={handleExit} soundOn={soundOn} musicOn={musicOn} toggleSound={() => setSoundOn(prev => !prev)} toggleMusic={() => setMusicOn(prev => !prev)} />
@@ -293,7 +278,6 @@ const QuestionScreen: React.FC = () => {
         </div>
         <LowerSection1 />
         </div>
-      
   );
 };
 

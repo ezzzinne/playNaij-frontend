@@ -57,7 +57,7 @@ const GameScreen: React.FC = () => {
   
   const handleExit = () => {
     if (confirm('Are you sure you want to exit the game?')) {
-      navigate('/home'); 
+      navigate('/game1'); 
     }
   };
   

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import coinIcon from '../assets/Coin gold.svg'; // replace with your actual asset paths
+import coinIcon from '../assets/Coin gold.svg';
 import energyIcon from '../assets/Flash gold.svg';
 import settingsIcon from '../assets/setting.svg';
 import logo from '../assets/Who Sabi TM 1.svg';
