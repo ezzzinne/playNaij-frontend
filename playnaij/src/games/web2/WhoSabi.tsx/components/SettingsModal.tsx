@@ -1,17 +1,35 @@
-interface Props {
-    onClose: () => void;
-    onQuit: () => void;
-  }
-  const SettingsModal: React.FC<Props> = ({ onClose, onQuit }) => (
-    <div className="modal d-block" onClick={onClose}>
-      <div className="modal-dialog modal-dialog-centered" onClick={e => e.stopPropagation()}>
-        <div className="modal-content p-4 text-center">
-          <button className="btn btn-success my-2">🔊 Sound On</button>
-          <button className="btn btn-success my-2">🎵 Music On</button>
-          <button className="btn btn-danger my-2" onClick={onQuit}>❌ Quit Game</button>
-        </div>
+import React from 'react';
+import './SettingsModal.css';
+
+interface SettingsModalProps {
+  onClose: () => void;
+  onQuit: () => void;
+  soundOn: boolean;
+  musicOn: boolean;
+  toggleSound: () => void;
+  toggleMusic: () => void;
+}
+
+const SettingsModal: React.FC<SettingsModalProps> = ({ onClose, onQuit, soundOn, musicOn, toggleSound, toggleMusic }) => {
+  return (
+    <div className="settings-overlay">
+      <div className="settings-box">
+        <button className="close-button" onClick={onClose}>✕</button>
+
+        <button className="settings-button green" onClick={toggleSound}>
+          🔊 {soundOn ? 'Sound On' : 'Sound Off'}
+        </button>
+
+        <button className="settings-button green" onClick={toggleMusic}>
+          🎵 {musicOn ? 'Music On' : 'Music Off'}
+        </button>
+
+        <button className="settings-button red" onClick={onQuit}>
+          ❌ Quit Game
+        </button>
       </div>
     </div>
   );
-  export default SettingsModal;
-  
+};
+
+export default SettingsModal;

@@ -18,6 +18,7 @@ import FriendsPage from './pages/Friends.tsx';
 import Leaderboard from './pages/Leaderboard.tsx';
 import ShareProfilePage from './pages/ShareProfile.tsx';
 import WhoSabiStartScreen from './games/web2/WhoSabi.tsx/components/HomeScreen.tsx';
+import QuestionScreen from './games/web2/WhoSabi.tsx/components/QuestionScreen.tsx';
 
 function App() {
 
@@ -34,9 +35,11 @@ function App() {
           <Route path="/loading" element={<Layout><LoadingScreen /></Layout>} />
           <Route path='/categories' element={<Layout><CategorySelection onSelect={(category) => console.log(category)} /></Layout>} />
           <Route path='/play' element={<Layout><WhoSabiStartScreen /></Layout>} />
+          <Route path="/questions/:category" element={<Layout><QuestionScreen /></Layout>} />
           <Route path="/friends" element={<FriendsPage />} />
-        <Route path="/share-profile" element={<ShareProfilePage />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/share-profile" element={<ShareProfilePage />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+
           
           <Route 
             path='/game1'

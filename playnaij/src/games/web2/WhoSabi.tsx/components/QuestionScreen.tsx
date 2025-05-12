@@ -1,6 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
+import '../styles.css'
+import Coin from '../assets/Coin gold.svg';
+import Energy from '../assets/Flash gold.svg'
+import Music from '../assets/Music.svg';
+import Settings from '../assets/setting.svg'
+import LowerSection1 from '../../Streetz.tsx/components/LowerSection1';
+import Bomb from '../assets/Bomb.svg';
+import Timer from '../assets/fast time.svg';
+import Check from '../assets/Check.svg';
+import GameResult from './ResultScreen';
+import SettingsModal from './SettingsModal';
 
 interface Question {
   question: string;
@@ -14,10 +25,106 @@ const QuestionScreen: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [coins, setCoins] = useState(0);
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(15);
   const [energy, setEnergy] = useState(3);
   const [gameOver, setGameOver] = useState(false);
+  const [hiddenOptions, setHiddenOptions] = useState<string[]>([]);
+  const [revealUsed, setRevealUsed] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [questionsAnswered, setQuestionsAnswered] = useState(0);
+  const [showSettings, setShowSettings] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
+  const [musicOn, setMusicOn] = useState(true);
 
+  const q = questions[current];
+  const categoryColors: { [key: string]: string } = {
+    Food: '#875432',
+    Music: '#8D9196',
+    Sports: '#3753DD',
+    '9ja History': '#0BD33D',
+  };
+  const topBarColor = categoryColors[category || ''];
+  
+  const handleFiftyFifty = () => {
+    if (coins < 100 || selected || hiddenOptions.length > 0) return;
+    const incorrectOptions = q.options.filter(o => o !== q.correctAnswer);
+    const twoToHide = incorrectOptions.sort(() => 0.5 - Math.random()).slice(0, 2);
+    setCoins(prev => prev - 100);
+    setHiddenOptions(twoToHide);
+  };
+
+  const handleReveal = () => {
+    if (coins < 500 || selected || revealUsed) return;
+    setCoins(prev => prev - 500);
+    setRevealUsed(true);
+    setSelected(q.correctAnswer);
+    setTimeout(() => {
+      setSelected(null);
+      setCurrent(prev => prev + 1);
+      setRevealUsed(false);
+    }, 400);
+  };
+
+  const handleSelect = (option: string) => {
+    setSelected(option);
+    setQuestionsAnswered(prev => prev + 1);
+    const correct = questions[current].correctAnswer;
+    if (option === correct) {
+      setCoins(prev => prev + 50);
+      setCorrectAnswers(prev => prev + 1);
+      setTimeout(() => {
+        if (current + 1 >= questions.length) {
+          setGameOver(true);
+        } else {
+          setSelected(null);
+          setCurrent(prev => prev + 1);
+        }
+      }, 400);
+    } else {
+      setTimeout(() => {
+        handleFail();
+      }, 400);
+    }
+  };
+
+  const handleFail = useCallback(() => {
+    setEnergy(prev => {
+      const newEnergy = prev - 1;
+      if (newEnergy <= 0) {
+        setGameOver(true);
+      }
+      return newEnergy;
+    });
+    setSelected(null);
+    setCurrent(prev => {
+      if (prev + 1 >= questions.length) {
+        setGameOver(true);
+      }
+      return prev + 1;
+    });
+  }, [questions.length]);
+  
+  const resetGame = () => {
+    setCurrent(0);
+    setSelected(null);
+    setCoins(0);
+    setTimer(15);
+    setEnergy(3);
+    setGameOver(false);
+    setHiddenOptions([]);
+    setRevealUsed(false);
+    setCorrectAnswers(0);
+    setQuestionsAnswered(0);
+  };
+
+  const navigate = useNavigate();
+
+  const handleExit = () => {
+    if (confirm('Are you sure you want to exit the game?')) {
+      navigate('/game2'); 
+    }
+  };
+  
   useEffect(() => {
     fetch(`https://api.example.com/questions?category=${category}`)
       .then(res => res.json())
@@ -29,143 +136,164 @@ const QuestionScreen: React.FC = () => {
             options: ['Okpa', 'Suya', 'Chin Chin', 'Kuli Kuli'],
             correctAnswer: 'Okpa',
           },
+          {
+            question: 'Which of these Food is Enugu popularly known for?',
+            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+            correctAnswer: 'ya',
+          },
+          {
+            question: 'Which of these Food is Enugu popularly known for?',
+            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+            correctAnswer: 'ya',
+          },
+          {
+            question: 'Which of these Food is Enugu popularly known for?',
+            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+            correctAnswer: 'ya',
+          },
+          {
+            question: 'Which of these Food is Enugu popularly known for?',
+            options: ['Ok', 'ya', 'Cn Chin', 'li Kuli'],
+            correctAnswer: 'ya',
+          },
         ]);
       });
   }, [category]);
 
   useEffect(() => {
-    if (selected || gameOver) return;
+    if (selected || gameOver || current >= questions.length || showSettings) return;
 
-    if (timer === 0) {
-      handleFail();
-      return;
-    }
+    // if (timer === 0) {
+    //   setGameOver(true);
+    //   return;
+    // }
+
+    // if (isSettingsOpen) return;
 
     const countdown = setInterval(() => {
-      setTimer(prev => (prev > 0 ? prev - 1 : 0));
+      setTimer(prev => {
+        if (prev <= 1) {
+          clearInterval(countdown);
+          handleFail();
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(countdown);
-  }, [timer, selected, gameOver]);
+  }, [timer, selected, gameOver, current, questions.length, handleFail, showSettings]);
 
-  const handleFail = () => {
-    setEnergy(prev => {
-      const newEnergy = prev - 1;
-      if (newEnergy <= 0) setGameOver(true);
-      return newEnergy;
-    });
-
-    setTimeout(() => {
-      setSelected(null);
-      setTimer(10);
-      setCurrent(prev => prev + 1);
-    }, 1000);
-  };
-
-  const handleSelect = (option: string) => {
-    setSelected(option);
-    const correct = questions[current].correctAnswer;
-
-    if (option === correct) {
-      setCoins(prev => prev + 500);
-      setTimeout(() => {
-        setSelected(null);
-        setTimer(10);
-        setCurrent(prev => prev + 1);
-      }, 1000);
-    } else {
-      handleFail();
+  useEffect(() => {
+    if (energy === 0) {
+      setGameOver(true);
     }
-  };
+  }, [energy]);
 
-  if (!questions.length) return <p className="text-center mt-5">Loading questions...</p>;
-  if (gameOver || current >= questions.length) {
+  if (!questions.length) {
+    return <p className="text-center mt-5">Loading questions...</p>;
+  } 
+
+  // const isRoundOver = gameOver || current >= questions.length;
+
+  if (gameOver) {
     return (
-      <Container className="text-center mt-5">
-        <h2 className="mb-3">💀 Game Over</h2>
-        <p>Your score: <strong>{coins}</strong></p>
-        <Button variant="primary" onClick={() => window.location.reload()}>Restart</Button>
-      </Container>
+      <div className="position-relative w-100" style={{ minHeight: '100vh' }}>
+        <Container fluid className="questions-bg m-0 p-0 d-flex flex-column justify-content-between">
+          <div className="game-result-wrapper">
+            <GameResult correctAnswers={correctAnswers} questionsAnswered={questionsAnswered} onPlayAgain={resetGame} />
+          </div>
+        </Container>
+        <LowerSection1 />
+      </div>
     );
   }
 
-  const q = questions[current];
-
   return (
-    <Container fluid className="py-4">
-      {/* Top Bar */}
-      <Row className="mb-3 justify-content-between">
-        <Col xs="auto">
-          <div className="bg-light rounded px-3 py-2 d-flex align-items-center gap-2">
-            <img src="/assets/coin.png" alt="coin" width={20} />
-            <span>{coins}</span>
+        <div className="position-relative w-100" style={{ minHeight: '100vh' }}>
+          <div className="container-fluid questions-bg m-0 p-0 position-relative w-100 d-flex flex-column justify-content-between" style={{ flex: 1 }}>
+          {/* Top Bar */}
+          <div className='d-flex justify-content-around align-items-center rounded-bottom-5 py-3 position-relative top-bar' style={{ backgroundColor: topBarColor }}>
+            <div className='d-flex gap-3'>
+              <div className="rounded-3 py-2 ps-1 pe-5 d-flex align-items-center gap-1" style={{ backgroundColor: '#00000033' }}>
+                <img src={Coin} alt="coin" width={30} />
+                <span className='fw-bold'>{coins}</span>
+              </div>
+              <div className="rounded-3 py-2 ps-1 pe-5 d-flex align-items-center gap-1" style={{ backgroundColor: '#00000033' }}>
+                <img src={Energy} alt="energy" width={30} />
+                <span className='fw-bold'>{energy}/3</span>
+              </div>
+            </div>
+            <div className="d-flex align-items-center gap-3 justify-content-center">
+              <img src={Music} alt="music" />
+              <h4 className="fw-bold">{category}</h4>
+            </div>
+            <div className='rounded-3 py-2 px-5' style={{ backgroundColor: '#00000033', color: '#F7B13C' }}>
+              <div className="fw-bold fs-5">Q{current + 1}/{questions.length}</div>
+            </div>
+            <div onClick={() => setShowSettings(true)} className="rounded-3 py-2 px-2" style={{ backgroundColor: '#5FD0AB' }}>
+              <img src={Settings} alt="settings" width={30} />
+            </div>
           </div>
-        </Col>
-        <Col xs="auto">
-          <div className="bg-light rounded px-3 py-2 d-flex align-items-center gap-2">
-            <img src="/assets/flash.png" alt="energy" width={20} />
-            <span>{energy}/3</span>
+
+          {/* Question */}
+          <Row className="justify-content-center align-items-center mt-5 mb-5">
+            <Col xs={12} md={8}>
+              <div className="text-dark p-4 rounded shadow text-center" style={{ backgroundColor: '#FAFAFA' }}>
+                <p>{q.question}</p>
+              </div>
+            </Col>
+          </Row>
+
+          {/* Options */}
+          <Row className="justify-content-center g-3 mb-4">
+            {q.options.map(opt => (
+              <Col xs={12} md={5} key={opt}>
+                <button
+                  className="w-100 py-3 fw-bold shadow border-0 rounded-3"
+                  style={{ 
+                    backgroundColor: selected
+                    ? opt === q.correctAnswer
+                      ? '#40C79A'
+                      : opt === selected
+                      ? '#EC0E11'
+                      : '#FAFAFA'
+                    : '#FAFAFA',
+                   color:
+                    selected && opt === q.correctAnswer
+                      ? 'white'
+                      : selected && opt === selected
+                      ? 'white'
+                      : hiddenOptions.includes(opt) ? '#ccc' : 'black',
+                    pointerEvents: hiddenOptions.includes(opt) ? 'none' : 'auto', }}
+                  disabled={!!selected}
+                  onClick={() => handleSelect(opt)}
+                >
+                  {opt}
+                </button>
+              </Col>
+            ))}
+          </Row>
+
+          {/* Bottom Bar */}
+          <div className="d-flex justify-content-around align-items-center mb-2">
+            
+            <button onClick={handleFiftyFifty} className="btn px-3 py-2 d-flex align-items-center fw-bold shadow rounded-3" style={{ backgroundColor: coins >= 100 ? '#60646E' : '#aaa', color: 'white'}}><img src={Bomb} alt="" /><span className='ms-1'>50/50</span> <span className='ms-5'><img src={Coin} className='ms-1' />100</span></button>
+          
+            
+            <h3 className="fw-bold" style={{ color: '#B4080B', fontFamily: 'Rubik'}}><img src={Timer} /> 00:{timer < 10 ? `0${timer}` : timer}</h3>
+            
+            
+            <button onClick={handleReveal} className="btn px-3 py-2 d-flex align-items-center fw-semibold fs-6 rounded-3 shadow" style={{ backgroundColor: coins >= 500 ? '#60646E' : '#aaa', color: 'white'}}><img src={Check} alt="" /><span className='ms-1'>Reveal <br /> Answer</span> <span className='ms-5'><img src={Coin} className='ms-1' />500</span></button>
+            
           </div>
-        </Col>
-      </Row>
-
-      {/* Question Header */}
-      <Row className="text-center mb-3">
-        <Col>
-          <h4 className="fw-bold text-uppercase">{category}</h4>
-          <div className="text-muted">Q{current + 1}/{questions.length}</div>
-        </Col>
-      </Row>
-
-      {/* Question */}
-      <Row className="justify-content-center mb-4">
-        <Col xs={12} md={8}>
-          <div className="bg-white text-dark p-4 rounded shadow text-center">
-            <strong>{q.question}</strong>
-          </div>
-        </Col>
-      </Row>
-
-      {/* Options */}
-      <Row className="justify-content-center g-3 mb-4">
-        {q.options.map(opt => (
-          <Col xs={12} md={5} key={opt}>
-            <Button
-              variant={
-                selected
-                  ? opt === q.correctAnswer
-                    ? 'success'
-                    : opt === selected
-                    ? 'danger'
-                    : 'outline-secondary'
-                  : 'outline-secondary'
-              }
-              className="w-100 py-3 fw-semibold"
-              disabled={!!selected}
-              onClick={() => handleSelect(opt)}
-            >
-              {opt}
-            </Button>
-          </Col>
-        ))}
-      </Row>
-
-      {/* Bottom Bar */}
-      <Row className="justify-content-between align-items-center">
-        <Col xs="auto">
-          <Button variant="dark" disabled className="me-2">🔥 50/50</Button>
-          <Button variant="dark" disabled>💰 100</Button>
-        </Col>
-        <Col xs="auto">
-          <h3 className="text-warning fw-bold">⏰ 00:{timer < 10 ? `0${timer}` : timer}</h3>
-        </Col>
-        <Col xs="auto" className="d-none d-md-flex align-items-center gap-2">
-          <span className="text-success fw-bold">✔ Correct =</span>
-          <img src="/assets/coin.png" alt="coin" width={20} />
-          <span>500</span>
-        </Col>
-      </Row>
-    </Container>
+          {showSettings && (
+            <SettingsModal onClose={() => setShowSettings(false)} onQuit={handleExit} soundOn={soundOn} musicOn={musicOn} toggleSound={() => setSoundOn(prev => !prev)} toggleMusic={() => setMusicOn(prev => !prev)} />
+          )}
+        </div>
+        <LowerSection1 />
+        </div>
+      
   );
 };
 

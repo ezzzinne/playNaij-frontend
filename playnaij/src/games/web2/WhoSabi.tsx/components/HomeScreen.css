@@ -81,4 +81,28 @@
       padding: 10px 24px;
     }
   }
+
+  @media screen and (orientation: portrait) {
+  .rotate-warning {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #4C1111;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .rotate-warning {
+    display: none;
+  }
+}
+
+
+
   

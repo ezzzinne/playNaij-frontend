@@ -9,6 +9,28 @@ import './HomeScreen.css';
 import LowerSection1 from '../../Streetz.tsx/components/LowerSection1';
 import CategorySelection from './CategorySelection';
 
+const enterFullscreenAndLandscape = async () => {
+  const docElm = document.documentElement;
+
+  if (docElm.requestFullscreen) {
+    await docElm.requestFullscreen();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } else if ((docElm as any).webkitRequestFullscreen) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (docElm as any).webkitRequestFullscreen();
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (screen.orientation && (screen.orientation as any).lock) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await (screen.orientation as any).lock('landscape');
+    }
+  } catch (err) {
+    console.warn('Orientation lock not supported:', err);
+  }
+};
+
 const WhoSabiStartScreen: React.FC = () => {
   const navigate = useNavigate();
   const [showCategories, setShowCategories] = useState(false);
@@ -47,10 +69,16 @@ const WhoSabiStartScreen: React.FC = () => {
             <Button
               className="play-btn rounded-3 fw-bold fs-3 text-white-emphasis"
               style={{ backgroundColor: '#F59E0B', width:'300px', maxWidth: '90%' }}
-              onClick={() => setShowCategories(true)}
+              onClick={async () => {
+                await enterFullscreenAndLandscape();
+                setShowCategories(true);
+              }}
             >
               Play Game
             </Button>
+          </div>
+          <div className="rotate-warning">
+            <p>Please rotate your device to landscape mode for the best experience.</p>
           </div>
         </div>
 
