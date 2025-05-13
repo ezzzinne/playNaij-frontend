@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import '../styles.css'
 import Coin from '../assets/Coin gold.svg';
 import Energy from '../assets/Flash gold.svg'
-import Music from '../assets/Music.svg';
+import MusicIcon from '../assets/Music.svg';
 import Settings from '../assets/setting.svg'
 import LowerSection1 from '../../Streetz.tsx/components/LowerSection1';
 import Bomb from '../assets/Bomb.svg';
@@ -12,6 +12,9 @@ import Timer from '../assets/fast time.svg';
 import Check from '../assets/Check.svg';
 import GameResult from './ResultScreen';
 import SettingsModal from './SettingsModal';
+import FoodIcon from '../assets/Food.svg';
+import SportsIcon from '../assets/Sports.svg';
+import HistoryIcon from '../assets/9ja.svg';
 
 interface Question {
   question: string;
@@ -53,7 +56,7 @@ const QuestionScreen: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [coins, setCoins] = useState(0);
-  const [timer, setTimer] = useState(15);
+  const [timer, setTimer] = useState(10);
   const [energy, setEnergy] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [hiddenOptions, setHiddenOptions] = useState<string[]>([]);
@@ -63,6 +66,7 @@ const QuestionScreen: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [musicOn, setMusicOn] = useState(true);
+  const [, setMissedQuestions] = useState(0);
 
   const q = questions[current];
   const categoryColors: { [key: string]: string } = {
@@ -72,6 +76,14 @@ const QuestionScreen: React.FC = () => {
     '9ja History': '#0BD33D',
   };
   const topBarColor = categoryColors[category || ''];
+
+  const categoryIcons: { [key: string]: string } = {
+    Food: FoodIcon,
+    Music: MusicIcon,
+    Sports: SportsIcon,
+    '9ja History': HistoryIcon,
+  };
+  const categoryIcon = categoryIcons[category || ''];
   
   const handleFiftyFifty = () => {
     if (coins < 100 || selected || hiddenOptions.length > 0) return;
@@ -90,7 +102,7 @@ const QuestionScreen: React.FC = () => {
       setSelected(null);
       setCurrent(prev => prev + 1);
       setRevealUsed(false);
-    }, 400);
+    }, 300);
   };
 
   const handleSelect = (option: string) => {
@@ -98,7 +110,7 @@ const QuestionScreen: React.FC = () => {
     setQuestionsAnswered(prev => prev + 1);
     const correct = questions[current].answer;
     if (option === correct) {
-      setCoins(prev => prev + 50);
+      setCoins(prev => prev + 150);
       setCorrectAnswers(prev => prev + 1);
       setTimeout(() => {
         if (current + 1 >= questions.length) {
@@ -107,11 +119,11 @@ const QuestionScreen: React.FC = () => {
           setSelected(null);
           setCurrent(prev => prev + 1);
         }
-      }, 400);
+      }, 300);
     } else {
       setTimeout(() => {
         handleFail();
-      }, 400);
+      }, 300);
     }
   };
 
@@ -125,10 +137,12 @@ const QuestionScreen: React.FC = () => {
     });
     setSelected(null);
     setCurrent(prev => {
-      if (prev + 1 >= questions.length) {
-        setGameOver(true);
-      }
-      return prev + 1;
+      const next = prev + 1;
+    if (next >= questions.length) {
+      setGameOver(true);
+      return prev;
+    }
+    return next;
     });
   }, [questions.length]);
   
@@ -136,13 +150,14 @@ const QuestionScreen: React.FC = () => {
     setCurrent(0);
     setSelected(null);
     setCoins(0);
-    setTimer(15);
+    setTimer(10);
     setEnergy(3);
     setGameOver(false);
     setHiddenOptions([]);
     setRevealUsed(false);
     setCorrectAnswers(0);
     setQuestionsAnswered(0);
+    setMissedQuestions(0);
   };
 
   const navigate = useNavigate();
@@ -158,8 +173,18 @@ const QuestionScreen: React.FC = () => {
     fetch(`https://casual-web-game-platform.onrender.com/trivia/questions?category=${category}`)
       .then(res => res.json())
       .then(data => {
-        const shuffled = data.sort(() => 0.5 - Math.random());
-        setQuestions(shuffled);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const shuffleArray = (array: any[]) => {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      };
+
+      const shuffledQuestions = shuffleArray(data);
+      setQuestions(shuffledQuestions);
       })
       .catch(() => {
         console.error('Error fetching questions');
@@ -173,7 +198,21 @@ const QuestionScreen: React.FC = () => {
       setTimer(prev => {
         if (prev <= 1) {
           clearInterval(countdown);
-          handleFail();
+          setMissedQuestions(m => {
+          const newMissed = m + 1;
+
+          if (newMissed >= 3) {
+            setGameOver(true);
+          } else {
+            setCurrent(c => {
+              if (c + 1 >= questions.length) {
+                setGameOver(true);
+              }
+              return c + 1;
+            });
+          }
+          return newMissed;
+        });
           return 0;
         }
         return prev - 1;
@@ -222,7 +261,7 @@ const QuestionScreen: React.FC = () => {
               </div>
             </div>
             <div className="d-flex align-items-center gap-3 justify-content-center">
-              <img src={Music} alt="music" />
+              <img src={categoryIcon} alt="music" />
               <h4 className="fw-bold">{category}</h4>
             </div>
             <div className='rounded-3 py-2 px-5' style={{ backgroundColor: '#00000033', color: '#F7B13C' }}>
