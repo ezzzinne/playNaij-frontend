@@ -168,9 +168,11 @@ const QuestionScreen: React.FC = () => {
       navigate('/game2'); 
     }
   };
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5173';
   
   useEffect(() => {
-    fetch(`https://casual-web-game-platform.onrender.com/trivia/questions?category=${category}`)
+    fetch(`${baseURL}/trivia/questions?category=${category}`)
       .then(res => res.json())
       .then(data => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -189,7 +191,7 @@ const QuestionScreen: React.FC = () => {
       .catch(() => {
         console.error('Error fetching questions');
       });
-  }, [category]);
+  }, [baseURL, category]);
 
   useEffect(() => {
     if (selected || gameOver || current >= questions.length || showSettings) return;
