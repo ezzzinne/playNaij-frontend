@@ -126,7 +126,7 @@ const GameScreen: React.FC = () => {
   
   return (
     <>
-      <div className="container-fluid text-white text-center p-3" style={{ minHeight: '100vh' }}>
+      <div className="container-fluid text-white text-center p-3" style={{ minHeight: '100%' }}>
         <img src={Image} alt="" className="img-fluid mb-3 mx-auto d-block" style={{ maxHeight: '120px' }} />
         <div className='container py-3 rounded-3 bg-black my-4'>
           <h4>LEVEL 1</h4>

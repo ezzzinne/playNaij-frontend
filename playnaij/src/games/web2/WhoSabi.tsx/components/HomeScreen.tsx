@@ -48,7 +48,7 @@ const WhoSabiStartScreen: React.FC = () => {
 
   return (
     <>
-      <Container fluid className="whosabi-bg position-relative d-flex flex-column justify-content-between min-vh-100 p-3">
+      <Container fluid className="whosabi-bg position-relative d-flex flex-column justify-content-between p-3" style={{ minHeight: '100vh'}}>
 
         <div className={`main-content ${showCategories ? 'blurred' : ''}`}>
           {/* Top Bar */}

@@ -207,8 +207,8 @@ const QuestionScreen: React.FC = () => {
   }
 
   return (
-        <div className="container-fluid position-relative w-100" style={{ minHeight: '100vh' }}>
-          <div className="container-fluid questions-bg m-0 p-0 position-relative w-100 d-flex flex-column justify-content-between" style={{ minHeight: '100vh', flex: 1 }}>
+        <div className="container-fluid position-relative w-100" style={{ minHeight: '100%' }}>
+          <div className="container-fluid questions-bg m-0 p-0 position-relative w-100 d-flex flex-column justify-content-between" style={{ minHeight: '100%', flex: 1 }}>
           {/* Top Bar */}
           <div className='d-flex flex-column flex-lg-row justify-content-around align-items-center gap-3 gap-md-0 rounded-bottom-5 py-3 position-relative top-bar w-100' style={{ backgroundColor: topBarColor }}>
             <div className='d-flex gap-3'>
