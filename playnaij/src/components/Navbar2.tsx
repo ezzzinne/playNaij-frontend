@@ -45,12 +45,12 @@ function Navbar2 ({ onToggleSidebar }: Navbar1Props) {
                     </select>
                 </ul>
 
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center" style={{ cursor: 'pointer' }}>
                     <img src={Icon} alt="" className='m-2' />
                     <img src={Bell} alt="" className='m-2 d-none d-md-flex' />
                 </div>
 
-                <button className="btn btn-warning d-none d-md-flex">Connect Wallet</button>
+                <button className="btn btn-warning d-none d-md-flex disabled">Connect Wallet</button>
 
                 
             </nav>

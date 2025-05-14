@@ -52,7 +52,7 @@ function HomeNavbar ({ }: NavbarProps) {
                         </div>
                     </form>
 
-                    <div className="d-flex align-items-center gap-3">
+                    <div className="d-flex align-items-center gap-3" style={{ cursor: 'pointer' }}>
                         <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
                             <li className="nav-item"><a className="nav-link text-white" href="#">Invite Friends</a></li>
                             <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/leaderboard' style={{ color: 'white', textDecoration: 'none'}}>Leaderboard</Link></a></li>
@@ -69,12 +69,12 @@ function HomeNavbar ({ }: NavbarProps) {
                         <img src={Icon} alt="User Icon" style={{ height: '32px' }} />
                         <img src={Bell} alt="Notification" style={{ height: '32px' }} />
 
-                        <button className="btn btn-warning d-none d-lg-block">Connect Wallet</button>
+                        <button className="btn btn-warning d-none d-lg-block disabled">Connect Wallet</button>
                     </div>
                 </div>
 
                 {showMobileMenu && (
-                    <div className="d-lg-none mt-3">
+                    <div className="d-lg-none mt-3" style={{ cursor: 'pointer' }}>
                         <ul className="nav flex-column text-white gap-3 px-1">
                             <li className="nav-item">
                                 <select className="text-white" style={{ background: '#0D1017' }} onChange={handleScrollToSection}>
@@ -93,7 +93,7 @@ function HomeNavbar ({ }: NavbarProps) {
                                 <a className="nav-link text-white p-0" href="#"><Link to='/friends' style={{ color: 'white', textDecoration: 'none'}}>Invite Friends</Link></a>
                             </li>
                             <li className="nav-item">
-                                <button className="btn btn-warning w-100">Connect Wallet</button>
+                                <button className="btn btn-warning w-100 disabled">Connect Wallet</button>
                             </li>
                         </ul>
                     </div>

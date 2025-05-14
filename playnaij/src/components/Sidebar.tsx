@@ -4,8 +4,8 @@ import Home from '../assets/home 02.svg'
 import Rewards from '../assets/Frame.svg'
 import Invite from "../assets/invite.svg"
 import Community from "../assets/community.svg"
-import Download from '../assets/download 01.svg'
-import Settings from '../assets/settings.svg'
+// import Download from '../assets/download 01.svg'
+// import Settings from '../assets/settings.svg'
 import Help from '../assets/help 01.svg'
 import Logout from '../assets/logout.svg'
 import MoreGames from '../assets/Frame 2147227324.svg'
@@ -92,22 +92,22 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                             Community
                             </a>
                         </li>
-                        <li className="nav-item mb-0">
+                        {/* <li className="nav-item mb-0">
                             <a href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Download} alt="" className="me-4" />
                             Downloads
                             </a>
-                        </li>
+                        </li> */}
                     </ul>
                     <hr />
 
                     <ul className="nav flex-column mb-auto">
-                        <li className="nav-item mb-0">
+                        {/* <li className="nav-item mb-0">
                             <a href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Settings} alt="" className="me-4" />
                             Settings
                             </a>
-                        </li>
+                        </li> */}
                         <li className="nav-item mb-0">
                             <a href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Help} alt="" className="me-4" />

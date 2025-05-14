@@ -42,15 +42,11 @@ function Navbar1 ({ onToggleSidebar }: Navbar1Props) {
                         <option disabled value="">Web3 Games</option>
                     </select>
 
-                    <div className='d-flex gap-3 align-items-center mb-2 mb-lg-0'>
-                        <button className="btn btn-outline-success me-3 text-white d-none d-lg-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
+                    <div className='d-flex gap-3 align-items-center mb-2 mb-lg-0' style={{ cursor: 'pointer' }}>
+                        <button className="btn btn-outline-success me-3 text-white d-none d-lg-flex disabled" style={{ background: '#0D1017' }}>Connect Wallet</button>
                         <button onClick={login} className="btn" style={{ backgroundColor: '#10B981' }}><Link to='/login' style={{  color: 'white', textDecoration: 'none'}}>Log In</Link></button>
                     </div>
-                </ul>
-
-                
-
-                
+                </ul>  
             </nav>
         </>
     )

@@ -27,7 +27,7 @@ const exitFullscreenAndPortrait = async () => {
 
   if (isMobile) {
     try {
-      // Unlock orientation
+
       if (screen.orientation && screen.orientation.unlock) {
         screen.orientation.unlock();
       } else {
@@ -69,6 +69,7 @@ const QuestionScreen: React.FC = () => {
   const [, setMissedQuestions] = useState(0);
 
   const q = questions[current];
+
   const categoryColors: { [key: string]: string } = {
     Food: '#875432',
     Music: '#8D9196',
@@ -169,28 +170,28 @@ const QuestionScreen: React.FC = () => {
     }
   };
 
-  const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5173';
-  
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     fetch(`${baseURL}/trivia/questions?category=${category}`)
       .then(res => res.json())
       .then(data => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const shuffleArray = (array: any[]) => {
-        const shuffled = [...array];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled;
-      };
+          const shuffled = [...array];
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+          return shuffled;
+        };
 
-      const shuffledQuestions = shuffleArray(data);
-      setQuestions(shuffledQuestions);
-      })
-      .catch(() => {
-        console.error('Error fetching questions');
-      });
+        const shuffledQuestions = shuffleArray(data);
+        setQuestions(shuffledQuestions);
+        })
+        .catch((err) => {
+          console.error('Error fetching questions', err);
+        });
   }, [baseURL, category]);
 
   useEffect(() => {

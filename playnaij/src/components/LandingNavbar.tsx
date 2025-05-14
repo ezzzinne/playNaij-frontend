@@ -55,7 +55,7 @@ function Navbar ({ }: NavbarProps) {
 
                 <div className="d-flex align-items-center gap-2 mb-2 mb-lg-0">
                     <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
-                        <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/friends' style={{  color: 'white', textDecoration: 'none'}}>Invite Friends</Link></a></li>
+                        <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/friends' style={{  color: 'white', textDecoration: 'none', cursor: 'pointer'}}>Invite Friends</Link></a></li>
                         <li className="nav-item">
                             <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} onChange={handleScrollToSection}>
                                 <option value="">Categories</option>
@@ -67,14 +67,14 @@ function Navbar ({ }: NavbarProps) {
                     </ul>
                 </div>
 
-                <div className='d-flex gap-3 align-items-center mb-2 mb-lg-0'>
-                    <button className="btn btn-outline-success text-white d-none d-lg-flex" style={{ background: '#0D1017' }}>Connect Wallet</button>
+                <div className='d-flex gap-3 align-items-center mb-2 mb-lg-0' style={{ cursor: 'pointer' }}>
+                    <button className="btn btn-outline-success text-white d-none d-lg-flex disabled" style={{ background: '#0D1017' }}>Connect Wallet</button>
                     <button onClick={login} className="btn" style={{ backgroundColor: '#10B981' }}><Link to='/login' style={{  color: 'white', textDecoration: 'none' }}>Log In</Link></button>
                 </div>
                 
 
                 {showMobileMenu && (
-                    <div className="d-lg-none mt-2 d-flex flex-column align-items-start w-100">
+                    <div className="d-lg-none mt-2 d-flex flex-column align-items-start w-100" style={{ cursor: 'pointer' }}>
                         <ul className="nav flex-column text-white gap-3 mb-3">
                             <li className="nav-item">
                                 <select className="text-white" style={{ background: '#0D1017' }} onChange={handleScrollToSection}>
@@ -91,7 +91,7 @@ function Navbar ({ }: NavbarProps) {
                         </ul>
 
                         <div className="d-flex flex-column gap-2">
-                            <button className="btn btn-outline-success text-white">Connect Wallet</button>
+                            <button className="btn btn-outline-success text-white disabled">Connect Wallet</button>
                         </div>
                     </div>
                 )}

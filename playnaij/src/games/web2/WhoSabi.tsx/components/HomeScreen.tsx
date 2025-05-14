@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import coinIcon from '../assets/Coin gold.svg'; 
@@ -8,6 +8,7 @@ import logo from '../assets/Who Sabi TM 1.svg';
 import './HomeScreen.css';
 import LowerSection1 from '../../Streetz.tsx/components/LowerSection1';
 import CategorySelection from './CategorySelection';
+import SettingsModal from './SettingsModal';
 
 const enterFullscreenAndLandscape = async () => {
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
@@ -41,10 +42,23 @@ const enterFullscreenAndLandscape = async () => {
 const WhoSabiStartScreen: React.FC = () => {
   const navigate = useNavigate();
   const [showCategories, setShowCategories] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
+  const [musicOn, setMusicOn] = useState(true);
+
+  useEffect(() => {
+    if (showSettings) {
+      return;
+    }
+  })
 
   const handleCategorySelect = (category: string) => {
     navigate(`/questions/${category}`);
   };
+
+  function handleExit(): void {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <>
@@ -64,7 +78,7 @@ const WhoSabiStartScreen: React.FC = () => {
               </div>
             </Col>
             <Col xs="auto">
-              <button className="settings-btn rounded-2">
+              <button onClick={() => setShowSettings(true)} className="settings-btn rounded-2">
                 <img src={settingsIcon} alt="settings" className="top-icon" />
               </button>
             </Col>
@@ -96,6 +110,9 @@ const WhoSabiStartScreen: React.FC = () => {
             </div>
           </div>
         )}
+        {showSettings && (
+            <SettingsModal onClose={() => setShowSettings(false)} onQuit={handleExit} soundOn={soundOn} musicOn={musicOn} toggleSound={() => setSoundOn(prev => !prev)} toggleMusic={() => setMusicOn(prev => !prev)} />
+          )}
       </Container>
   
         {/* Lower Section */}
