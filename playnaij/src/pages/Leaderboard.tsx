@@ -1,6 +1,7 @@
 // This component displays a leaderboard with user ranks, names, and XP points.
 import { Trophy } from "lucide-react";
 import '../App.css';
+// import { useEffect, useState } from "react";
 
 interface User {
   rank: number;
@@ -8,6 +9,7 @@ interface User {
   xp: number;
 }
 
+// Comment out when the leaderboard API is ready
 const users: User[] = [
   { rank: 1, name: "FAVOUR", xp: 1548197 },
   { rank: 2, name: "CHUCKS", xp: 1548190 },
@@ -28,7 +30,32 @@ const medalEmojis: { [key: number]: string } = {
   3: "🥉",
 };
 
+// const baseURL = import.meta.env.VITE_API_BASE_URL;
+
 const Leaderboard = () => {
+  // const [users, setUsers] = useState<User[]>([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState('');
+
+  // useEffect(() => {
+  //   fetch(`${baseURL}/trivia/leaderboard`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       // Assuming data is already sorted and includes rank, name, xp
+  //       setUsers(data);
+  //       setLoading(false);
+  //     })
+  //     .catch(err => {
+  //       console.error('Failed to fetch leaderboard:', err);
+  //       setError('Failed to load leaderboard');
+  //       setLoading(false);
+  //     });
+  // }, []);
+
+  // if (loading) return <div className="text-white text-center mt-5">Loading...</div>;
+  // if (error) return <div className="text-danger text-center mt-5">{error}</div>;
+
+
   return (
     <div className="min-vh-100 text-white d-flex flex-column align-items-center p-4 leaderboard" style={{ backgroundColor: '#0F1623' }}>
       {/* Header */}

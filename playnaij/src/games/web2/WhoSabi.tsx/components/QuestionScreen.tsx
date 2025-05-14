@@ -173,8 +173,13 @@ const QuestionScreen: React.FC = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    fetch(`${baseURL}/trivia/questions?category=${category}`)
-      .then(res => res.json())
+    fetch(`${baseURL}/trivia/questions`)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       
       .then(data => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
