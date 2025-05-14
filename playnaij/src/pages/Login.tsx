@@ -29,8 +29,7 @@ export default function Login() {
     }));
   };
 
-  const handleLogin = () => {
-    // Form validation
+  const handleLogin = async () => {
     if (!form.username || !form.password) {
       setError('Please enter both username and password.');
       return;
@@ -41,15 +40,30 @@ export default function Login() {
       return;
     }
 
-    setError(''); // Clear error if everything is valid
+    setError('');
 
-    // Replace this with real auth logic
-    const userExists = true;
+    try {
+      const response = await fetch('https://casual-web-game-platform.onrender.com/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: form.username,
+          password: form.password
+        })
+      });
 
-    if (!userExists) {
-      navigate('/create-account');
-    } else {
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Login failed');
+      }
+
+      const data = await response.json();
+      // Example: localStorage.setItem('token', data.token);
       navigate('/home');
+    } catch (err: any) {
+      setError(err.message || 'An error occurred during login.');
     }
   };
 
@@ -143,7 +157,7 @@ export default function Login() {
 
         <div className="ca-social-buttons">
           <button
-            aria-label="Google sign up"
+            aria-label="Google sign in"
             onClick={handleGoogleLogin}
             type="button"
             className="ca-social"
@@ -152,7 +166,7 @@ export default function Login() {
           </button>
 
           <button
-            aria-label="Facebook sign up"
+            aria-label="Facebook sign in"
             onClick={handleFacebookLogin}
             type="button"
             className="ca-social"
