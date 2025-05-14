@@ -53,7 +53,7 @@ function HomeNavbar ({ }: NavbarProps) {
                     </form>
 
                     <div className="d-flex align-items-center gap-3" style={{ cursor: 'pointer' }}>
-                        <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
+                        <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0 me-5">
                             <li className="nav-item"><a className="nav-link text-white" href="#">Invite Friends</a></li>
                             <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/leaderboard' style={{ color: 'white', textDecoration: 'none'}}>Leaderboard</Link></a></li>
                             <li className="nav-item">
@@ -69,7 +69,7 @@ function HomeNavbar ({ }: NavbarProps) {
                         <img src={Icon} alt="User Icon" style={{ height: '32px' }} />
                         <img src={Bell} alt="Notification" style={{ height: '32px' }} />
 
-                        <button className="btn btn-warning d-none d-lg-block disabled">Connect Wallet</button>
+                        {/* <button className="btn btn-warning d-none d-lg-block disabled">Connect Wallet</button> */}
                     </div>
                 </div>
 
@@ -92,9 +92,9 @@ function HomeNavbar ({ }: NavbarProps) {
                                 <img src={User} alt="Invite" style={{ height: '24px' }} />
                                 <a className="nav-link text-white p-0" href="#"><Link to='/friends' style={{ color: 'white', textDecoration: 'none'}}>Invite Friends</Link></a>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <button className="btn btn-warning w-100 disabled">Connect Wallet</button>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 )}

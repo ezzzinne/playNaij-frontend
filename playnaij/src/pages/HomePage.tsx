@@ -22,7 +22,7 @@ function HomePage () {
                             <p className="card-title mb-2 text-warning fs-3 mt-0">Streetz</p>
                             <p style={{ color: '#9CA3AF' }}>Build words in Pidgin English, use power-ups, and become the ultimate word master!</p>
                             <div className="d-flex justify-content-between align-items-center mb-3">
-                                <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50K Players</small>
+                                <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50 Players</small>
                                 <button className="btn mx-2 text-white" style={{ backgroundColor: '#10B981' }}><Link to='/game1' style={{  color: 'white', textDecoration: 'none'}}>Play Now</Link></button>
                             </div>
                         </div>
@@ -35,7 +35,7 @@ function HomePage () {
                             <p className="card-title mb-2 text-warning fs-3 mt-0">Who Sabi</p>
                             <p style={{ color: '#9CA3AF' }}>Test your knowledge of Naija culture, entertainment, and current events!</p>
                             <div className="d-flex justify-content-between align-items-center mb-3">
-                                <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>50K Players</small>
+                                <small style={{ color: '#8E7564'}}><span><img src={People} className="me-1" /></span>42 Players</small>
                                 <button className="btn mx-2 text-white" style={{ backgroundColor: '#10B981' }}><Link to='/game2' style={{  color: 'white', textDecoration: 'none'}}>Play Now</Link></button>
                             </div>
                         </div>
@@ -48,8 +48,8 @@ function HomePage () {
                             <p className="card-title mb-2 text-warning fs-3 mt-0">Hustlerz</p>
                             <p style={{ color: '#9CA3AF' }}>Run your virtual Lagos market stall with NFT-powered items and strategy!</p>
                             <div className="d-flex justify-content-between align-items-center mb-3">
-                                <small style={{ color: '#8E7564'}}>COMING SOON...</small>
-                                <button className="btn btn-outline-success mx-1 text-white disabled" style={{ backgroundColor: '#0D1017' }}>Play Now</button>
+                                <small style={{ color: '#8E7564'}}></small>
+                                <button className="btn btn-outline-success mx-1 text-white disabled" style={{ backgroundColor: '#0D1017' }}>Coming soon...</button>
                             </div>
                         </div>
                     </div>

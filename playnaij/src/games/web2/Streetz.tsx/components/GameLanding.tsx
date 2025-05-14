@@ -35,7 +35,7 @@ const GameLanding: React.FC = () => {
         <div className="d-flex justify-content-around my-4">
           <div className='p-2 rounded-3' style={{ backgroundColor: '#DCF9EF'}}>
             <img src={Player} alt="" className='mb-2 p-1' style={{ width: '40px'}} />
-            <p style={{ color: '#2F80ED'}} className='fw-medium'>50K Players</p>
+            <p style={{ color: '#2F80ED'}} className='fw-medium'>50 Players</p>
           </div>
           <div className='p-2 rounded-3' style={{ backgroundColor: 'white'}}>
             <img src={Leaderboard} alt="" className='mb-2 p-1' style={{ width: '40px'}} />
@@ -47,25 +47,25 @@ const GameLanding: React.FC = () => {
           </div>
         </div>
         <div className="bg-black p-4 rounded text-start w-100 mx-auto my-0">
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>Rating:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
               ⭐ 4.5
             </span>
           </p>
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>Category:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
               Word Games
             </span>
           </p>
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>Description:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
               Streetz is a word game that helps you build your vocabulary in the Nigerian Pigin English. It is a mix of modern and ruggedity.
             </span>
           </p>
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>How To Play:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
               Type in your answer into the input field, this automatically fills in what you typed and you get a reward for inputting the correct answer.

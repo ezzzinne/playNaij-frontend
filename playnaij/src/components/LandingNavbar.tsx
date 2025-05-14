@@ -54,7 +54,7 @@ function Navbar ({ }: NavbarProps) {
                 </form>
 
                 <div className="d-flex align-items-center gap-2 mb-2 mb-lg-0">
-                    <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0">
+                    <ul className="d-none d-lg-flex nav gap-5 align-items-center mb-0">
                         <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/friends' style={{  color: 'white', textDecoration: 'none', cursor: 'pointer'}}>Invite Friends</Link></a></li>
                         <li className="nav-item">
                             <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} onChange={handleScrollToSection}>
@@ -68,8 +68,8 @@ function Navbar ({ }: NavbarProps) {
                 </div>
 
                 <div className='d-flex gap-3 align-items-center mb-2 mb-lg-0' style={{ cursor: 'pointer' }}>
-                    <button className="btn btn-outline-success text-white d-none d-lg-flex disabled" style={{ background: '#0D1017' }}>Connect Wallet</button>
-                    <button onClick={login} className="btn" style={{ backgroundColor: '#10B981' }}><Link to='/login' style={{  color: 'white', textDecoration: 'none' }}>Log In</Link></button>
+                    {/* <button className="btn btn-outline-success text-white d-none d-lg-flex disabled" style={{ background: '#0D1017' }}>Connect Wallet</button> */}
+                    <button onClick={login} className="btn px-5" style={{ backgroundColor: '#10B981' }}><Link to='/login' style={{  color: 'white', textDecoration: 'none' }}>Log In</Link></button>
                 </div>
                 
 
@@ -84,15 +84,15 @@ function Navbar ({ }: NavbarProps) {
                                     <option value="#game-cards">Web3</option>
                                 </select>
                             </li>
-                            <li className="nav-item d-flex align-items-center gap-2">
+                            <li className="nav-item d-flex align-items-center">
                                 <img src={User2} alt="" />
                                 <a className="nav-link text-white" href="#">Invite Friends</a>
                             </li>
                         </ul>
 
-                        <div className="d-flex flex-column gap-2">
+                        {/* <div className="d-flex flex-column gap-2">
                             <button className="btn btn-outline-success text-white disabled">Connect Wallet</button>
-                        </div>
+                        </div> */}
                     </div>
                 )}
             </nav> 

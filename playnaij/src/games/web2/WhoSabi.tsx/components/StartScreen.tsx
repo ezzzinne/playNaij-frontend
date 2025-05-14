@@ -18,25 +18,25 @@ import Logo from '../assets/Who Sabi TM 1.svg'
         </div>
 
         <div className="bg-black p-4 rounded text-start w-100 mx-auto my-0">
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>Rating:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
               ⭐ 4.3
             </span>
           </p>
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>Category:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
               Trivia Games
             </span>
           </p>
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>Description:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
             <b>Who Sabi</b> is a culturally-rich trivia game that tests players’ knowledge of Nigerian pop culture, slangs, food, music, history, and lifestyle.
             </span>
           </p>
-          <p>
+          <p className='d-flex align-items-center'>
             <strong style={{ display: 'inline-block', width: '120px' }}>How To Play:</strong>
             <span style={{ display: 'inline-block', maxWidth: 'calc(100% - 120px)' }}>
             Select the correct option to answer the question presented to you. Answer all questions before the time runs out.

@@ -35,22 +35,24 @@ function Navbar2 ({ onToggleSidebar }: Navbar1Props) {
                     </div>
                 </form>
 
-                <ul className="nav gap-4 d-none d-md-flex">
-                    <li className="nav-item"><a className="nav-link text-white" href="#"><Link to="/leaderboard" style={{  color: 'white', textDecoration: 'none'}}>Leaderboard</Link></a></li>
-                    <select className="text-white border-0" style={{ background: '#0D1017' }} onChange={handleSelectChange}>
-                        <option value="">Categories</option>
-                        <option value="/game1">Word Games</option>
-                        <option value="/game2">Trivia Games</option>
-                        <option disabled value="" className='disabled'>Web3 Games</option>
-                    </select>
-                </ul>
+                <div className="d-flex align-items-center justify-content-center gap-3" style={{ cursor: 'pointer' }}>
+                    <ul className="nav gap-5 d-none d-lg-flex align-items-center justify-content-center mb-0 me-5">
+                        <li className="nav-item"><a className="nav-link text-white" href="#"><Link to="/leaderboard" style={{  color: 'white', textDecoration: 'none'}}>Leaderboard</Link></a></li>
+                        <select className="text-white border-0" style={{ background: '#0D1017' }} onChange={handleSelectChange}>
+                            <option value="">Categories</option>
+                            <option value="/game1">Word Games</option>
+                            <option value="/game2">Trivia Games</option>
+                            <option disabled value="" className='disabled'>Web3 Games</option>
+                        </select>
+                    </ul>
 
-                <div className="d-flex align-items-center" style={{ cursor: 'pointer' }}>
                     <img src={Icon} alt="" className='m-2' />
-                    <img src={Bell} alt="" className='m-2 d-none d-md-flex' />
+                    <img src={Bell} alt="" className='m-2 d-none d-lg-flex' />
                 </div>
 
-                <button className="btn btn-warning d-none d-md-flex disabled">Connect Wallet</button>
+                
+
+                {/* <button className="btn btn-warning d-none d-md-flex disabled">Connect Wallet</button> */}
 
                 
             </nav>

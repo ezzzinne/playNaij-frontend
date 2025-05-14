@@ -175,6 +175,7 @@ const QuestionScreen: React.FC = () => {
   useEffect(() => {
     fetch(`${baseURL}/trivia/questions?category=${category}`)
       .then(res => res.json())
+      
       .then(data => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const shuffleArray = (array: any[]) => {
@@ -193,6 +194,7 @@ const QuestionScreen: React.FC = () => {
           console.error('Error fetching questions', err);
         });
   }, [baseURL, category]);
+  
 
   useEffect(() => {
     if (selected || gameOver || current >= questions.length || showSettings) return;

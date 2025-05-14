@@ -18,8 +18,8 @@ const users: User[] = [
 
 const rankColors: { [key: number]: React.CSSProperties } = {
   1: { backgroundColor: "#2F80ED", color: "#fff" },
-  2: { backgroundColor: "#F59E0B", color: "#fff" }, // Bootstrap orange
-  3: { backgroundColor: "#5B3303", color: "#fff" }, // Approx amber-800
+  2: { backgroundColor: "#F59E0B", color: "#fff" }, 
+  3: { backgroundColor: "#5B3303", color: "#fff" },
 };
 
 const medalEmojis: { [key: number]: string } = {
