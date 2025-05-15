@@ -1,0 +1,650 @@
+[
+  {
+    "id": "1",
+    "question": "Which Nigerian rapper is known as 'Mr. Incredible'?",
+    "options": [
+      "Phyno",
+      "Ice Prince",
+      "M.I Abaga",
+      "Vector"
+    ],
+    "answer": "M.I Abaga",
+    "category": "Music"
+  },
+  {
+    "id": "2",
+    "question": "Who is known as the 'Queen of Afrobeat'?",
+    "options": [
+      "Tiwa Savage",
+      "Yemi Alade",
+      "Asa",
+      "Simi"
+    ],
+    "answer": "Tiwa Savage",
+    "category": "Music"
+  },
+  {
+    "id": "3",
+    "question": "Which food is Enugu popularly known for?",
+    "options": [
+      "Okpa",
+      "Suya",
+      "Chin Chin",
+      "Kuli Kuli"
+    ],
+    "answer": "Okpa",
+    "category": "Food"
+  },
+  {
+    "id": "5",
+    "question": "Which Nigerian won the Olympic gold medal in long jump?",
+    "options": [
+      "Blessing Okagbare",
+      "Chioma Ajunwa",
+      "Mary Onyali",
+      "Falilat Ogunkoya"
+    ],
+    "answer": "Chioma Ajunwa",
+    "category": "Sports"
+  },
+  {
+    "id": "6",
+    "question": "Which year did Nigeria win the Olympic football gold?",
+    "options": [
+      "1996",
+      "2000",
+      "1992",
+      "1988"
+    ],
+    "answer": "1996",
+    "category": "Sports"
+  },
+  {
+    "id": "7",
+    "question": "Who was Nigeria\u2019s first president?",
+    "options": [
+      "Nnamdi Azikiwe",
+      "Obafemi Awolowo",
+      "Yakubu Gowon",
+      "Ahmadu Bello"
+    ],
+    "answer": "Nnamdi Azikiwe",
+    "category": "9ja History"
+  },
+  {
+    "id": "8",
+    "question": "In what year did Nigeria gain independence?",
+    "options": [
+      "1960",
+      "1956",
+      "1970",
+      "1963"
+    ],
+    "answer": "1960",
+    "category": "9ja History"
+  },
+  {
+    "id": "9",
+    "question": "What's the title of Wizkid's first album?",
+    "options": [
+      "Superstar",
+      "Made in Lagos",
+      "Ayo",
+      "Sounds from the Other Side"
+    ],
+    "answer": "Superstar",
+    "category": "Music"
+  },
+  {
+    "id": "10",
+    "question": "Which river is the longest in Nigeria?",
+    "options": [
+      "Niger River",
+      "Benue River",
+      "Osun River",
+      "Cross River"
+    ],
+    "answer": "Niger River",
+    "category": "9ja History"
+  },
+  {
+    "id": "11",
+    "question": "What is the official currency of Nigeria?",
+    "options": [
+      "Naira",
+      "Dollar",
+      "Pound",
+      "Euro"
+    ],
+    "answer": "Naira",
+    "category": "9ja History"
+  },
+  {
+    "id": "12",
+    "question": "Which festival is celebrated in Nigeria to mark the end of Ramadan?",
+    "options": [
+      "Eid-el-Fitr",
+      "Eid-el-Adha",
+      "Christmas",
+      "New Year"
+    ],
+    "answer": "Eid-el-Fitr",
+    "category": "9ja History"
+  },
+  {
+    "id": "13",
+    "question": "What is the most popular sport in Nigeria?",
+    "options": [
+      "Football",
+      "Basketball",
+      "Cricket",
+      "Tennis"
+    ],
+    "answer": "Football",
+    "category": "9ja History"
+  },
+  {
+    "id": "14",
+    "question": "Which Nigerian city is known as the 'Centre of Excellence'?",
+    "options": [
+      "Lagos",
+      "Abuja",
+      "Port Harcourt",
+      "Ibadan"
+    ],
+    "answer": "Lagos",
+    "category": "9ja History"
+  },
+  {
+    "id": "15",
+    "question": "Which song made Burna Boy win his first Grammy?",
+    "options": [
+      "Ye",
+      "Last Last",
+      "Twicwe as Tall",
+      "Anybody"
+    ],
+    "answer": "Twicwe as Tall",
+    "category": "Music"
+    },
+    {
+    "id": "16",
+    "question": "Which Nigerian artist is known for the song 'Dumebi'?",
+    "options": [
+      "Rema",
+      "Omah Lay",
+      "Joeboy",
+      "Fireboy DML"
+    ],
+    "answer": "Rema",
+    "category": "Music"
+    },
+    {
+    "id": "17",
+    "question": "Which artist is known as “African Giant”?",
+    "options": [
+        "Davido", 
+        "Burna",
+        "Wizkid",
+        "Olamide"
+    ],
+    "answer": "Burna",
+    "category": "Music"
+    },
+    {
+    "id": "18",
+    "question": "Which song is known for the line “Now wey I dey alive” by Patoranking?",
+    "options": [
+        "No Kissing",
+        "Abule",
+        "Alubarika",
+        "Celebrate Me"
+    ],
+    "answer": "Celebrate Me",
+    "category": "Music"
+    },
+    {
+    "id": "19",
+    "question": "Who featured on Wizkid's “Essence”?",
+    "options": [
+        "Tems",
+        "Tiwa Savage",
+        "Burna Boy",
+        "Omah Lay"
+    ],  
+    "answer": "Tems",
+    "category": "Music"
+    },
+    {
+    "id": "20",
+    "question": "What is the title of Davido's debut album?",
+    "options": [
+        "Omo Baba Olowo",
+        "A Better Time",
+        "Son of Mercy",
+        "A Good Time"
+    ],  
+    "answer": "Omo Baba Olowo",
+    "category": "Music"
+    },  
+    {
+    "id": "21",
+    "question": "What is the main ingredient in Moi Moi?",
+    "options": [
+        "Beans",
+        "Rice",
+        "Yam",
+        "Plantain"
+    ],  
+    "answer": "Beans",
+    "category": "Food"
+    },
+    {
+    "id": "22",
+    "question": "Which Nigerian dish is made from fermented locust beans?", 
+    "options": [
+        "Ogiri",
+        "Iyan",
+        "Efo Riro",
+        "Pepper Soup"
+    ],
+    "answer": "Ogiri",
+    "category": "Food"
+    },
+    { 
+    "id": "23",
+    "question": "Which of these is not a type of Nigerian soup?",
+    "options": [
+        "Egusi",
+        "Ogbono",
+        "Bitterleaf",
+        "Jollof"
+    ],  
+    "answer": "Jollof",
+    "category": "Food"
+    },
+    {   
+    "id": "24",
+    "question": "Which of these spices is common in Jollof Rice?",
+    "options": [
+        "Thyme",
+        "Curry",
+        "Ginger",
+        "Garlic"
+    ],
+    "answer": "Thyme",
+    "category": "Food"
+    },
+    {
+    "id": "25",
+    "question": "Which of these is a popular Yoruba dish?",
+    "options": [
+        "Afang Soup",
+        "Efo Riro",
+        "Okpa",
+        "Ofe Nsala"
+    ],  
+    "answer": "Efo Riro",
+    "category": "Food"
+    },
+    {
+    "id": "26",
+    "question": "What is the main ingredient in Akara?",
+    "options": [
+        "Beans",
+        "Cassava",
+        "Yam",
+        "Plantain"
+    ],  
+    "answer": "Beans",
+    "category": "Food"
+    },
+    {
+    "id": "27",
+    "question": "What is a common street food in Lagos known as “Boli”?",
+    "options": [
+        "Roasted Plantain",
+        "Fried Yam",
+        "Puff Puff",
+        "Grilled Fish"
+    ],
+    "answer": "Roasted Plantain",
+    "category": "Food"
+    },
+    {
+    "id": "28",
+    "question": "Which Nigerian dish is made from pounded yam?",
+    "options": [
+        "Iyan",
+        "Eba",
+        "Fufu",
+        "Pounded Cassava"
+    ],
+    "answer": "Iyan",
+    "category": "Food"
+    },
+    {
+    "id": "29",
+    "question": "Which soup is famous among the Efik people?",
+    "options": [
+        "Afang Soup",
+        "Egusi Soup",
+        "Ogbono Soup",
+        "Bitterleaf Soup"
+    ],  
+    "answer": "Afang Soup",
+    "category": "Food"
+    },
+    {
+    "id": "30",
+    "question": "Who was Nigeria's first Prime Minister?",
+    "options": [
+      "Nnamdi Azikiwe",
+      "Abubakar Tafawa Balewa",
+      "Obafemi Awolowo",
+      "Ahmadu Bello"
+    ],  
+    "answer": "Abubakar Tafawa Balewa",
+    "category": "9ja History"
+    },
+    {
+    "id": "31",
+    "question": "What is the traditional attire of the Yoruba called?",
+    "options": [
+      "Buba and Iro",
+      "Kaftan",
+      "Agbada",
+      "Isi Agu"
+    ],
+    "answer": "Buba and Iro",
+    "category": "9ja History"
+    },
+    {
+    "id": "32",
+    "question": "Which Nigerian state is known as the 'Home of Peace'?",    
+    "options": [
+      "Benue",
+      "Bauchi",
+      "Kano",
+      "Kaduna"
+    ],  
+    "answer": "Benue",
+    "category": "9ja History"
+    },
+    {
+    "id": "33",
+    "question": "Which Nigerian city is known for its oil production?",
+    "options": [
+      "Port Harcourt",
+      "Lagos",
+      "Abuja",
+      "Calabar"
+    ],  
+    "answer": "Port Harcourt",
+    "category": "9ja History"
+    },
+    {
+    "id": "34",
+    "question": "What is the capital of Cross River State?",
+    "options": [
+      "Calabar",
+      "Uyo",
+      "Port Harcourt",
+      "Enugu"
+    ],  
+    "answer": "Calabar",
+    "category": "9ja History"
+    },
+    {
+    "id": "35", 
+    "question": "Which year did Nigeria become a republic?",
+    "options": [
+      "1963",
+      "1960",
+      "1970",
+      "1980"
+    ],  
+    "answer": "1963",
+    "category": "9ja History"
+    },
+    {
+    "id": "36",
+    "question": "Who was Nigeria's first military Head of State?",
+    "options": [
+      "Yakubu Gowon",
+      "Muhammadu Buhari",
+      "Sani Abacha",
+      "Johnson Aguiyi-Ironsi"
+    ],
+    "answer": "Johnson Aguiyi-Ironsi",
+    "category": "9ja History"
+    },
+    {
+    "id": "37",
+    "question": "Which Nigerian city is known as the “Coal City”?",
+    "options": [
+      "Enugu",
+      "Jos",
+      "Lagos",
+      "Ibadan"
+    ],
+    "answer": "Enugu",
+    "category": "9ja History"
+    },
+    {
+    "id": "38",
+    "question": "The famous “Olojo Festival” is celebrated in which state?",
+    "options": [
+      "Osun",
+      "Ekiti",
+      "Oyo",
+      "Lagos"
+    ],
+    "answer": "Osun",
+    "category": "9ja History"
+    },
+    {
+    "id": "39",
+    "question": "Which Nigerian state is known for the 'Argungu Festival'?",
+    "options": [
+      "Kebbi",
+      "Kano",
+      "Sokoto",
+      "Yobe"
+    ],  
+    "answer": "Kebbi",
+    "category": "9ja History"
+    },
+    {
+    "id": "40",
+    "question": "Who is known as the “Mathematical” in Nigerian football history?",
+    "options": [
+      "Jay Jay Okocha",
+      "Nwankwo Kanu",
+      "Rashidi Yekini",
+      "Segun Odegbami"
+    ],
+    "answer": "Segun Odegbami",
+    "category": "Sports"
+    },
+    {
+    "id": "41",
+    "question": "Which Nigerian football club is known as 'The People's Elephant'?",
+    "options": [
+      "Enyimba FC",
+      "Rangers International",
+      "Kano Pillars",
+      "Shooting Stars"
+    ],  
+    "answer": "Enyimba FC",
+    "category": "Sports"
+    },
+    {
+    "id": "42",
+    "question": "Which Nigerian athlete is known for the 100m sprint?",
+    "options": [
+      "Olusoji Fasuba",
+      "Mary Onyali",
+      "Blessing Okagbare",
+      "Tobi Amusan"
+    ],
+    "answer": "Olusoji Fasuba",
+    "category": "Sports"
+    },
+    {
+    "id": "43",
+    "question": "Which Nigerian footballer is known as 'The Lion of Africa'?",
+    "options": [
+      "Samuel Eto'o",
+      "Yaya Toure",
+      "Didier Drogba",
+      "Nwankwo Kanu"
+    ],  
+    "answer": "Nwankwo Kanu",
+    "category": "Sports"
+    },
+    {
+    "id": "44",
+    "question": "Which Nigerian football club has the most league titles?",
+    "options": [
+      "Enyimba FC",
+      "Rangers International",
+      "Kano Pillars",
+      "Shooting Stars"
+    ],
+    "answer": "Enyimba FC",
+    "category": "Sports"
+    },
+    {
+    "id": "45",
+    "question": "Which Nigerian athlete is known for the 400m hurdles?",
+    "options": [
+      "Tobi Amusan",
+      "Blessing Okagbare",
+      "Mary Onyali",
+      "Olusoji Fasuba"
+    ],
+    "answer": "Tobi Amusan",
+    "category": "Sports"
+    },
+    {
+    "id": "46",
+    "question": "Which Nigerian female athlete is known as the “Queen of the Track”?",
+    "options": [
+      "Blessing Okagbare",
+      "Mary Onyali",
+      "Falilat Ogunkoya",
+      "Chioma Ajunwa"
+    ],
+    "answer": "Blessing Okagbare",
+    "category": "Sports"
+    },
+    {
+    "id": "47",
+    "question": "Who is Nigeria's first Olympic gold medalist?",
+    "options": [
+      "Chioma Ajunwa",
+      "Mary Onyali",
+      "Falilat Ogunkoya",
+      "Blessing Okagbare"
+    ],
+    "answer": "Chioma Ajunwa",
+    "category": "Sports"
+    },
+    {
+    "id": "48",
+    "question": "Who was the captain of the Super Eagles during the 2013 AFCON win?",
+    "options": [
+      "Joseph Yobo",
+      "Vincent Enyeama",
+      "John Obi Mikel",
+      "Obafemi Martins"
+    ],  
+    "answer": "Joseph Yobo",
+    "category": "Sports"
+    },
+    {
+    "id": "49",
+    "question": "Which Nigerian player has won the UEFA Champions League?",
+    "options": [
+      "Samuel Eto'o",
+      "Jay Jay Okocha",
+      "Nwankwo Kanu",
+      "Vincent Enyeama"
+    ],
+    "answer": "Nwankwo Kanu",
+    "category": "Sports"
+    },
+    {
+    "id": "50",
+    "question": "Who is the first Nigerian boxer to become a heavyweight world champion?",
+    "options": [
+      "Samuel Peter",
+      "Anthony Joshua",
+      "David Haye",
+      "Bola Ahmed Tinubu"
+    ],
+    "answer": "Samuel Peter",
+    "category": "Sports"
+    },
+    {
+    "id": "51",
+    "question": "Who is the first Nigerian to win a UFC title?",
+    "options": [
+      "Kamaru Usman",
+      "Israel Adesanya",
+      "Anthony Joshua",
+      "Sodiq Yusuff"
+    ],
+    "answer": "Kamaru Usman",
+    "category": "Sports"
+    },
+    {
+    "id": "52",
+    "question": "Who holds the Nigerian record for men's 100m?",
+    "options": [
+      "Olusoji Fasuba",
+      "Divine Oduduru",
+      "Seye Ogunlewe",
+      "Francis Obikwelu"
+    ],
+    "answer": "Olusoji Fasuba",
+    "category": "Sports"
+    },
+    {   
+    "id": "53",
+    "question": "Which Nigerian athlete is known as “The Beast” in boxing?",
+    "options": [
+      "Anthony Joshua",
+      "Samuel Peter",
+      "David Haye",
+      "Kamaru Usman"
+    ],
+    "answer": "Samuel Peter",
+    "category": "Sports"
+    },
+    {
+    "id": "54",
+    "question": "Which Nigerian goalkeeper is famous for his penalty saves?",
+    "options": [
+      "Vincent Enyeama",
+      "Peter Rufai",
+      "Ikechukwu Ezenwa",
+      "Dele Alampasu"
+    ],
+    "answer": "Vincent Enyeama",
+    "category": "Sports"
+    },
+    {
+    "id": "55",
+    "question": "Which Nigerian player won the FIFA U-17 World Cup Golden Boot in 2015?",
+    "options": [
+      "Victor Osimhen",
+      "Kelechi Iheanacho",
+      "Samuel Chukwueze",
+      "Moses Simon"
+    ],
+    "answer": "Victor Osimhen",
+    "category": "Sports"
+    }
+]
