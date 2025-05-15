@@ -22,7 +22,7 @@ const GameResult: React.FC<GameResultProps> = ({ correctAnswers, questionsAnswer
   };
 
   const getMessage = () => {
-    if (correctAnswers === questionsAnswered && questionsAnswered > 0) {
+    if (correctAnswers === questionsAnswered && questionsAnswered === 5) {
       return (
         <>
           <div className='d-flex flex-column justify-content-center align-items-center gap-3 text-white'>
@@ -40,7 +40,7 @@ const GameResult: React.FC<GameResultProps> = ({ correctAnswers, questionsAnswer
           </div>
         </>
       );
-    } else if (correctAnswers > 0 && correctAnswers < questionsAnswered) {
+    } else if (correctAnswers > 0 && correctAnswers <= 5) {
       return (
         <>
           <div className='d-flex flex-column justify-content-center align-items-center gap-3 text-white'>

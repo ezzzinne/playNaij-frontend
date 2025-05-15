@@ -17,9 +17,11 @@ import SportsIcon from '../assets/Sports.svg';
 import HistoryIcon from '../assets/9ja.svg';
 
 interface Question {
+  id: string;
   question: string;
   options: string[];
   answer: string;
+  category: string;
 }
 
 const exitFullscreenAndPortrait = async () => {
@@ -56,7 +58,7 @@ const QuestionScreen: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [coins, setCoins] = useState(0);
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(15);
   const [energy, setEnergy] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [hiddenOptions, setHiddenOptions] = useState<string[]>([]);
@@ -106,6 +108,25 @@ const QuestionScreen: React.FC = () => {
     }, 300);
   };
 
+  const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+  const nextQuestionOrEnd = () => {
+  if (current + 1 >= questions.length) {
+    setGameOver(true);
+  } else {
+    setSelected(null);
+    setCurrent(prev => prev + 1);
+  }
+};
+
+
   const handleSelect = (option: string) => {
     setSelected(option);
     setQuestionsAnswered(prev => prev + 1);
@@ -114,16 +135,23 @@ const QuestionScreen: React.FC = () => {
       setCoins(prev => prev + 150);
       setCorrectAnswers(prev => prev + 1);
       setTimeout(() => {
-        if (current + 1 >= questions.length) {
-          setGameOver(true);
-        } else {
-          setSelected(null);
-          setCurrent(prev => prev + 1);
-        }
+        // if (current + 1 >= questions.length) {
+        //   setGameOver(true);
+        // } else {
+        //   setSelected(null);
+        //   setCurrent(prev => prev + 1);
+        // }
+        nextQuestionOrEnd();
       }, 300);
     } else {
       setTimeout(() => {
-        handleFail();
+        // handleFail();
+        setEnergy(prev => {
+        const updated = prev - 1;
+        if (updated <= 0) setGameOver(true);
+        return updated;
+      });
+      nextQuestionOrEnd();
       }, 300);
     }
   };
@@ -151,7 +179,7 @@ const QuestionScreen: React.FC = () => {
     setCurrent(0);
     setSelected(null);
     setCoins(0);
-    setTimer(10);
+    setTimer(15);
     setEnergy(3);
     setGameOver(false);
     setHiddenOptions([]);
@@ -159,6 +187,7 @@ const QuestionScreen: React.FC = () => {
     setCorrectAnswers(0);
     setQuestionsAnswered(0);
     setMissedQuestions(0);
+    loadQuestions();
   };
 
   const navigate = useNavigate();
@@ -170,36 +199,36 @@ const QuestionScreen: React.FC = () => {
     }
   };
 
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
+  // useEffect(() => {
+  //   fetch(`https://casual-web-game-platform.onrender.com/trivia/questions?category=${category}`)
+  //     .then(res => res.json())
+      
+  //     .then(data => {
+  //       const shuffled = data.sort(() => 0.5 - Math.random());
+  //       setQuestions(shuffled);
+  //     })
+  //       .catch((err) => {
+  //         console.error('Error fetching questions', err);
+  //       });
+  // }, [category]);
+  
+  const loadQuestions = useCallback(() => {
+    fetch(`${import.meta.env.BASE_URL}questions.json`)
+      .then(res => res.json())
+      .then(data => {
+        const filtered = data.filter((q: Question) => q.category === category) as Question[];
+        const shuffledQuestions = shuffleArray(filtered).slice(0, 5).map((q) => ({
+          ...q,
+          options: shuffleArray(q.options),
+        }));
+        setQuestions(shuffledQuestions);
+      })
+      .catch(err => console.error('Failed to load questions:', err));
+  }, [category]);
 
   useEffect(() => {
-    fetch(`${baseURL}/trivia/questions`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      })
-      
-      .then(data => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const shuffleArray = (array: any[]) => {
-          const shuffled = [...array];
-          for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-          }
-          return shuffled;
-        };
-
-        const shuffledQuestions = shuffleArray(data);
-        setQuestions(shuffledQuestions);
-        })
-        .catch((err) => {
-          console.error('Error fetching questions', err);
-        });
-  }, [baseURL, category]);
-  
+    loadQuestions();
+  }, [loadQuestions]);
 
   useEffect(() => {
     if (selected || gameOver || current >= questions.length || showSettings) return;
