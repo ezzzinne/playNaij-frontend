@@ -1,11 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import ReCAPTCHA from 'react-google-recaptcha';
 import './CreateAccount.css';
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, createUserWithEmailAndPassword, } from 'firebase/auth';
-import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebase/firestore';
-import { app } from '../firebase';
-import { sendEmailVerification } from 'firebase/auth';
 import Google from "../assets/google logo.png";
 import Facebook from "../assets/Facebook_Logo_(2019).png";
 
@@ -18,13 +13,7 @@ export default function CreateAccount() {
     accepted: false,
   });
 
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const recaptchaRef = useRef<any>(null);
   const navigate = useNavigate();
-
-  const auth = getAuth(app);
-  const db = getFirestore(app);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -32,10 +21,6 @@ export default function CreateAccount() {
       ...f,
       [name]: type === 'checkbox' ? checked : value
     }));
-  };
-
-  const handleCaptcha = (token: string | null) => {
-    setCaptchaToken(token);
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -46,72 +31,37 @@ export default function CreateAccount() {
       return;
     }
 
-    if (!captchaToken) {
-      alert('Please complete the reCAPTCHA.');
-      return;
-    }
-
     if (form.password !== form.confirm) {
       alert('Passwords do not match.');
       return;
     }
 
     try {
-      // Check for duplicate username
-      const q = query(collection(db, 'users'), where('username', '==', form.username));
-      const snapshot = await getDocs(q);
-  
-      if (!snapshot.empty) {
-        alert('Username already exists. Please choose another.');
-        return;
+      const response = await fetch('https://casual-web-game-platform.onrender.com/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: form.username,
+          email: form.email,
+          password: form.password
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to register. Please try again.');
       }
 
-      // Create Firebase user
-      const userCredential = await createUserWithEmailAndPassword(auth, form.email, form.password);
-      const user = userCredential.user;
-  
-      // Send verification email
-      await sendEmailVerification(user);
-  
-      // Save user info to Firestore
-      await addDoc(collection(db, 'users'), {
-        uid: user.uid,
-        username: form.username,
-        email: form.email,
-        createdAt: new Date()
-      });
-  
-      alert('Account created! Please check your email to verify your account before logging in.');
-      navigate('/'); // Optional: Navigate to a "Verify Email" screen
+      // Success - redirect to login or verification page
+      alert('Account created successfully. Please check your email.');
+      navigate('/verify-email-sent');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error('Signup error:', error);
       alert(error.message || 'An error occurred during signup.');
-    } finally {
-      recaptchaRef.current?.reset();
-      setCaptchaToken(null);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log('Google user:', user);
-    } catch (error) {
-      console.error('Google login error:', error);
-    }
-  };
-
-  const handleFacebookLogin = async () => {
-    const provider = new FacebookAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log('Facebook user:', user);
-    } catch (error) {
-      console.error('Facebook login error:', error);
     }
   };
 
@@ -205,14 +155,6 @@ export default function CreateAccount() {
                 </label>
             </div>
 
-            <div className="ca-recaptcha">
-                <ReCAPTCHA
-                ref={recaptchaRef}
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || 'invalid-key'}
-                onChange={handleCaptcha}
-                />
-            </div>
-
             <button
                 type="submit"
                 className="ca-submit"
@@ -229,13 +171,13 @@ export default function CreateAccount() {
 
             { 
             <div className="ca-social-buttons">
-            <button aria-label="Google sign up" className="ca-social" onClick={handleGoogleLogin} type='button'>
+            <button aria-label="Google sign up" className="ca-social" type='button' disabled title="Coming soon">
             <img
                 src={Google}
                 alt="Google sign in"
               />
             </button>
-            <button aria-label="Facebook sign up" className="ca-social" onClick={handleFacebookLogin} type='button'>
+            <button aria-label="Facebook sign up" className="ca-social" type='button' disabled title="Coming soon">
             <img
                 src={Facebook}
                 alt="Facebook sign in"
