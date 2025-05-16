@@ -94,6 +94,7 @@ const QuestionScreen: React.FC = () => {
     const twoToHide = incorrectOptions.sort(() => 0.5 - Math.random()).slice(0, 2);
     setCoins(prev => prev - 100);
     setHiddenOptions(twoToHide);
+    setEnergy(prev => Math.max(prev - 1, 0));
   };
 
   const handleReveal = () => {
@@ -101,21 +102,29 @@ const QuestionScreen: React.FC = () => {
     setCoins(prev => prev - 500);
     setRevealUsed(true);
     setSelected(q.answer);
+    setEnergy(prev => Math.max(prev - 1, 0));
+    setCorrectAnswers(prev => prev + 1);
+    setQuestionsAnswered(prev => prev + 1);
     setTimeout(() => {
       setSelected(null);
-      setCurrent(prev => prev + 1);
       setRevealUsed(false);
+
+      if (current + 1 >= questions.length) {
+        setGameOver(true);
+      } else {  
+      setCurrent(prev => prev + 1);
+      }
     }, 300);
   };
 
   const shuffleArray = <T,>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-};
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
 
   const nextQuestionOrEnd = () => {
   if (current + 1 >= questions.length) {
@@ -132,7 +141,7 @@ const QuestionScreen: React.FC = () => {
     setQuestionsAnswered(prev => prev + 1);
     const correct = questions[current].answer;
     if (option === correct) {
-      setCoins(prev => prev + 150);
+      setCoins(prev => prev + 200);
       setCorrectAnswers(prev => prev + 1);
       setTimeout(() => {
         // if (current + 1 >= questions.length) {
@@ -229,6 +238,10 @@ const QuestionScreen: React.FC = () => {
   useEffect(() => {
     loadQuestions();
   }, [loadQuestions]);
+
+  useEffect(() => {
+    setHiddenOptions([]);
+  }, [current]);
 
   useEffect(() => {
     if (selected || gameOver || current >= questions.length || showSettings) return;

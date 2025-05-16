@@ -16,38 +16,19 @@ interface WordData {
 
 type ModalType = 'correct' | 'wrong' | 'timeout' | null;
 
-const fetchWordFromAPI = async (): Promise<WordData> => {
-  // Mock API response (replace with real fetch in production)
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve({ word: 'DANFO', hint: 'A Yellow Vehicle , regularly used for transportation' });
-    }, 500)
-  );
-};
-
-// what the above code should look like
-// const fetchWordFromAPI = async (): Promise<WordData> => {
-//   const response = await fetch('/api/word'); // replace with actual URL
-//   const data = await response.json();
-//   return {
-//     word: data.word,
-//     hint: data.hint,
-//   };
-// };
-
 const GameScreen: React.FC = () => {
   const [input, setInput] = useState('');
   const [correctWord, setCorrectWord] = useState('');
   const [hint, setHint] = useState('');
   const [scrambledWord, setScrambledWord] = useState<string[]>([]);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [modalType, setModalType] = useState<ModalType>(null);
-  const [currentWordIndex] = useState(0);
-  const [wordList] = useState<{ word: string; hint: string }[]>([]);
+  const [wordList, setWordList] = useState<WordData[]>([]);
   const [userXP, setUserXP] = useState(0);
   const [isLoggedIn] = useState(true);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
-
+  const [level, setLevel] = useState(1);
+  const [levelIndex, setLevelIndex] = useState(0);
 
   const handleShuffle = () => {
     setScrambledWord(prev => [...prev].sort(() => 0.5 - Math.random()));
@@ -66,35 +47,112 @@ const GameScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    const startGame = async () => {
-      const data = await fetchWordFromAPI();
-      setCorrectWord(data.word.toUpperCase());
-      setHint(data.hint);
-      setScrambledWord(data.word.split('').sort(() => 0.5 - Math.random()));
-      setInput('');
-      setTimeLeft(30);
-    };
-    startGame();
+    fetch(`${import.meta.env.BASE_URL}words.json`)
+      .then(res => res.json())
+      .then((data: WordData[]) => {
+        const shuffled = data.sort(() => 0.5 - Math.random());
+        setWordList(shuffled);
+
+        const firstWord = shuffled[0];
+        setCorrectWord(firstWord.word.toUpperCase());
+        setHint(firstWord.hint);
+        setScrambledWord(firstWord.word.toUpperCase().split('').sort(() => 0.5 - Math.random()));
+        setTimeLeft(10);
+      })
+      .catch(err => console.error('Failed to load words', err));
   }, []);
 
-  const loadNextWord = async () => {
-    const data = await fetchWordFromAPI();
-    setCorrectWord(data.word.toUpperCase());
-    setHint(data.hint);
-    setScrambledWord(data.word.split('').sort(() => 0.5 - Math.random()));
-    setInput('');
-    setTimeLeft(30);
-    setModalType(null);
+  // useEffect(() => {
+  //   fetch(`${import.meta.env.BASE_URL}words.json`)
+  //     .then(res => res.json())
+  //     .then((data: WordData[]) => {
+  //       const shuffled = data.sort(() => 0.5 - Math.random());
+  //       setWordList(shuffled);
+  //       setCurrentWordIndex(0);
+  //       setCorrectWord(shuffled[0].word.toUpperCase());
+  //       setHint(shuffled[0].hint);
+  //       setScrambledWord(shuffled[0].word.split('').sort(() => 0.5 - Math.random()));
+  //       setTimeLeft(10);
+  //     })
+  //     .catch(err => console.error('Failed to load words', err));
+  // }, []);
+
+  // const loadNextWord = async () => {
+  //   try {
+  //     const res = await fetch(`${import.meta.env.BASE_URL}words.json`);
+  //     const data: WordData[] = await res.json();
+
+  //     // Shuffle words and pick one that hasn't been shown yet
+  //     const remainingWords = data.filter(w => w.word.toUpperCase() !== correctWord.toUpperCase());
+  //     const randomWord = remainingWords[Math.floor(Math.random() * remainingWords.length)];
+
+  //     setCorrectWord(randomWord.word.toUpperCase());
+  //     setHint(randomWord.hint);
+
+  //     // Shuffle letters
+  //     const shuffledLetters = randomWord.word.toUpperCase().split('').sort(() => 0.5 - Math.random());
+  //     setScrambledWord(shuffledLetters);
+
+  //     setInput('');
+  //     setTimeLeft(30);
+  //     setModalType(null);
+  //   } catch (err) {
+  //     console.error('Failed to load word:', err);
+  //   }
+  //    if (levelIndex + 1 < 5) {
+  //   setLevelIndex(prev => prev + 1);
+  // } else {
+  //   setLevel(prev => prev + 1);
+  //   setLevelIndex(0);
+  // }
+  // };
+
+  const loadNextWord = () => {
+  if (levelIndex + 1 < 5) {
+    setLevelIndex(prev => prev + 1);
+  } else {
+    setLevel(prev => prev + 1);
+    setLevelIndex(0);
+  }
+
+  const nextWord = wordList[(level - 1) * 5 + (levelIndex + 1) % 5];
+    if (nextWord) {
+      setCorrectWord(nextWord.word.toUpperCase());
+      setHint(nextWord.hint);
+      setScrambledWord(nextWord.word.toUpperCase().split('').sort(() => 0.5 - Math.random()));
+      setInput('');
+      setTimeLeft(10);
+      setModalType(null);
+    } else {
+      console.warn('No more words available.');
+    }
   };
 
-  useEffect(() => {
-    if (timeLeft === 0) {
-      setModalType('timeout');
-      return;
+  const getLetterUsage = (input: string) => {
+    const usage = new Map<string, number>();
+    for (const char of input) {
+      usage.set(char, (usage.get(char) || 0) + 1);
     }
-    const timer = setTimeout(() => setTimeLeft((prev) => prev - 1), 1000);
+    return usage;
+  };
+
+  const inputUsage = getLetterUsage(input);
+
+  useEffect(() => {
+    if (modalType || timeLeft === 0) return;
+    
+    const timer = setTimeout(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1 && !modalType) {
+          setModalType('timeout'); // only set timeout if user hasn’t answered
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
     return () => clearTimeout(timer);
-  }, [timeLeft]);
+  }, [modalType, timeLeft]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSubmit = () => {
@@ -129,9 +187,9 @@ const GameScreen: React.FC = () => {
       <div className="container-fluid text-white text-center p-3" style={{ minHeight: '100%' }}>
         <img src={Image} alt="" className="img-fluid mb-3 mx-auto d-block" style={{ maxHeight: '120px' }} />
         <div className='container py-3 rounded-3 bg-black my-4'>
-          <h4>LEVEL 1</h4>
+          <h4>LEVEL {level}</h4>
           <div className="progress my-4">
-            <div className="progress-bar" style={{ width: `${((currentWordIndex + 1) / wordList.length) * 100}%`, backgroundColor: '#F59E0B' }}>{currentWordIndex + 1}/{wordList.length || 1}</div>
+            <div className="progress-bar" style={{ width: `${((levelIndex + 1) / 5) * 100}%`, backgroundColor: '#F59E0B' }}>{levelIndex + 1}/5</div>
           </div>
 
           <div className="py-2 my-4 text-white" style={{ backgroundColor: '#B4080B' }}>{hint}</div>
@@ -143,11 +201,23 @@ const GameScreen: React.FC = () => {
           </div>
 
           <div className="d-flex justify-content-center gap-2 flex-wrap" style={{ backgroundColor: '#4F4F4F'}}>
-            {scrambledWord.map((char, idx) => (
-              <button key={idx} className="btn btn-light" onClick={() => setInput(prev => prev + char)}>
-                {char}
-              </button>
-            ))}
+            {scrambledWord.map((char, idx) => {
+              const usedCount = inputUsage.get(char) || 0;
+              const totalCount = scrambledWord.filter(c => c === char).length;
+              const alreadyUsed = input.slice(0).split('').filter(c => c === char).length >= totalCount;
+
+              if (alreadyUsed || usedCount >= totalCount) return null;
+
+              return (
+                <button
+                  key={`${char}-${idx}`}
+                  className="btn btn-light"
+                  onClick={() => setInput(prev => prev + char)}
+                >
+                  {char}
+                </button>
+              );
+            })}
           </div>
 
           <div className="row g-2 align-items-center my-4">
@@ -189,4 +259,5 @@ export default GameScreen;
 function setShowMoreOptions(_arg0: (prev: unknown) => boolean) {
   throw new Error('Function not implemented.');
 }
+
 

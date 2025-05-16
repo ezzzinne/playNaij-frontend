@@ -59,8 +59,7 @@ export default function Login() {
         throw new Error(errorData.message || 'Login failed');
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const data = await response.json();
+      await response.json();
       // Example: localStorage.setItem('token', data.token);
       navigate('/home');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
