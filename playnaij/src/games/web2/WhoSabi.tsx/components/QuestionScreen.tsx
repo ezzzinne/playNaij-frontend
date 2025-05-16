@@ -117,14 +117,14 @@ const QuestionScreen: React.FC = () => {
     }, 300);
   };
 
-  const shuffleArray = <T,>(array: T[]): T[] => {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
+  // const shuffleArray = <T,>(array: T[]): T[] => {
+  //   const shuffled = [...array];
+  //   for (let i = shuffled.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  //   }
+  //   return shuffled;
+  // };
 
   const nextQuestionOrEnd = () => {
   if (current + 1 >= questions.length) {
@@ -196,7 +196,7 @@ const QuestionScreen: React.FC = () => {
     setCorrectAnswers(0);
     setQuestionsAnswered(0);
     setMissedQuestions(0);
-    loadQuestions();
+    // loadQuestions();
   };
 
   const navigate = useNavigate();
@@ -208,36 +208,36 @@ const QuestionScreen: React.FC = () => {
     }
   };
 
-  // useEffect(() => {
-  //   fetch(`https://casual-web-game-platform.onrender.com/trivia/questions?category=${category}`)
-  //     .then(res => res.json())
-      
-  //     .then(data => {
-  //       const shuffled = data.sort(() => 0.5 - Math.random());
-  //       setQuestions(shuffled);
-  //     })
-  //       .catch((err) => {
-  //         console.error('Error fetching questions', err);
-  //       });
-  // }, [category]);
-  
-  const loadQuestions = useCallback(() => {
-    fetch(`${import.meta.env.BASE_URL}questions.json`)
-      .then(res => res.json())
-      .then(data => {
-        const filtered = data.filter((q: Question) => q.category === category) as Question[];
-        const shuffledQuestions = shuffleArray(filtered).slice(0, 5).map((q) => ({
-          ...q,
-          options: shuffleArray(q.options),
-        }));
-        setQuestions(shuffledQuestions);
-      })
-      .catch(err => console.error('Failed to load questions:', err));
-  }, [category]);
-
   useEffect(() => {
-    loadQuestions();
-  }, [loadQuestions]);
+    fetch(`https://casual-web-game-platform.onrender.com/trivia/questions?category=${category}`)
+      .then(res => res.json())
+      
+      .then(data => {
+        const shuffled = data.sort(() => 0.5 - Math.random());
+        setQuestions(shuffled);
+      })
+        .catch((err) => {
+          console.error('Error fetching questions', err);
+        });
+  }, [category]);
+  
+  // const loadQuestions = useCallback(() => {
+  //   fetch(`${import.meta.env.BASE_URL}questions.json`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       const filtered = data.filter((q: Question) => q.category === category) as Question[];
+  //       const shuffledQuestions = shuffleArray(filtered).slice(0, 5).map((q) => ({
+  //         ...q,
+  //         options: shuffleArray(q.options),
+  //       }));
+  //       setQuestions(shuffledQuestions);
+  //     })
+  //     .catch(err => console.error('Failed to load questions:', err));
+  // }, [category]);
+
+  // useEffect(() => {
+  //   loadQuestions();
+  // }, [loadQuestions]);
 
   useEffect(() => {
     setHiddenOptions([]);
