@@ -24,7 +24,7 @@ function App() {
 
   return (
     <>
-      <Router>
+      <Router basename="/playNaij-frontend">
         <Routes>
           <Route path="/" element={<LandingLayout><LandingPage /></LandingLayout>} />
           <Route path="/login" element={<Login />} />
