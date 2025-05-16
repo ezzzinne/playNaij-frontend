@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #0D1017;
+    scroll-behavior: smooth;
+}
+  
+.sidebar-container {
+    width: 280px;
+    height: 100%;
+    background-color: #0D1017;
+}
+
+.more-games {
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .btn-toggle-sidebar {
+      display: none !important;
+    }
+}
+
+.leaderboard {
+    font-family: "Rubik Bubbles", system-ui;
+}
+  
+
+  

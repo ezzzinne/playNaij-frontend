@@ -1,0 +1,59 @@
+.settings-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-box {
+  background-color: #F7B13C;
+  padding: 2rem;
+  border-radius: 1rem;
+  position: relative;
+  min-width: 300px;
+  text-align: center;
+}
+
+.settings-button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.green {
+  background-color: #10B981;
+  color: white;
+  box-shadow: 0 4px #0f766e;
+}
+
+.red {
+  background-color: #EC0E11;
+  color: white;
+  box-shadow: 0 4px #b91c1c;
+}
+
+.close-button {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: #10b981;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}

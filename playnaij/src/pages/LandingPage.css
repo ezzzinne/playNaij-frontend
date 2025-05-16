@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+
+body {
+    background: #0D1017;
+    font-family: "Rubik", sans-serif;
+}
+
+h3 {
+    font-family: "Rubik Spray Paint", system-ui;
+}
+
+.feature {
+    min-height: 250px;
+    text-align: center;
+}
+
+.bg1 {
+    background-image: url("../assets/Gamepad.svg");
+    min-height: 100vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+}
+  

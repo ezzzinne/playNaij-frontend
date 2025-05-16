@@ -1,0 +1,256 @@
+/* Colors & base */
+:root {
+  --clr-primary: #F59E0B;
+  --clr-info:    #2F80ED;
+  --clr-bg:      #111827;
+  --clr-neutral: #4F4F4F;
+  --clr-white:   #FFFFFF;
+  --clr-input-border: #828282;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Rubik', sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-white);
+}
+
+/* Wrapper & container */
+.ca-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+.ca-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Header */
+.ca-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.ca-back,
+.ca-close {
+  font-size: 1.5rem;
+  color: var(--clr-white);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.ca-switch {
+  color: var(--clr-white);
+  font-size: 0.9rem;
+}
+.ca-link {
+  color: var(--clr-primary);
+  text-decoration: none;
+}
+
+/* Title */
+.ca-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--clr-primary);
+}
+
+/* Grid */
+.ca-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .ca-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Fields */
+.ca-field {
+  position: relative;
+}
+.ca-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--clr-input-border);
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--clr-white);
+  font-size: 1rem;
+}
+.ca-input::placeholder {
+  color: var(--clr-neutral);
+}
+.ca-note {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--clr-neutral);
+}
+.ca-relative .ca-eye {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--clr-neutral);
+}
+
+/* Password note */
+.ca-password-note {
+  margin: 1rem 0;
+  font-size: 0.8rem;
+  color: var(--clr-neutral);
+}
+
+/* Divider */
+.ca-divider {
+  border: 0;
+  height: 1px;
+  background: var(--clr-neutral);
+  margin: 2rem 0;
+}
+
+/* Terms */
+.ca-terms {
+  display: flex;
+  align-items: flex-start;
+}
+.ca-terms input {
+  margin-right: 0.5rem;
+  margin-top: 0.25rem;
+}
+.ca-terms-label {
+  font-size: 0.9rem;
+  color: var(--clr-neutral);
+}
+.ca-info-link {
+  color: var(--clr-info);
+  text-decoration: none;
+}
+
+/* reCAPTCHA placeholder */
+.ca-recaptcha {
+  display: block; /* Or flex if needed for spacing, but not for alignment */
+  width: fit-content;
+  margin: 1rem auto; /* Center it horizontally, but not force content inside */
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* .ca-recaptcha > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+
+ */
+/* Submit */
+/* .ca-submit {
+  width: 80%;
+  justify-content: center;
+  align-items:center;
+  margin-right:120px;
+  padding: 1rem;
+  border: none;
+  border-radius: 9999px;
+  background: var(--clr-neutral);
+  color: var(--clr-bg);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.ca-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+} */
+.ca-submit {
+  width: 80%;
+  margin: 0 auto; /* This centers the button horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border: none;
+  border-radius: 9999px;
+  background: var(--clr-neutral);
+  color: var(--clr-bg);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ca-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* Social divider */
+.ca-social-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+.ca-social-divider hr {
+  flex: 1;
+  border: 0;
+  height: 1px;
+  background: var(--clr-neutral);
+}
+.ca-sm {
+  margin: 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--clr-neutral);
+}
+
+/* Social buttons */
+.ca-social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.ca-social {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.ca-social img {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* styles/shared.css */
+.auth-background {
+  background-image: url("../assets/background_login_page.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.ca-container {
+  background-color: #0F111A;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+}
