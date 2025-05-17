@@ -9,6 +9,8 @@ import Google from "../assets/google logo.png";
 import Facebook from "../assets/Facebook_Logo_(2019).png";
 
 export default function Login() {
+  const [fieldErrors, setFieldErrors] = useState<{ username?: string; password?: string }>({});
+
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
     username: '',
@@ -35,15 +37,15 @@ export default function Login() {
       return;
     }
 
-    if (!form.remember) {
-      setError('You must agree to remember me before logging in.');
-      return;
-    }
+    // if (!form.remember) {
+    //   setError('You must agree to remember me before logging in.');
+    //   return;
+    // }
 
     setError(''); // Clear error if everything is valid
 
     try {
-      const response = await fetch('https://casual-web-game-platform.onrender.com/auth/login', {
+      const response = await fetch('https://casual-web-game-platform.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -56,7 +58,18 @@ export default function Login() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Login failed');
+
+      if (errorData.errors) {
+        const usernameError = errorData.errors.username?._errors?.[0] || '';
+        const passwordError = errorData.errors.password?._errors?.[0] || '';
+        setFieldErrors({
+          username: usernameError,
+          password: passwordError
+        });
+      } else {
+        setError(errorData.message || 'Login failed');
+      }
+      return;
       }
 
       await response.json();
@@ -111,6 +124,7 @@ export default function Login() {
                 placeholder="Enter Username"
                 className="auth-input"
               />
+              {fieldErrors.username && <p className="error-message">{fieldErrors.username}</p>}
             </div>
 
             <div className="password-wrapper">
@@ -129,6 +143,7 @@ export default function Login() {
                 {showPassword ? <IoEyeOff size={20} /> : <IoEye size={20} />}
               </span>
             </div>
+            {fieldErrors.password && <p className="error-message">{fieldErrors.password}</p>}
 
             <div className="login-remember">
               <label htmlFor="remember" className="remember-label">

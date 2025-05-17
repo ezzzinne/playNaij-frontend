@@ -37,7 +37,7 @@ export default function CreateAccount() {
     }
 
     try {
-      const response = await fetch('https://casual-web-game-platform.onrender.com/auth/register', {
+      const response = await fetch('https://casual-web-game-platform.onrender.com/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -45,22 +45,31 @@ export default function CreateAccount() {
         body: JSON.stringify({
           username: form.username,
           email: form.email,
-          password: form.password
+          password: form.password,
+          confirmPassword: form.confirm
         })
       });
 
       const data = await response.json();
+      localStorage.setItem('isAuthenticated', 'true'); // or store a real token if available
+      navigate('/login');
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to register. Please try again.');
+        // Extract detailed validation error messages
+        const errorMessages = [];
+        for (const key in data.errors) {
+          const fieldErrors = data.errors[key]?._errors;
+          if (fieldErrors && fieldErrors.length > 0) {
+            errorMessages.push(`${key}: ${fieldErrors.join(', ')}`);
+          }
+        }
+        throw new Error(errorMessages.join('\n') || data.message || 'Registration failed');
       }
 
-      // Success - redirect to login or verification page
       alert('Account created successfully. Please check your email.');
-      navigate('/verify-email-sent');
+      navigate('/login');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error('Signup error:', error);
       alert(error.message || 'An error occurred during signup.');
     }
   };

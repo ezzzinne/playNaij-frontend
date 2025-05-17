@@ -46,7 +46,7 @@ function Navbar2 ({ onToggleSidebar }: Navbar1Props) {
                         </select>
                     </ul>
 
-                    <img src={Icon} alt="" className='m-2' />
+                    <Link to='/main'><img src={Icon} alt="User Icon" style={{ height: '32px' }} /></Link>
                     <img src={Bell} alt="" className='m-2 d-none d-lg-flex' />
                 </div>
 

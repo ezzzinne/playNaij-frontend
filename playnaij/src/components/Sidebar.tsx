@@ -41,9 +41,10 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
 
     const handleLogout = () => {
         if (confirm('Are you sure you want to log out?')) {
-          navigate('/home'); 
+          localStorage.removeItem('isAuthenticated');
+            navigate('/login'); 
         }
-      };
+    };
 
     return (
         <>

@@ -191,7 +191,7 @@ body {
   padding: 1rem;
   border: none;
   border-radius: 9999px;
-  background: var(--clr-neutral);
+  background-color: #10B981;
   color: var(--clr-bg);
   font-size: 1rem;
   cursor: pointer;

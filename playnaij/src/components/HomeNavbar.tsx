@@ -39,7 +39,7 @@ function HomeNavbar ({ }: NavbarProps) {
                             <FaBars size={20} />
                         </button>
 
-                        <img src={Logo} alt="Logo" className='me-2' style={{ height: '40px' }} />
+                        <Link to='/home'><img src={Logo} alt="Logo" className='me-2' style={{ height: '40px' }} /></Link>
                     </div>
                     
                     <form className="d-none d-lg-flex align-items-center flex-grow-1 mx-4" style={{ maxWidth: '500px' }}>
@@ -66,7 +66,7 @@ function HomeNavbar ({ }: NavbarProps) {
                             </li>
                         </ul>
 
-                        <img src={Icon} alt="User Icon" style={{ height: '32px' }} />
+                        <Link to='/main'><img src={Icon} alt="User Icon" style={{ height: '32px' }} /></Link>
                         <img src={Bell} alt="Notification" style={{ height: '32px' }} />
 
                         {/* <button className="btn btn-warning d-none d-lg-block disabled">Connect Wallet</button> */}

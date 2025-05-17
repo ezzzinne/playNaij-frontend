@@ -19,12 +19,17 @@ import Leaderboard from './pages/Leaderboard.tsx';
 import ShareProfilePage from './pages/ShareProfile.tsx';
 import WhoSabiStartScreen from './games/web2/WhoSabi.tsx/components/HomeScreen.tsx';
 import QuestionScreen from './games/web2/WhoSabi.tsx/components/QuestionScreen.tsx';
+import InviteFriendsScreen from './pages/InviteFriendsProfileScreen.tsx';
+import MainScreen from './pages/MainProfileScreen.tsx';
+import EditProfileScreen from './pages/EditProfileScreen.tsx';
+import AccountSettingsScreen from './pages/AccountSettingsProfileScreen.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 function App() {
 
   return (
     <>
-      <Router basename="/playNaij-frontend">
+      <Router>
         <Routes>
           <Route path="/" element={<LandingLayout><LandingPage /></LandingLayout>} />
           <Route path="/login" element={<Login />} />
@@ -39,6 +44,33 @@ function App() {
           <Route path="/friends" element={<FriendsPage />} />
           <Route path="/share-profile" element={<ShareProfilePage />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/invite" element={<InviteFriendsScreen onBack={function (): void {
+            throw new Error('Function not implemented.');
+          } } />} />
+          <Route path="/main" element={<MainScreen onInviteFriends={function (): void {
+            throw new Error('Function not implemented.');
+          } } onEditProfile={function (): void {
+            throw new Error('Function not implemented.');
+          } } onAccountSettings={function (): void {
+            throw new Error('Function not implemented.');
+          } } />} />
+          <Route path="/edit" element={<EditProfileScreen onBack={function (): void {
+            throw new Error('Function not implemented.');
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          } } onSave={function (nick: string, avatar: string): void {
+            throw new Error('Function not implemented.');
+          } } />} />
+          <Route path="/account" element={<AccountSettingsScreen onBack={function (): void {
+            throw new Error('Function not implemented.');
+          } } />} />
 
           
           <Route 

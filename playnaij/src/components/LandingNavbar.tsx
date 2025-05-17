@@ -40,7 +40,7 @@ function Navbar ({ }: NavbarProps) {
                         </button>
                     </div>
 
-                    <img src={Logo} alt="Logo" style={{ height: '40px' }} />
+                    <Link to='/'><img src={Logo} alt="Logo" style={{ height: '40px' }} /></Link>
                 </div>
 
                 <form className="d-none d-lg-flex align-items-center flex-grow-1 mx-4" style={{ maxWidth: '500px' }}>
