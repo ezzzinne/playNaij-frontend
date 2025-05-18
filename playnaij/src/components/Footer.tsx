@@ -4,6 +4,7 @@ import Icon2 from '../assets/Icon2.svg'
 import Icon3 from '../assets/Icon3.svg'
 import Icon4 from '../assets/Icon4.svg'
 import '../pages/LandingPage.css'
+import { Link } from 'react-router-dom'
 
 function Footer () {
     return (
@@ -54,9 +55,9 @@ function Footer () {
                         <div className="col mb-3 ms-2">
                             <p style={{ color: 'white' }}>Games</p>
                             <ul className="nav flex-column ">
-                                <li className="nav-item mb-2"><a href="#" className="nav-link p-0" style={{ color: '#9CA3AF' }}>Streetz</a></li>
-                                <li className="nav-item mb-2"><a href="#" className="nav-link p-0" style={{ color: '#9CA3AF' }}>Who Sabi</a></li>
-                                <li className="nav-item mb-2"><a href="#" className="nav-link p-0" style={{ color: '#9CA3AF' }}>Hustlerz</a></li>
+                                <Link to='/game1' style={{ textDecoration: 'none' }}><li className="nav-item mb-2"><a href="#" className="nav-link p-0" style={{ color: '#9CA3AF' }}>Streetz</a></li></Link>
+                                <Link to='/game2' style={{ textDecoration: 'none' }} ><li className="nav-item mb-2"><a href="#" className="nav-link p-0" style={{ color: '#9CA3AF' }}>Who Sabi</a></li></Link>
+                                <li className="nav-item mb-2"><a className="nav-link p-0" style={{ color: '#9CA3AF', cursor: 'pointer' }}>Hustlerz</a></li>
                             </ul>
                         </div>
 

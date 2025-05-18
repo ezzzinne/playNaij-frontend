@@ -26,33 +26,33 @@ interface Question {
   category: string;
 }
 
-const exitFullscreenAndPortrait = async () => {
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+// const exitFullscreenAndPortrait = async () => {
+//   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
-  if (isMobile) {
-    try {
+//   if (isMobile) {
+//     try {
 
-      if (screen.orientation && screen.orientation.unlock) {
-        screen.orientation.unlock();
-      } else {
-        // Fallback: rotate back to portrait if supported
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        await (screen.orientation as any).lock('portrait').catch(() => {});
-      }
-    } catch (err) {
-      console.warn('Orientation unlock or revert failed:', err);
-    }
+//       if (screen.orientation && screen.orientation.unlock) {
+//         screen.orientation.unlock();
+//       } else {
+//         // Fallback: rotate back to portrait if supported
+//         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//         await (screen.orientation as any).lock('portrait').catch(() => {});
+//       }
+//     } catch (err) {
+//       console.warn('Orientation unlock or revert failed:', err);
+//     }
 
-    // Exit fullscreen
-    if (document.fullscreenElement) {
-      await document.exitFullscreen();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } else if ((document as any).webkitExitFullscreen) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (document as any).webkitExitFullscreen();
-    }
-  }
-};
+//     // Exit fullscreen
+//     if (document.fullscreenElement) {
+//       await document.exitFullscreen();
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     } else if ((document as any).webkitExitFullscreen) {
+//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//       (document as any).webkitExitFullscreen();
+//     }
+//   }
+// };
 
 const QuestionScreen: React.FC = () => {
   const { category } = useParams<{ category: string }>();
@@ -205,7 +205,7 @@ const QuestionScreen: React.FC = () => {
 
   const handleExit = () => {
     if (confirm('Are you sure you want to exit the game?')) {
-      exitFullscreenAndPortrait();
+      // exitFullscreenAndPortrait();
       navigate('/game2'); 
     }
   };
