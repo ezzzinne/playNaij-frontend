@@ -123,9 +123,6 @@ const WhoSabiStartScreen: React.FC = () => {
               Play Game
             </Button>
           </div>
-          <div className="rotate-warning">
-            <p>Please rotate your device to landscape mode for the best experience.</p>
-          </div>
         </div>
 
         {showCategories && (

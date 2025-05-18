@@ -24,6 +24,7 @@ import AccountSettingsScreen from './pages/AccountSettingsProfileScreen.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import AppLayout from './layouts/HomeLayout.tsx';
 import ScrollToTop from './components/ScrollToTop.tsx';
+import StartScreen from './games/web2/WhoSabi.tsx/components/StartScreen.tsx';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
           <Route path="/friends" element={<FriendsPage />} />
           <Route path="/share-profile" element={<ShareProfilePage />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/start" element={<Layout><StartScreen /></Layout>} />
           <Route
             path="/home"
             element={
