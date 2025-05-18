@@ -82,7 +82,7 @@
     }
   }
 
-  @media screen and (orientation: portrait) {
+  /* @media screen and (orientation: portrait) {
   .rotate-warning {
     display: flex;
     position: fixed;
@@ -95,13 +95,13 @@
     text-align: center;
     padding: 2rem;
   }
-}
+} */
 
-@media screen and (orientation: landscape) {
+/* @media screen and (orientation: landscape) {
   .rotate-warning {
     display: none;
   }
-}
+} */
 
 
 

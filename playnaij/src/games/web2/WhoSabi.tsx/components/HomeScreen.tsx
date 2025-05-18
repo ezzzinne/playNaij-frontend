@@ -11,34 +11,34 @@ import CategorySelection from './CategorySelection';
 import SettingsModal from './SettingsModal';
 import bgMusicFile from '../assets/Game Music.mp3';
 
-const enterFullscreenAndLandscape = async () => {
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  const docElm = document.documentElement;
+// const enterFullscreenAndLandscape = async () => {
+//   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+//   const docElm = document.documentElement;
 
-  if (isMobile) {
-    // Check if the device is mobile and in portrait mode
-    if (window.innerHeight > window.innerWidth) {
-      // Request fullscreen
-      if (docElm.requestFullscreen) {
-        await docElm.requestFullscreen();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } else if ((docElm as any).webkitRequestFullscreen) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (docElm as any).webkitRequestFullscreen();
-      }
-    }
+//   if (isMobile) {
+//     // Check if the device is mobile and in portrait mode
+//     if (window.innerHeight > window.innerWidth) {
+//       // Request fullscreen
+//       if (docElm.requestFullscreen) {
+//         await docElm.requestFullscreen();
+//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//       } else if ((docElm as any).webkitRequestFullscreen) {
+//         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//         (docElm as any).webkitRequestFullscreen();
+//       }
+//     }
 
-    try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if (screen.orientation && (screen.orientation as any).lock) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (screen.orientation as any).lock('landscape');
-    }
-  } catch (err) {
-    console.warn('Orientation lock not supported:', err);
-  }
-  }
-};
+//     try {
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     if (screen.orientation && (screen.orientation as any).lock) {
+//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//       await (screen.orientation as any).lock('landscape');
+//     }
+//   } catch (err) {
+//     console.warn('Orientation lock not supported:', err);
+//   }
+//   }
+// };
 
 const WhoSabiStartScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -116,7 +116,7 @@ const WhoSabiStartScreen: React.FC = () => {
               className="play-btn rounded-3 fw-bold fs-3 text-white-emphasis"
               style={{ backgroundColor: '#F59E0B', width:'300px', maxWidth: '90%' }}
               onClick={async () => {
-                await enterFullscreenAndLandscape();
+                // await enterFullscreenAndLandscape();
                 setShowCategories(true);
               }}
             >
