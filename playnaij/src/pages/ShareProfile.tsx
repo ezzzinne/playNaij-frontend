@@ -3,7 +3,7 @@ import instagram from "../assets/instagram_2111463.png";
 import messenger from "../assets/messenger_889182.png";
 import whatsapp from "../assets/whatsapp_3536445.png";
 import twitter from "../assets/twitter_5969020.png";
-import QrCode from "../assets/WhatsApp Image 2025-04-23 at 19.02.14_e5f935ae 1.png";
+import QrCode from "../assets/qr-code.png";
 import '../App.css';
 
 interface ProfileData {

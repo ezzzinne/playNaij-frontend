@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import '../styles.css'
@@ -15,6 +15,8 @@ import SettingsModal from './SettingsModal';
 import FoodIcon from '../assets/Food.svg';
 import SportsIcon from '../assets/Sports.svg';
 import HistoryIcon from '../assets/9ja.svg';
+// import clickSoundFile from '../assets/click.mp3';
+import bgMusicFile from '../assets/Game Music.mp3';
 
 interface Question {
   id: string;
@@ -58,7 +60,7 @@ const QuestionScreen: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [coins, setCoins] = useState(0);
-  const [timer, setTimer] = useState(15);
+  const [timer, setTimer] = useState(20);
   const [energy, setEnergy] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [hiddenOptions, setHiddenOptions] = useState<string[]>([]);
@@ -69,6 +71,11 @@ const QuestionScreen: React.FC = () => {
   const [soundOn, setSoundOn] = useState(true);
   const [musicOn, setMusicOn] = useState(true);
   const [, setMissedQuestions] = useState(0);
+  const bgMusicRef = useRef<HTMLAudioElement | null>(null);
+
+  const correctSoundRef = useRef<HTMLAudioElement | null>(null);
+  const wrongSoundRef = useRef<HTMLAudioElement | null>(null);
+
 
   const q = questions[current];
 
@@ -135,24 +142,19 @@ const QuestionScreen: React.FC = () => {
   }
 };
 
-
   const handleSelect = (option: string) => {
     setSelected(option);
     setQuestionsAnswered(prev => prev + 1);
     const correct = questions[current].answer;
     if (option === correct) {
+      correctSoundRef.current?.play();
       setCoins(prev => prev + 200);
       setCorrectAnswers(prev => prev + 1);
       setTimeout(() => {
-        // if (current + 1 >= questions.length) {
-        //   setGameOver(true);
-        // } else {
-        //   setSelected(null);
-        //   setCurrent(prev => prev + 1);
-        // }
         nextQuestionOrEnd();
       }, 300);
     } else {
+      wrongSoundRef.current?.play();
       setTimeout(() => {
         // handleFail();
         setEnergy(prev => {
@@ -188,7 +190,7 @@ const QuestionScreen: React.FC = () => {
     setCurrent(0);
     setSelected(null);
     setCoins(0);
-    setTimer(15);
+    setTimer(20);
     setEnergy(3);
     setGameOver(false);
     setHiddenOptions([]);
@@ -274,6 +276,44 @@ const QuestionScreen: React.FC = () => {
       setGameOver(true);
     }
   }, [energy]);
+
+  useEffect(() => {
+    bgMusicRef.current = new Audio(bgMusicFile);
+    bgMusicRef.current.loop = true;
+
+    if (musicOn) {
+      bgMusicRef.current.play().catch(() => {});
+    }
+
+    return () => {
+      bgMusicRef.current?.pause();
+    };
+  }, [musicOn]);
+
+  useEffect(() => {
+    if (bgMusicRef.current) {
+      if (musicOn) {
+        bgMusicRef.current.play().catch(() => {});
+      } else {
+        bgMusicRef.current.pause();
+      }
+    }
+  }, [musicOn]);
+
+  useEffect(() => {
+    if (soundOn) {
+      correctSoundRef.current = new Audio('/sounds/correct.mp3');
+      wrongSoundRef.current = new Audio('/sounds/wrong.mp3');
+    }
+  }, [soundOn]);
+
+  useEffect(() => {
+    correctSoundRef.current = new Audio('/sounds/correct.mp3');
+    wrongSoundRef.current = new Audio('/sounds/wrong.mp3');
+    
+    correctSoundRef.current.volume = 0.8;
+    wrongSoundRef.current.volume = 0.8;
+  }, []);
 
   if (!questions.length) {
     return <p className="text-center mt-5">Loading questions...</p>;

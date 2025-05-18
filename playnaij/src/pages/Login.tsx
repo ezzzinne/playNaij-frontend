@@ -7,8 +7,12 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } fr
 import { app } from '../firebase';
 import Google from "../assets/google logo.png";
 import Facebook from "../assets/Facebook_Logo_(2019).png";
+import { loginWithGoogle } from '../auth/loginWithGoogle';
+import { loginWithFacebook } from '../auth/loginWithFacebook';
+import { useAuth } from '../redux/AuthContext';
 
 export default function Login() {
+
   const [fieldErrors, setFieldErrors] = useState<{ username?: string; password?: string }>({});
 
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +24,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const auth = getAuth(app);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, value, checked } = e.target;
@@ -58,7 +63,7 @@ export default function Login() {
 
       if (!response.ok) {
         const errorData = await response.json();
-
+        login();
       if (errorData.errors) {
         const usernameError = errorData.errors.username?._errors?.[0] || '';
         const passwordError = errorData.errors.password?._errors?.[0] || '';
@@ -82,22 +87,27 @@ export default function Login() {
   };
 
   const handleGoogleLogin = async () => {
+    await loginWithGoogle(navigate);
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log('Google user:', user);
+      login();
+      
     } catch (error) {
       console.error('Google login error:', error);
     }
   };
 
   const handleFacebookLogin = async () => {
+    await loginWithFacebook(navigate);
     const provider = new FacebookAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log('Facebook user:', user);
+      login();
     } catch (error) {
       console.error('Facebook login error:', error);
     }

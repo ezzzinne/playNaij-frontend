@@ -1,10 +1,10 @@
 // src/pages/MainScreen.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowDimensions } from '../hooks/useWindowDimensions';
 import { styles } from '../styles';
 import Footer from "../components/Footer";
-import LandingNavbar from "../components/LandingNavbar";
 import { Link } from "react-router-dom";
+import HomeNavbar from "../components/HomeNavbar";
 
 interface Props {
   onInviteFriends(): void;
@@ -27,12 +27,41 @@ const games = [
 const MainScreen: React.FC<Props> = () => {
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [, setUser] = useState<any>(null);
 
-  const lastGame = games[2];
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userId = localStorage.getItem('userId');
+      if (!userId) return;
+
+      try {
+        const res = await fetch('https://casual-web-game-platform.onrender.com/api/users');
+        const data = await res.json();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const currentUser = data.find((u: any) => u._id === userId);
+        setUser(currentUser);
+      } catch (err) {
+        console.error('Failed to fetch user data:', err);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const lastGame = {
+    id: "3",
+    title: "Game 3?",
+    xp: 100,
+    mins: 7,
+    img: "images/game3.png",
+  };
+
+  // const lastGame = games[2];
 
   return (
     <div style={styles.container}>
-      <LandingNavbar />
+      <HomeNavbar isLoggedIn={true} />
       {/* HEADER */}
       <div
         style={{

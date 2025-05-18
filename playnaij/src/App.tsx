@@ -5,8 +5,6 @@ import LandingPage from './pages/LandingPage';
 import Layout from './layouts/GameLayout';
 import Streetz from './games/web2/Streetz.tsx';
 import HomePage from './pages/HomePage.tsx';
-import LandingLayout from './layouts/LandingLayout.tsx';
-import HomeLayout from './layouts/HomeLayout.tsx';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount.tsx';
 import GameScreen from './games/web2/Streetz.tsx/components/GameScreen.tsx';
@@ -24,6 +22,7 @@ import MainScreen from './pages/MainProfileScreen.tsx';
 import EditProfileScreen from './pages/EditProfileScreen.tsx';
 import AccountSettingsScreen from './pages/AccountSettingsProfileScreen.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
+import AppLayout from './layouts/HomeLayout.tsx';
 
 function App() {
 
@@ -31,11 +30,11 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LandingLayout><LandingPage /></LandingLayout>} />
+          <Route path="/" element={<AppLayout><LandingPage /></AppLayout>} />
           <Route path="/login" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/verify" element={<VerifyAccount />} />
-          <Route path="/home" element={<HomeLayout><HomePage /></HomeLayout>} />
+          <Route path="/home" element={<AppLayout><HomePage /></AppLayout>} />
           <Route path="/game" element={<Layout><GameScreen /></Layout>} />
           <Route path="/loading" element={<Layout><LoadingScreen /></Layout>} />
           <Route path='/categories' element={<Layout><CategorySelection onSelect={(category) => console.log(category)} /></Layout>} />
@@ -65,7 +64,7 @@ function App() {
           <Route path="/edit" element={<EditProfileScreen onBack={function (): void {
             throw new Error('Function not implemented.');
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          } } onSave={function (nick: string, avatar: string): void {
+          } } onSave={function (_nick: string, _avatar: string): void {
             throw new Error('Function not implemented.');
           } } />} />
           <Route path="/account" element={<AccountSettingsScreen onBack={function (): void {

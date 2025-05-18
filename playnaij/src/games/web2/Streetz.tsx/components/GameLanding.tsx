@@ -43,7 +43,7 @@ const GameLanding: React.FC = () => {
           </div>
           <div className='p-2 rounded-3' style={{ backgroundColor: '#96BAEB'}}>
             <img src={Timer} alt="" className='mb-2 p-1' style={{ width: '40px'}} />
-            <p style={{ color: '#2F80ED'}} className='fw-medium'>30 Seconds</p>
+            <p style={{ color: '#2F80ED'}} className='fw-medium'>15 Seconds</p>
           </div>
         </div>
         <div className="bg-black p-4 rounded text-start w-100 mx-auto my-0">

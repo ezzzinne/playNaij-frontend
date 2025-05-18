@@ -21,7 +21,7 @@ const GameScreen: React.FC = () => {
   const [correctWord, setCorrectWord] = useState('');
   const [hint, setHint] = useState('');
   const [scrambledWord, setScrambledWord] = useState<string[]>([]);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(15);
   const [modalType, setModalType] = useState<ModalType>(null);
   const [wordList, setWordList] = useState<WordData[]>([]);
   const [userXP, setUserXP] = useState(0);
@@ -57,7 +57,7 @@ const GameScreen: React.FC = () => {
         setCorrectWord(firstWord.word.toUpperCase());
         setHint(firstWord.hint);
         setScrambledWord(firstWord.word.toUpperCase().split('').sort(() => 0.5 - Math.random()));
-        setTimeLeft(10);
+        setTimeLeft(15);
       })
       .catch(err => console.error('Failed to load words', err));
   }, []);
@@ -121,7 +121,7 @@ const GameScreen: React.FC = () => {
       setHint(nextWord.hint);
       setScrambledWord(nextWord.word.toUpperCase().split('').sort(() => 0.5 - Math.random()));
       setInput('');
-      setTimeLeft(10);
+      setTimeLeft(15);
       setModalType(null);
     } else {
       console.warn('No more words available.');

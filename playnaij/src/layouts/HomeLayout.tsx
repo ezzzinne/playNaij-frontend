@@ -7,7 +7,7 @@ interface LayoutProps {
     children: ReactNode;
 }
 
-function HomeLayout ({ children }: LayoutProps) {
+function AppLayout ({ children }: LayoutProps) {
     const { isLoggedIn } = useAuth();
 
     return (
@@ -18,4 +18,4 @@ function HomeLayout ({ children }: LayoutProps) {
     )
 }
 
-export default HomeLayout
+export default AppLayout

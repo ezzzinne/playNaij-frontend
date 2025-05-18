@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Logo from '../assets/Logo.svg'
 import User2 from '../assets/users 02.svg'
 import { Link } from 'react-router-dom';
-import { useAuth } from '../redux/AuthContext'
+import { useAuth } from '../redux/AuthContext';
 
 type NavbarProps = {
     className?: string;

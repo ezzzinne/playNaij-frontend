@@ -54,7 +54,7 @@ function HomeNavbar ({ }: NavbarProps) {
 
                     <div className="d-flex align-items-center gap-3" style={{ cursor: 'pointer' }}>
                         <ul className="d-none d-lg-flex nav gap-3 align-items-center mb-0 me-5">
-                            <li className="nav-item"><a className="nav-link text-white" href="#">Invite Friends</a></li>
+                            <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/friends' style={{ color: 'white', textDecoration: 'none'}}>Invite Friends</Link></a></li>
                             <li className="nav-item"><a className="nav-link text-white" href="#"><Link to='/leaderboard' style={{ color: 'white', textDecoration: 'none'}}>Leaderboard</Link></a></li>
                             <li className="nav-item">
                                 <select className="text-white" style={{ minWidth: '130px', background: '#0D1017' }} onChange={handleScrollToSection}>
