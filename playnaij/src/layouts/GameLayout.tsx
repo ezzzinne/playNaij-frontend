@@ -14,9 +14,9 @@ function Layout({ children }: { children: React.ReactNode }) {
         
         <div className="flex-grow-1">
           {isLoggedIn ? (
-            <Navbar1 onToggleSidebar={() => setShowSidebar(!showSidebar)} />
-          ) : (
             <Navbar2 onToggleSidebar={() => setShowSidebar(!showSidebar)} />
+          ) : (
+            <Navbar1 onToggleSidebar={() => setShowSidebar(!showSidebar)} />
           )}
         
           <main className="p-3">{children}</main> 

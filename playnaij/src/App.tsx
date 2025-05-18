@@ -23,12 +23,14 @@ import EditProfileScreen from './pages/EditProfileScreen.tsx';
 import AccountSettingsScreen from './pages/AccountSettingsProfileScreen.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import AppLayout from './layouts/HomeLayout.tsx';
+import ScrollToTop from './components/ScrollToTop.tsx';
 
 function App() {
 
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<AppLayout><LandingPage /></AppLayout>} />
           <Route path="/login" element={<Login />} />

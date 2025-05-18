@@ -1,6 +1,7 @@
 // This component displays a leaderboard with user ranks, names, and XP points.
 import { Trophy } from "lucide-react";
 import '../App.css';
+import { useState, useEffect } from "react";
 // import { useEffect, useState } from "react";
 
 interface User {
@@ -10,13 +11,13 @@ interface User {
 }
 
 // Comment out when the leaderboard API is ready
-const users: User[] = [
-  { rank: 1, name: "FAVOUR", xp: 1548197 },
-  { rank: 2, name: "CHUCKS", xp: 1548190 },
-  { rank: 3, name: "VIVIAN", xp: 1548189 },
-  { rank: 4, name: "CHIGOZIE", xp: 1548122 },
-  { rank: 5, name: "ADA", xp: 1548119 },
-];
+// const users: User[] = [
+//   { rank: 1, name: "FAVOUR", xp: 1548197 },
+//   { rank: 2, name: "CHUCKS", xp: 1548190 },
+//   { rank: 3, name: "VIVIAN", xp: 1548189 },
+//   { rank: 4, name: "CHIGOZIE", xp: 1548122 },
+//   { rank: 5, name: "ADA", xp: 1548119 },
+// ];
 
 const rankColors: { [key: number]: React.CSSProperties } = {
   1: { backgroundColor: "#2F80ED", color: "#fff" },
@@ -30,30 +31,36 @@ const medalEmojis: { [key: number]: string } = {
   3: "🥉",
 };
 
-// const baseURL = import.meta.env.VITE_API_BASE_URL;
-
 const Leaderboard = () => {
-  // const [users, setUsers] = useState<User[]>([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState('');
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  // useEffect(() => {
-  //   fetch(`${baseURL}/trivia/leaderboard`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       // Assuming data is already sorted and includes rank, name, xp
-  //       setUsers(data);
-  //       setLoading(false);
-  //     })
-  //     .catch(err => {
-  //       console.error('Failed to fetch leaderboard:', err);
-  //       setError('Failed to load leaderboard');
-  //       setLoading(false);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(`https://casual-web-game-platform.onrender.com/api/user`)
+      .then(res => res.json())
+      .then(data => {
+        const sortedUsers = data
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .sort((a: any, b: any) => b.stats.totalScore - a.stats.totalScore)
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .map((u: any, i: number) => ({
+            rank: i + 1,
+            name: u.username,
+            xp: u.stats.totalScore,
+          }));
+        setUsers(sortedUsers);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch leaderboard:', err);
+        setError('Failed to load leaderboard');
+        setLoading(false);
+      });
+  }, []);
 
-  // if (loading) return <div className="text-white text-center mt-5">Loading...</div>;
-  // if (error) return <div className="text-danger text-center mt-5">{error}</div>;
+  if (loading) return <div className="text-white text-center mt-5">Loading...</div>;
+  if (error) return <div className="text-danger text-center mt-5">{error}</div>;
 
 
   return (

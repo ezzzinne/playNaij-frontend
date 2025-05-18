@@ -90,7 +90,7 @@ function Sidebar ({ showSidebar, setShowSidebar }: { showSidebar: boolean, setSh
                         <li className="nav-item mb-0">
                             <a href="#" className="nav-link link-body-emphasis text-white">
                             <img src={Community} alt="" className="me-4" />
-                            Community
+                            <Link to='/leaderboard' style={{  color: 'white', textDecoration: 'none'}}>Community</Link>
                             </a>
                         </li>
                         {/* <li className="nav-item mb-0">

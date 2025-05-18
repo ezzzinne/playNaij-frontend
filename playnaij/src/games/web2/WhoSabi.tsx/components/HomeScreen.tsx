@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import coinIcon from '../assets/Coin gold.svg'; 
@@ -9,6 +9,7 @@ import './HomeScreen.css';
 import LowerSection1 from '../../Streetz.tsx/components/LowerSection1';
 import CategorySelection from './CategorySelection';
 import SettingsModal from './SettingsModal';
+import bgMusicFile from '../assets/Game Music.mp3';
 
 const enterFullscreenAndLandscape = async () => {
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
@@ -45,12 +46,36 @@ const WhoSabiStartScreen: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [musicOn, setMusicOn] = useState(true);
-
+  const bgMusicRef = useRef<HTMLAudioElement | null>(null);
+  
   useEffect(() => {
     if (showSettings) {
       return;
     }
   })
+
+  useEffect(() => {
+    bgMusicRef.current = new Audio(bgMusicFile);
+    bgMusicRef.current.loop = true;
+
+    if (musicOn) {
+      bgMusicRef.current.play().catch(() => {});
+    }
+
+    return () => {
+      bgMusicRef.current?.pause();
+    };
+  }, [musicOn]);
+
+  useEffect(() => {
+    if (bgMusicRef.current) {
+      if (musicOn) {
+        bgMusicRef.current.play().catch(() => {});
+      } else {
+        bgMusicRef.current.pause();
+      }
+    }
+  }, [musicOn]);
 
   const handleCategorySelect = (category: string) => {
     navigate(`/questions/${category}`);

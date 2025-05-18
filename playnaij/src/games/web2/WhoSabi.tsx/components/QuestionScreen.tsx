@@ -147,7 +147,7 @@ const QuestionScreen: React.FC = () => {
     setQuestionsAnswered(prev => prev + 1);
     const correct = questions[current].answer;
     if (option === correct) {
-      correctSoundRef.current?.play();
+      if (soundOn) correctSoundRef.current?.play();
       setCoins(prev => prev + 200);
       setCorrectAnswers(prev => prev + 1);
       setTimeout(() => {
@@ -336,7 +336,7 @@ const QuestionScreen: React.FC = () => {
         <div className="container-fluid position-relative w-100" style={{ minHeight: '100%' }}>
           <div className="container-fluid questions-bg m-0 p-0 position-relative w-100 d-flex flex-column justify-content-between" style={{ minHeight: '100%', flex: 1 }}>
           {/* Top Bar */}
-          <div className='d-flex flex-column flex-lg-row justify-content-around align-items-center gap-3 gap-md-0 rounded-bottom-5 py-3 position-relative top-bar w-100' style={{ backgroundColor: topBarColor }}>
+          <div className='d-flex flex-column flex-md-row flex-wrap justify-content-around align-items-center gap-3 rounded-bottom-5 py-3 position-relative top-bar w-100' style={{ backgroundColor: topBarColor }}>
             <div className='d-flex gap-3'>
               <div className="rounded-3 py-2 ps-1 pe-5 d-flex align-items-center gap-1" style={{ backgroundColor: '#00000033' }}>
                 <img src={Coin} alt="coin" width={30} />
@@ -347,7 +347,7 @@ const QuestionScreen: React.FC = () => {
                 <span className='fw-bold'>{energy}/3</span>
               </div>
             </div>
-            <div className="d-flex align-items-center gap-3 justify-content-center">
+            <div className="d-flex align-items-center gap-3 text-center">
               <img src={categoryIcon} alt="music" />
               <h4 className="fw-bold">{category}</h4>
             </div>
@@ -360,8 +360,8 @@ const QuestionScreen: React.FC = () => {
           </div>
 
           {/* Question */}
-          <Row className="justify-content-center align-items-center mt-5 mb-5">
-            <Col xs={12} md={8}>
+          <Row className="justify-content-center align-items-center my-4">
+            <Col xs={11} sm={10} md={8}>
               <div className="text-dark p-4 rounded shadow text-center" style={{ backgroundColor: '#FAFAFA' }}>
                 <p>{q.question}</p>
               </div>
@@ -371,7 +371,7 @@ const QuestionScreen: React.FC = () => {
           {/* Options */}
           <Row className="justify-content-center g-3 mb-4">
             {q.options.map(opt => (
-              <Col xs={12} md={5} key={opt}>
+              <Col xs={12} sm={10} md={6} lg={5} key={opt}>
                 <button
                   className="w-100 py-3 fw-bold shadow border-0 rounded-3"
                   style={{ 
@@ -399,8 +399,8 @@ const QuestionScreen: React.FC = () => {
           </Row>
 
           {/* Bottom Bar */}
-          <div className="d-flex justify-content-around align-items-center mb-2">
-            <button onClick={handleFiftyFifty} className="btn px-3 py-2 d-flex align-items-center fw-bold shadow rounded-3" style={{ backgroundColor: coins >= 100 ? '#60646E' : '#aaa', color: 'white'}}><img src={Bomb} alt="" /><span className='ms-1'>50/50</span> <span className='ms-5'><img src={Coin} className='ms-1' />100</span></button>
+          <div className="d-flex flex-column flex-md-row justify-content-around align-items-center my-3 gap-2">
+            <button onClick={handleFiftyFifty} className="btn px-4 py-2 d-flex align-items-center fw-bold shadow rounded-3" style={{ backgroundColor: coins >= 100 ? '#60646E' : '#aaa', color: 'white'}}><img src={Bomb} alt="" /><span className='ms-1'>50/50</span> <span className='ms-5'><img src={Coin} className='ms-1' />100</span></button>
             <h3 className="fw-bold" style={{ color: '#B4080B', fontFamily: 'Rubik'}}><img src={Timer} /> 00:{timer < 10 ? `0${timer}` : timer}</h3>
             <button onClick={handleReveal} className="btn px-3 py-2 d-flex align-items-center fw-semibold fs-6 rounded-3 shadow" style={{ backgroundColor: coins >= 500 ? '#60646E' : '#aaa', color: 'white'}}><img src={Check} alt="" /><span className='ms-1'>Reveal <br /> Answer</span> <span className='ms-5'><img src={Coin} className='ms-1' />500</span></button>
           </div>

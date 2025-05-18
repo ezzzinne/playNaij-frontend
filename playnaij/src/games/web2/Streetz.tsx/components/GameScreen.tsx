@@ -245,7 +245,7 @@ const GameScreen: React.FC = () => {
         </div>
         
         {modalType && (
-          <ResultModal type={modalType} icon={modalType === 'correct' || modalType === 'wrong' ? <img src={Cup} /> : <img src={Timer} /> } xp={modalType === 'correct' ? 12 : 0} onNext={closeModal} correctAnswer={modalType === 'wrong' ? correctWord : undefined} onClose={closeModal} />
+          <ResultModal type={modalType} icon={modalType === 'correct' || modalType === 'wrong' ? <img src={Cup} /> : <img src={Timer} /> } xp={modalType === 'correct' ? 12 : 0} onNext={closeModal} correctAnswer={modalType === 'wrong' || modalType === 'timeout' ? correctWord : undefined} onClose={closeModal} />
         )}
       </div>
 

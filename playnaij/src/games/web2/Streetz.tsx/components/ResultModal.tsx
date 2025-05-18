@@ -20,7 +20,7 @@ const ResultModal: React.FC<Props> = ({ xp, onNext, type, icon, correctAnswer })
   const extra = {
     correct: '',
     wrong: `(${correctAnswer})`,
-    timeout: ''
+    timeout: `(${correctAnswer})`
   }[type];
 
   const message = {
