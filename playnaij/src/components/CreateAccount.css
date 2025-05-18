@@ -72,6 +72,9 @@ body {
   grid-template-columns: 1fr;
   gap: 1.5rem;
 }
+
+
+
 @media (min-width: 768px) {
   .ca-grid {
     grid-template-columns: 1fr 1fr;
@@ -130,6 +133,7 @@ body {
 .ca-terms {
   display: flex;
   align-items: flex-start;
+  margin-bottom: 12px;
 }
 .ca-terms input {
   margin-right: 0.5rem;
@@ -195,7 +199,7 @@ body {
   color: var(--clr-bg);
   font-size: 1rem;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s,background-color 0.3s ease, cursor 0.3s ease;
 }
 
 .ca-submit:disabled {
@@ -234,8 +238,10 @@ body {
   cursor: pointer;
 }
 .ca-social img {
-  width: 2rem;
-  height: 2rem;
+
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
 /* styles/shared.css */

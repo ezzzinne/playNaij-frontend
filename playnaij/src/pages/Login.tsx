@@ -1,34 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider
-} from 'firebase/auth';
-import { app } from '../firebase';
 import { IoEye, IoEyeOff } from '../components/icons';
 import '../styles/login.css';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [form, setForm] = useState({
-    username: '',
-    password: '',
-    remember: false
-  });
+  const [form, setForm] = useState({ username: '', password: '', remember: false });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const auth = getAuth(app);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, type, value, checked } = e.target;
-    setForm(f => ({
-      ...f,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
+  const formValid = form.username && form.password && form.remember;
 
+  // Handle traditional login
   const handleLogin = async () => {
     if (!form.username || !form.password) {
       setError('Please enter both username and password.');
@@ -41,17 +24,14 @@ export default function Login() {
     }
 
     setError('');
-
     try {
-      const response = await fetch('https://casual-web-game-platform.onrender.com/auth/login', {
+      const response = await fetch('https://casual-web-game-platform.onrender.com/api/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           username: form.username,
-          password: form.password
-        })
+          password: form.password,
+        }),
       });
 
       if (!response.ok) {
@@ -59,57 +39,119 @@ export default function Login() {
         throw new Error(errorData.message || 'Login failed');
       }
 
-      const data = await response.json();
-      // Example: localStorage.setItem('token', data.token);
-      navigate('/home');
-    } catch (err: any) {
+      
+const data = await response.json();
+console.log(data);
+
+// Save the token
+localStorage.setItem('token', data.token);
+
+
+fetch('/protected-route', {
+  headers: {
+    Authorization: `Bearer ${data.token}`,
+  },
+});
+
+// Redirect to home page
+navigate('/home');
+} catch (err: any) {
       setError(err.message || 'An error occurred during login.');
     }
   };
 
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log('Google user:', user);
-    } catch (error) {
-      console.error('Google login error:', error);
-    }
+  // Google Login handler
+  const handleGoogleLogin = async (googleResponse: any) => {
+  try {
+    const res = await fetch('https://casual-web-game-platform.onrender.com/auth/google', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ credential: googleResponse.credential }),
+    });
+
+    if (!res.ok) throw new Error('Google login failed');
+    // Optional: save token or redirect
+    navigate('/home');
+  } catch (err: any) {
+    setError(err.message || 'Google login failed.');
+  }
+};
+
+  // Facebook login
+  const handleFacebookLogin = () => {
+    window.FB.login(
+      async (response: any) => {
+        if (response.authResponse) {
+          try {
+            const res = await fetch('https://casual-web-game-platform.onrender.com/auth/facebook', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ accessToken: response.authResponse.accessToken }),
+            });
+
+            if (!res.ok) throw new Error('Facebook login failed');
+
+            const data = await res.json();
+            console.log(data); 
+
+            navigate('/home');
+          } catch (err: any) {
+            setError(err.message);
+          }
+        } else {
+          setError('Facebook login was cancelled.');
+        }
+      },
+      { scope: 'email' }
+    );
   };
 
-  const handleFacebookLogin = async () => {
-    const provider = new FacebookAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log('Facebook user:', user);
-    } catch (error) {
-      console.error('Facebook login error:', error);
+
+
+  // Setup Google and Facebook SDKs
+  useEffect(() => {
+    if (window.google) {
+    window.google.accounts.id.initialize({
+      client_id: '597377794282-gk9907sffjpu550iedru4hrf6j8p0rrm.apps.googleusercontent.com',
+      callback: handleGoogleLogin,
+    });
+      // window.google.accounts.id.renderButton(
+      //   document.getElementById('google-login-button'),
+      //   { theme: 'outline', size: 'large' }
+      // );
     }
+
+    if (window.FB) {
+      window.FB.init({
+        appId: '3213614008788759', //  App ID
+        cookie: true,
+        xfbml: true,
+        version: 'v19.0',
+      });
+    }
+  }, []);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, type, value, checked } = e.target;
+    setForm(f => ({ ...f, [name]: type === 'checkbox' ? checked : value }));
   };
 
   return (
     <div className="auth-container auth-background">
       <div className="auth-box">
-        <div className="auth-close">
-          <button>&times;</button>
-        </div>
-
+        <div className="auth-close"><button>&times;</button></div>
         <h1 className="auth-title">Login</h1>
 
         {error && <p className="error-message">{error}</p>}
 
-        <div>
-          <input
-            type="text"
-            name="username"
-            value={form.username}
-            onChange={onChange}
-            placeholder="Enter Username"
-            className="auth-input"
-          />
-        </div>
+        <input
+          type="text"
+          name="username"
+          value={form.username}
+          onChange={onChange}
+          placeholder="Enter Username"
+          className="auth-input"
+        />
 
         <div className="password-wrapper">
           <input
@@ -120,10 +162,7 @@ export default function Login() {
             placeholder="Enter password"
             className="auth-input"
           />
-          <span
-            className="password-toggle"
-            onClick={() => setShowPassword(!showPassword)}
-          >
+          <span className="password-toggle" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? <IoEyeOff size={20} /> : <IoEye size={20} />}
           </span>
         </div>
@@ -139,15 +178,21 @@ export default function Login() {
             />
             Remember me
           </label>
-
-          <Link to="/forgot-password" className="forgot-password-link">
-            Forgot Password?
-          </Link>
+          <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link>
         </div>
 
-        <button className="login-btn" onClick={handleLogin}>
-          Login
-        </button>
+        <button
+  className="login-btn"
+  onClick={handleLogin}
+  style={{
+    backgroundColor: formValid ? '#10b981' : '#ccc',
+    cursor: formValid ? 'pointer' : 'not-allowed',
+  }}
+  disabled={!formValid}
+>
+  Login
+</button>
+
 
         <div className="divider">
           <hr />
@@ -157,29 +202,20 @@ export default function Login() {
 
         <div className="ca-social-buttons">
           <button
-            aria-label="Google sign in"
-            onClick={handleGoogleLogin}
-            type="button"
-            className="ca-social"
-          >
-            <img src="/google logo.png" alt="Google sign in" />
-          </button>
+  type="button"
+  className="login-social"
+  onClick={() => window.google.accounts.id.prompt()}
+>
+  <img src="/google logo.png" alt="Google sign in" style={{ width: '25px', height: '30px', objectFit: 'contain' }}/>
+</button>
 
-          <button
-            aria-label="Facebook sign in"
-            onClick={handleFacebookLogin}
-            type="button"
-            className="ca-social"
-          >
-            <img src="/Facebook_Logo_(2019).png" alt="Facebook sign in" />
+          <button onClick={handleFacebookLogin} className="ca-social">
+            <img src="/Facebook_Logo_(2019).png" alt="Facebook sign in" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
           </button>
         </div>
 
         <p className="signup">
-          Don’t have an account?{' '}
-          <Link to="/create-account" className="signup-link">
-            Sign Up
-          </Link>
+          Don’t have an account? <Link to="/create-account" className="signup-link">Sign Up</Link>
         </p>
       </div>
     </div>

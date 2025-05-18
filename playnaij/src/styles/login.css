@@ -95,6 +95,7 @@ body {
 
 
 
+
 /* .auth-box .remember-forgot {
   display: flex;
   justify-content: space-between;
@@ -112,6 +113,9 @@ body {
   border-radius: 999px;
   cursor: pointer;
   margin-bottom: 1rem;
+    transition: background-color 0.3s ease, cursor 0.3s ease;
+  
+  
 }
 
 .auth-box .divider {
