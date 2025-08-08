@@ -7,7 +7,7 @@ import Energy from '../assets/Flash gold.svg'
 import MusicIcon from '../assets/Music.svg';
 import Settings from '../assets/setting.svg'
 import LowerSection1 from '../../Streetz.tsx/components/LowerSection1';
-import Bomb from '../assets/Bomb.svg';
+import Bomb from '../assets/bomb.svg';
 import Timer from '../assets/fast time.svg';
 import Check from '../assets/Check.svg';
 import GameResult from './ResultScreen';
